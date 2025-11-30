@@ -2,3 +2,16 @@
 node_modules
 dist
 build
+prisma.config.ts
+prisma/*
+app/globals.css
+.github/*
+.gitignore
+.prettierignore
+.prettierrc
+app/favicon.ico
+package-lock.json
+package.json
+README.md
+.eslintrc.json
+tsconfig.json
