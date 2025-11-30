@@ -15,3 +15,15 @@ package.json
 README.md
 .eslintrc.json
 tsconfig.json
+components.json
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+*.svg
+*.webp
+*.pdf
+.env
+.env.local
+.env*.local
