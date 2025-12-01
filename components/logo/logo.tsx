@@ -11,14 +11,7 @@ interface IProps {
   className?: string;
 }
 
-
-
-export function Logo({
-  size = "md",
-  animated = true,
-  linkTo = "/",
-  className = ""
-}: IProps) {
+export function Logo({ size = "md", animated = true, linkTo = "/", className = "" }: IProps) {
   const logo = (
     <motion.div
       className={className}

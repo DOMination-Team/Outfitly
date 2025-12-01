@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { motion } from "framer-motion";
 import SignInForm from "./signInForm";
 
@@ -15,12 +15,8 @@ const SignInCard = () => {
 
       {/* Welcome Text */}
       <div className="mb-8">
-        <h2 className="mb-2 text-foreground">
-          Welcome Back!
-        </h2>
-        <p className="text-muted-foreground">
-          Sign in to continue to your wardrobe
-        </p>
+        <h2 className="mb-2 text-foreground">Welcome Back!</h2>
+        <p className="text-muted-foreground">Sign in to continue to your wardrobe</p>
       </div>
 
       {/* Login Form */}

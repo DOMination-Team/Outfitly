@@ -1,47 +1,47 @@
-'use client';
-import MotionField from '@/components/motioned-input/motionedInput'
-import { Form, FormikProvider } from 'formik'
-import { motion } from 'framer-motion'
-import useSignIn from '../hook/useSignIn';
-import { Mail, Lock } from 'lucide-react';
+"use client";
+import MotionField from "@/components/motioned-input/motionedInput";
+import { Form, FormikProvider } from "formik";
+import { motion } from "framer-motion";
+import useSignIn from "../hook/useSignIn";
+import { Mail, Lock } from "lucide-react";
 
 const SignInForm = () => {
-    const {formik} = useSignIn();
+  const { formik } = useSignIn();
   return (
     <FormikProvider value={formik}>
-        <Form className="space-y-6">
-            {/* Email Input */}
-            <MotionField
-                name='email'
-                isPassword={false}
-                label='Email'
-                placeholder='you@example.com'
-                icon={<Mail size={18} />}
-            />
+      <Form className="space-y-6">
+        {/* Email Input */}
+        <MotionField
+          name="email"
+          isPassword={false}
+          label="Email"
+          placeholder="you@example.com"
+          icon={<Mail size={18} />}
+        />
 
-            {/* Password Input */}
-            <MotionField
-                name='password'
-                isPassword={true}
-                label='Password'
-                placeholder='••••••••'
-                icon={<Lock size={18} />}
-            />
+        {/* Password Input */}
+        <MotionField
+          name="password"
+          isPassword={true}
+          label="Password"
+          placeholder="••••••••"
+          icon={<Lock size={18} />}
+        />
 
-            {/* Forgot Password Link */}
-            <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="text-right"
-            >
-            <button
-                type="button"
-                className="text-[#671425] dark:text-[#8B1D35] hover:text-[#8B1D35] dark:hover:text-[#A82444] transition-colors duration-300"
-            >
-                Forgot Password?
-            </button>
-            </motion.div>
+        {/* Forgot Password Link */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="text-right"
+        >
+          <button
+            type="button"
+            className="text-[#671425] dark:text-[#8B1D35] hover:text-[#8B1D35] dark:hover:text-[#A82444] transition-colors duration-300"
+          >
+            Forgot Password?
+          </button>
+        </motion.div>
         <motion.button
           type="submit"
           initial={{ opacity: 0, y: 20 }}
@@ -59,9 +59,9 @@ const SignInForm = () => {
             transition={{ duration: 0.6 }}
           />
         </motion.button>
-        </Form>  
+      </Form>
     </FormikProvider>
-  )
-}
+  );
+};
 
-export default SignInForm
+export default SignInForm;

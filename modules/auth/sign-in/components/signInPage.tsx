@@ -1,12 +1,10 @@
-'use client';
+"use client";
 import { motion } from "framer-motion";
 import SignInCard from "./signInCard";
 import { Logo } from "@/components/logo/logo";
 import { SocialLoginButtons } from "./socialSignIn";
 
-
 export function SignInPage() {
-  
   return (
     <div className="min-h-screen transition-colors duration-300 bg-gradient-to-br from-[#FAF1ED] via-[#F2E8E3] to-[#FAF1ED] dark:from-[#1C1C20] dark:via-[#14141A] dark:to-[#1C1C20] relative overflow-hidden">
       {/* Animated Background Elements */}
@@ -52,12 +50,16 @@ export function SignInPage() {
           </div>
 
           {/* Login Card */}
-          <SignInCard/>
+          <SignInCard />
 
           {/* Social Login */}
           {/* <SocialLoginButtons onSocialLogin={handleSocialLogin} /> */}
 
-          <SocialLoginButtons onSocialLogin={() => { console.log("Social Login clicked") }} />
+          <SocialLoginButtons
+            onSocialLogin={() => {
+              console.log("Social Login clicked");
+            }}
+          />
           {/* Sign Up Link */}
           <motion.div
             initial={{ opacity: 0 }}

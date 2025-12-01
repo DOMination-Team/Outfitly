@@ -16,20 +16,16 @@ import { Checkbox } from "../ui/checkbox";
 
 type InputVariant = "filled" | "outline" | "subtle";
 
-type CustomTextFieldProps = Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  "name"
-> & {
+type CustomTextFieldProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "name"> & {
   name: string;
   label?: string;
   isPassword?: boolean;
   style?: IStyle;
   variant?: InputVariant;
-  icon?: React.ReactNode; 
+  icon?: React.ReactNode;
 };
 
-const baseLabelClasses =
-  "text-sm font-medium text-foreground tracking-wide";
+const baseLabelClasses = "text-sm font-medium text-foreground tracking-wide";
 
 const baseInputClasses = [
   "w-full pr-4 py-4 rounded-xl h-auto",
@@ -44,7 +40,6 @@ const baseInputClasses = [
   "file:text-foreground file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium",
   "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
 ].join(" ");
-
 
 const invalidInputClasses =
   "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive";
@@ -95,20 +90,14 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
   return (
     <div className="space-y-2">
       {label && !isCheckbox && (
-        <Label
-          htmlFor={name}
-          className={clsx(style?.label ?? baseLabelClasses)}
-        >
+        <Label htmlFor={name} className={clsx(style?.label ?? baseLabelClasses)}>
           {label}
         </Label>
       )}
 
       <div className="relative">
-        
         {icon && !isCheckbox && (
-          <span
-            className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#4C1420]/50 dark:text-white/60"
-          >
+          <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#4C1420]/50 dark:text-white/60">
             {icon}
           </span>
         )}
@@ -123,13 +112,10 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
                 baseCheckboxClasses,
                 checkedCheckboxClasses,
                 style?.input,
-                hasError && checkboxErrorClasses
+                hasError && checkboxErrorClasses,
               )}
             />
-            <Label
-              htmlFor={name}
-              className={clsx(style?.label ?? checkboxLabelClasses)}
-            >
+            <Label htmlFor={name} className={clsx(style?.label ?? checkboxLabelClasses)}>
               {label}
             </Label>
           </div>
@@ -146,7 +132,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
               invalidInputClasses,
               inputVariantClasses[variant],
               style?.input,
-              hasError && "border-destructive text-destructive"
+              hasError && "border-destructive text-destructive",
             )}
           />
         )}
@@ -159,11 +145,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
             className={passwordToggleButtonClasses}
             onClick={() => setShowPassword(!showPassword)}
           >
-            {showPassword ? (
-              <EyeOff className="h-6 w-6" />
-            ) : (
-              <Eye className="h-6 w-6" />
-            )}
+            {showPassword ? <EyeOff className="h-6 w-6" /> : <Eye className="h-6 w-6" />}
           </Button>
         )}
       </div>

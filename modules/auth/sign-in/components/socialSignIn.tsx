@@ -1,13 +1,10 @@
 import { motion } from "framer-motion";
 
-
 interface SocialLoginButtonsProps {
   onSocialLogin: (provider: string) => void;
 }
 
-export function SocialLoginButtons({
-  onSocialLogin,
-}: SocialLoginButtonsProps) {
+export function SocialLoginButtons({ onSocialLogin }: SocialLoginButtonsProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

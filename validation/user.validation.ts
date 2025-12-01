@@ -1,5 +1,4 @@
 import { User } from "@/app/generated/prisma/client";
-import { PrismaConfig } from "prisma/config";
 import { z, ZodType } from "zod";
 
 export const userValidationSchema = z.object({
@@ -12,5 +11,5 @@ export const userValidationSchema = z.object({
   isActive: z.boolean(),
   lastLogin: z.coerce.date().nullable(),
   createdAt: z.coerce.date(),
-  updatedAt: z.coerce.date()
+  updatedAt: z.coerce.date(),
 }) satisfies ZodType<User>;
