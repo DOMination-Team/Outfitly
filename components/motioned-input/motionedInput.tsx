@@ -3,14 +3,14 @@
 import { useState } from "react";
 import type React from "react";
 
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { useField } from "formik";
-import { Button } from "../ui/button";
-import { Eye, EyeOff } from "lucide-react";
+import { Input } from "../ui/input"
+import { Label } from "../ui/label"
+import { useField } from "formik"
+import { Button } from "../ui/button"
+import { Eye, EyeOff } from "lucide-react"
 import withMotion from "@/HOC/withMotion";
 import clsx from "clsx";
-import type { IStyle } from "@/@types";
+import type { IStyle } from "@/@types"   
 
 import { Checkbox } from "../ui/checkbox";
 
