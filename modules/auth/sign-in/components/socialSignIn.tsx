@@ -12,26 +12,23 @@ export function SocialLoginButtons({ onSocialLogin }: SocialLoginButtonsProps) {
       transition={{ duration: 0.6, delay: 0.5 }}
       className="mb-6"
     >
-      {/* Divider */}
       <div className="relative mb-6">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-[#F2E8E3] dark:border-[#35353D]"></div>
+          <div className="w-full border-t border-[var(--outfitly-bg-secondary)]"></div>
         </div>
         <div className="relative flex justify-center">
-          <span className="px-4 bg-[#FAF1ED] dark:bg-[#1C1C20] text-[#4C1420]/60 dark:text-white/60">
+          <span className="px-4 bg-[var(--outfitly-bg-primary)] text-[var(--outfitly-text-primary)]/60">
             OR
           </span>
         </div>
       </div>
 
-      {/* Social Login Buttons */}
       <div className="space-y-3">
-        {/* Google Login */}
         <motion.button
           onClick={() => onSocialLogin("google")}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="w-full py-4 px-6 rounded-xl bg-white dark:bg-[#2A2A30] border-2 border-[#F2E8E3] dark:border-[#35353D] hover:border-[#671425] dark:hover:border-[#8B1D35] text-[#4C1420] dark:text-white transition-all duration-300 flex items-center justify-center gap-3 shadow-md hover:shadow-lg group"
+          className="w-full py-4 px-6 rounded-xl bg-[var(--outfitly-bg-white)] dark:bg-[var(--outfitly-bg-secondary)] border-2 border-[var(--outfitly-bg-secondary)] dark:border-[var(--outfitly-bg-tertiary)] hover:border-[var(--outfitly-primary)] dark:hover:border-[var(--outfitly-primary-hover)] text-[var(--outfitly-text-primary)] transition-all duration-300 flex items-center justify-center gap-3 shadow-md hover:shadow-lg group"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path
@@ -54,12 +51,11 @@ export function SocialLoginButtons({ onSocialLogin }: SocialLoginButtonsProps) {
           <span>Continue with Google</span>
         </motion.button>
 
-        {/* Facebook Login */}
         <motion.button
           onClick={() => onSocialLogin("facebook")}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="w-full py-4 px-6 rounded-xl bg-white dark:bg-[#2A2A30] border-2 border-[#F2E8E3] dark:border-[#35353D] hover:border-[#671425] dark:hover:border-[#8B1D35] text-[#4C1420] dark:text-white transition-all duration-300 flex items-center justify-center gap-3 shadow-md hover:shadow-lg group"
+          className="w-full py-4 px-6 rounded-xl bg-[var(--outfitly-bg-white)] dark:bg-[var(--outfitly-bg-secondary)] border-2 border-[var(--outfitly-bg-secondary)] dark:border-[var(--outfitly-bg-tertiary)] hover:border-[var(--outfitly-primary)] dark:hover:border-[var(--outfitly-primary-hover)] text-[var(--outfitly-text-primary)] transition-all duration-300 flex items-center justify-center gap-3 shadow-md hover:shadow-lg group"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path

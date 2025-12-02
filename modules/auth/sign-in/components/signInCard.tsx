@@ -8,15 +8,17 @@ const SignInCard = () => {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.6, delay: 0.2 }}
-      className="bg-white text-card-foreground rounded-3xl p-8 md:p-10 shadow-2xl backdrop-blur-sm mb-6 relative overflow-hidden border border-border"
+      className="bg-[var(--outfitly-bg-white)] dark:bg-[var(--outfitly-bg-secondary)] text-card-foreground rounded-3xl p-8 md:p-10 shadow-2xl backdrop-blur-sm mb-6 relative overflow-hidden border border-[var(--outfitly-border-light)]"
     >
       {/* Top Accent Bar */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary" />
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--outfitly-gradient-start)] via-[var(--outfitly-gradient-mid)] to-[var(--outfitly-gradient-end)]" />
 
       {/* Welcome Text */}
       <div className="mb-8">
-        <h2 className="mb-2 text-foreground">Welcome Back!</h2>
-        <p className="text-muted-foreground">Sign in to continue to your wardrobe</p>
+        <h2 className="text-[var(--outfitly-text-primary)] mb-2">Welcome Back!</h2>
+        <p className="text-[var(--outfitly-text-primary)]/60">
+          Sign in to continue to your wardrobe
+        </p>
       </div>
 
       {/* Login Form */}

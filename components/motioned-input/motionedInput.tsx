@@ -29,12 +29,12 @@ const baseLabelClasses = "text-sm font-medium text-foreground tracking-wide";
 
 const baseInputClasses = [
   "w-full pr-4 py-4 rounded-xl h-auto",
-  "bg-[#FAF1ED] dark:bg-[#1C1C20]",
-  "border-2 border-[#F2E8E3] dark:border-[#35353D]",
-  "text-[#4C1420] dark:text-white",
-  "placeholder-[#4C1420]/40 dark:placeholder-white/40",
+  "bg-[var(--outfitly-bg-primary)] dark:bg-[var(--outfitly-bg-primary)]",
+  "border-2 border-[var(--outfitly-bg-secondary)] dark:border-[var(--outfitly-bg-secondary)]",
+  "text-[var(--outfitly-text-primary)] dark:text-[var(--outfitly-text-primary)]",
+  "placeholder-[var(--outfitly-text-primary)]/40",
   "focus:outline-none",
-  "focus:border-[#671425] dark:focus:border-[#8B1D35]",
+  "focus:border-[var(--outfitly-primary)] dark:focus:border-[var(--outfitly-primary-hover)]",
   "transition-all duration-300",
   "selection:bg-primary selection:text-primary-foreground",
   "file:text-foreground file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium",
@@ -97,7 +97,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
 
       <div className="relative">
         {icon && !isCheckbox && (
-          <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#4C1420]/50 dark:text-white/60">
+          <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[var(--outfitly-text-primary)]/50">
             {icon}
           </span>
         )}
@@ -128,7 +128,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
             aria-invalid={hasError || undefined}
             className={clsx(
               baseInputClasses,
-              icon ? "pl-12" : "pl-4", // 👈 padding حسب وجود الأيقونة
+              icon ? "pl-12" : "pl-4",
               invalidInputClasses,
               inputVariantClasses[variant],
               style?.input,

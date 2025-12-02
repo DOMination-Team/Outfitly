@@ -10,7 +10,6 @@ const SignInForm = () => {
   return (
     <FormikProvider value={formik}>
       <Form className="space-y-6">
-        {/* Email Input */}
         <MotionField
           name="email"
           isPassword={false}
@@ -19,7 +18,6 @@ const SignInForm = () => {
           icon={<Mail size={18} />}
         />
 
-        {/* Password Input */}
         <MotionField
           name="password"
           isPassword={true}
@@ -28,7 +26,6 @@ const SignInForm = () => {
           icon={<Lock size={18} />}
         />
 
-        {/* Forgot Password Link */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -37,11 +34,12 @@ const SignInForm = () => {
         >
           <button
             type="button"
-            className="text-[#671425] dark:text-[#8B1D35] hover:text-[#8B1D35] dark:hover:text-[#A82444] transition-colors duration-300"
+            className="text-[var(--outfitly-primary)] hover:text-[var(--outfitly-primary-hover)] dark:hover:text-[var(--outfitly-primary-active)] transition-colors duration-300"
           >
             Forgot Password?
           </button>
         </motion.div>
+
         <motion.button
           type="submit"
           initial={{ opacity: 0, y: 20 }}
@@ -49,7 +47,7 @@ const SignInForm = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="w-full py-4 rounded-xl bg-gradient-to-r from-[#671425] to-[#8B1D35] hover:from-[#6A1526] hover:to-[#9A1E3A] text-white shadow-lg shadow-[#671425]/30 hover:shadow-xl hover:shadow-[#671425]/40 transition-all duration-300 relative overflow-hidden group"
+          className="w-full py-4 rounded-xl bg-gradient-to-r from-[var(--outfitly-gradient-start)] to-[var(--outfitly-gradient-mid)] hover:from-[var(--outfitly-primary-hover)] hover:to-[var(--outfitly-gradient-end)] text-[var(--outfitly-text-light)] shadow-lg shadow-[var(--outfitly-shadow)] hover:shadow-xl hover:shadow-[var(--outfitly-shadow)] transition-all duration-300 relative overflow-hidden group"
         >
           <span className="relative z-10">Sign In</span>
           <motion.div

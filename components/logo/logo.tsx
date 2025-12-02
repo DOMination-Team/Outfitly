@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { SIZE_CONFIG } from "./constants";
+
 interface IProps {
   size?: "sm" | "md" | "lg" | "xl";
   animated?: boolean;
@@ -22,7 +23,7 @@ export function Logo({ size = "md", animated = true, linkTo = "/", className = "
       <Image
         src="/logo.png"
         alt="Outfitly Logo"
-        width={SIZE_CONFIG[size] * 4} // keeps high resolution
+        width={SIZE_CONFIG[size] * 4}
         height={SIZE_CONFIG[size]}
         className="object-contain w-auto"
         priority
@@ -30,7 +31,6 @@ export function Logo({ size = "md", animated = true, linkTo = "/", className = "
     </motion.div>
   );
 
-  // With Link
   if (linkTo) {
     return (
       <Link href={linkTo}>
@@ -45,6 +45,5 @@ export function Logo({ size = "md", animated = true, linkTo = "/", className = "
     );
   }
 
-  // Without Link
   return logo;
 }
