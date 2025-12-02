@@ -235,7 +235,6 @@ async function main() {
         await prisma.wardrobeItem.create({
           data: {
             userId,
-            productId: allVariants[vi].productId,
             variantId: allVariants[vi].id,
             source: Math.random() > 0.7 ? 'manual' : 'purchased',
           },

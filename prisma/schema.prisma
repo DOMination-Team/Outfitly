@@ -73,7 +73,6 @@ model Product {
   images        ProductImage[]
   orderItems    OrderItem[]
   cartItems     CartItem[]
-  wardrobeItems WardrobeItem[]
 
   @@index([brandId])
   @@index([categoryId])
@@ -291,20 +290,18 @@ model OutfitItem {
 model WardrobeItem {
   id         String @id @default(uuid())
   userId     String
-  productId  String
   variantId  String?
-  source     String   @default("purchased") // purchased, manual, ai-suggested
+  source     String   @default("manual") // purchased, manual, ai-suggested
   addedAt    DateTime @default(now())
 
   user    User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  product Product        @relation(fields: [productId], references: [id])
   variant ProductVariant? @relation(fields: [variantId], references: [id])
 
   outfitItems OutfitItem[]
   images      WardrobeItemImage[]
 
   @@index([userId])
-  @@index([productId])
+  @@index([variantId])
 }
 
 model WardrobeItemImage {
