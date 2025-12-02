@@ -1,6 +1,6 @@
-import { TFormValues } from "../types";
+import { TFormValues } from "../signUp.types";
 import { useFormik } from "formik";
-import { INITIAL_VALUES } from "../constants";
+import { INITIAL_VALUES } from "../signUp.constants";
 import { formikSignUpSchema } from "../validation/signUp.validation";
 
 const useSignUp = () => {
