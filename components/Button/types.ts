@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, ButtonHTMLAttributes } from "react";
 
 export type ButtonSize = "sm" | "md" | "lg" | "xl";
 
@@ -11,15 +11,13 @@ export type ButtonVariant =
   | "icon"
   | "motion";
 
-export interface ButtonProps {
+// Extend ALL native <button> props
+export interface ButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   size?: ButtonSize;
   variant?: ButtonVariant;
   icon?: ReactNode;
   badge?: ReactNode;
-  selected?: boolean; // for category buttons
-  className?: string;
-  style?: React.CSSProperties;
-  onClick?: () => void;
-  type?: "button" | "submit" | "reset";
+  selected?: boolean; // category buttons
 }

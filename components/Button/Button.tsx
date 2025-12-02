@@ -1,9 +1,11 @@
-import { FC } from "react";
-import { motion } from "framer-motion";
+import { FC, ButtonHTMLAttributes } from "react";
+import { motion, MotionProps } from "framer-motion";
 import { ButtonProps } from "./types";
 import { sizeClasses, variantDefaults } from "./constants";
 
-export const Button: FC<ButtonProps> = ({
+type MotionButtonProps = ButtonProps & ButtonHTMLAttributes<HTMLButtonElement> & MotionProps;
+
+export const Button: FC<MotionButtonProps> = ({
   children,
   size = "md",
   variant = "primary",
@@ -12,24 +14,23 @@ export const Button: FC<ButtonProps> = ({
   selected = false,
   className = "",
   style = {},
-  onClick,
   type = "button",
+  ...rest
 }) => {
   const baseClasses =
     "transition-all duration-300 flex items-center justify-center gap-2 relative overflow-hidden";
 
   const sizeClass = sizeClasses[size];
 
-  // Motion variant
   if (variant === "motion") {
     return (
       <motion.button
         type={type}
-        onClick={onClick}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
         className={`${baseClasses} ${sizeClass} ${className}`}
         style={style}
+        {...rest} // this works now
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
       >
         {icon && <span>{icon}</span>}
         {children}
@@ -38,7 +39,6 @@ export const Button: FC<ButtonProps> = ({
     );
   }
 
-  // Category variant has selected/unselected classes
   let variantClasses = "";
   let variantStyles: React.CSSProperties = { ...style };
 
@@ -54,9 +54,9 @@ export const Button: FC<ButtonProps> = ({
   return (
     <button
       type={type}
-      onClick={onClick}
       className={`${baseClasses} ${sizeClass} ${variantClasses} ${className}`}
       style={variantStyles}
+      {...rest}
     >
       {icon && <span>{icon}</span>}
       {children}
@@ -64,37 +64,3 @@ export const Button: FC<ButtonProps> = ({
     </button>
   );
 };
-
-{/* Usage Example:
-
-
-<Button size="lg" variant="primary">
-  Get Started Free <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-</Button>
-
-
-<Button size="lg" variant="secondary">
-  Watch Demo
-</Button>
-
-<Button size="xl" variant="gradient">
-  Explore More Styles
-</Button>
-
-<Button variant="ghost">
-  Sign In
-</Button>
-
-<Button variant="category" selected={true}>
-  Category Name
-</Button>
-
-<Button variant="icon">
-  <Edit className="w-4 h-4" /> Edit
-</Button>
-
-<Button size="md" variant="motion" icon={<ChevronRight className="w-5 h-5" />}>
-  View Outfit
-</Button>
-
-*/}
