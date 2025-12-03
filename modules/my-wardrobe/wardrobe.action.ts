@@ -1,5 +1,5 @@
 "use server";
-import { handleError } from "@/utils/error-handler.utils";
+import { actionHandler } from "@/utils/action-handler.utils";
 import { createWardrobeItemService } from "./wardrobe.service";
 
-export const createWardrobeItemAction = handleError(createWardrobeItemService);
+export const createWardrobeItemAction = actionHandler(createWardrobeItemService);
