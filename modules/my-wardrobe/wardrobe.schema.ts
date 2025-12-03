@@ -1,0 +1,40 @@
+import { z, ZodType } from "zod";
+import { WardrobeItemSourceEnum } from "./types";
+import { CreateWardrobeItemDTO } from "./types/dto.types";
+
+// Base WardrobeItem schema
+const WardrobeItemBaseSchema = z.object({
+  id: z.uuid(), // auto-generated
+  userId: z.uuid(),
+  categoryId: z.uuid(),
+  variantId: z.uuid().nullable(),
+
+  name: z.string().min(1, "Name is required"),
+  color: z.string().min(1, "Color is required"),
+  size: z.string().min(1, "Size is required"),
+  brand: z.string().min(1, "Brand is required"),
+  season: z.string().min(1, "Season is required"),
+  notes: z.string().optional().default(""),
+
+  source: z.enum(Object.values(WardrobeItemSourceEnum)).default("manual"),
+
+  addedAt: z.date().optional(), // Prisma defaults now()
+  purchasedDate: z.date(),
+});
+
+// CREATE schema
+export const CreateWardrobeItemDTOSchema = WardrobeItemBaseSchema.pick({
+  userId: true,
+  categoryId: true,
+  variantId: true,
+  name: true,
+  color: true,
+  size: true,
+  brand: true,
+  season: true,
+  notes: true,
+  source: true,
+  purchasedDate: true,
+}).extend({
+  imageUrls: z.array(z.string()).min(1, "At least one item is required"),
+}) satisfies ZodType<CreateWardrobeItemDTO>;
