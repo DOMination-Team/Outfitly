@@ -5,10 +5,13 @@ import { createWardrobeItemRepo } from "./wardrobe.repo";
 import { ApiResponseSuccess } from "@/types/response.type";
 import { CreateWardrobeItemResponse } from "./types/dto.types";
 import { CreateWardrobeItemDTO } from "./types/dto.types";
+import userRepo from "../user/user.repo";
 
 export const createWardrobeItemService = async (CreateWardrobeItemDTO: CreateWardrobeItemDTO): Promise<ApiResponseSuccess<CreateWardrobeItemResponse>> => {
   const data = zodValidation(CreateWardrobeItemDTOSchema, CreateWardrobeItemDTO);
   const { imageUrls, ...rest } = data;
+
+  await userRepo.findById(rest.userId);
 
   const wardrobeItem = await createWardrobeItemRepo(rest, imageUrls);
 
