@@ -11,4 +11,3 @@ export const WardrobeItemSourceEnum = {
 } as const;
 
 export type WardrobeItemSourceType = keyof typeof WardrobeItemSourceEnum;
-

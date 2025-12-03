@@ -6,4 +6,4 @@ export const findCategoryById = async (id: string) => {
       id,
     },
   });
-}
+};

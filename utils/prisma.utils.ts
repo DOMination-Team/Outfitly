@@ -20,4 +20,4 @@ export const prismaKnownErrorMessage = (err: Prisma.PrismaClientKnownRequestErro
     default:
       return "A database error occurred.";
   }
-}
+};

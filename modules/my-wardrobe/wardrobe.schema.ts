@@ -6,8 +6,8 @@ import { WardrobeItem } from "@/app/generated/prisma/browser";
 // Base WardrobeItem schema
 const WardrobeItemBaseSchema = z.object({
   id: z.uuid(), // auto-generated
-  userId: z.uuid(),
-  categoryId: z.uuid(),
+  userId: z.string(),
+  categoryId: z.string(),
   variantId: z.uuid().nullable(),
 
   name: z.string().min(1, "Name is required"),

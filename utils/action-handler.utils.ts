@@ -12,19 +12,13 @@ import {
 import { prismaKnownErrorMessage } from "./prisma.utils";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function actionHandler<
-  Args extends unknown[],
-  Return
->(
-  actionFn: (...args: Args) => Promise<Return>
+export function actionHandler<Args extends unknown[], Return>(
+  actionFn: (...args: Args) => Promise<Return>,
 ) {
-  return async (
-    ...args: Args
-  ): Promise<Return | ApiResponseError> => {
+  return async (...args: Args): Promise<Return | ApiResponseError> => {
     try {
       return await actionFn(...args);
     } catch (err: unknown) {
-
       // ---------------------------
       // 🔥 Prisma Error Handling
       // ---------------------------
@@ -74,7 +68,7 @@ export function actionHandler<
       // ---------------------------
 
       if (err instanceof ZodError) {
-        const errors = z.flattenError(err, issue => issue.message).fieldErrors;
+        const errors = z.flattenError(err, (issue) => issue.message).fieldErrors;
         return {
           success: false,
           statusCode: HttpStatusError.BadRequest,
