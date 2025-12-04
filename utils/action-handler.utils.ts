@@ -15,11 +15,9 @@ import { errors as JoseErrors } from "jose";
 
 export function actionHandler<Args extends unknown[], Return>(
   actionFn: (...args: Args) => Promise<Return>,
-  config?: TSuccessConfig
+  config?: TSuccessConfig,
 ) {
-  return async (
-    ...args: Args
-  ): Promise<ApiResponseSuccess<Return> | ApiResponseError> => {
+  return async (...args: Args): Promise<ApiResponseSuccess<Return> | ApiResponseError> => {
     try {
       const data = await actionFn(...args);
 
@@ -79,8 +77,7 @@ export function actionHandler<Args extends unknown[], Return>(
       // ---------------------------
 
       if (err instanceof ZodError) {
-        const errors = z.flattenError(err, (issue) => issue.message)
-          .fieldErrors;
+        const errors = z.flattenError(err, (issue) => issue.message).fieldErrors;
 
         return {
           success: false,
