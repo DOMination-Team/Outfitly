@@ -1,15 +1,28 @@
+"use client";
 import Image from "next/image";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { PageHeader } from "@/components/page-header";
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from '../contexts/ThemeContext'
+import { Button } from "@/components/Button/Button";
+import { useState } from "react";
 
 export default function Home({ Component, pageProps }: AppProps) {
+  const [isLoading, setIsLoading] = useState(false); // Example loading state
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
        <ThemeProvider>
           <Navbar/>
+            <Button
+              variant="motion"
+              loading={isLoading}
+              onClick={()=>{setIsLoading(!isLoading)}}
+              loadingText="Processing..."
+              className="bg-red-100"
+            >
+              Submit
+            </Button>
           <Footer/>     
        </ThemeProvider>
 
