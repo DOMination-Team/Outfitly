@@ -19,5 +19,9 @@ export interface ButtonProps
   variant?: ButtonVariant;
   icon?: ReactNode;
   badge?: ReactNode;
-  selected?: boolean; // category buttons
+  selected?: boolean;
+  loading?: boolean;
+  loadingText?: string;
+  
+  // category buttons
 }
