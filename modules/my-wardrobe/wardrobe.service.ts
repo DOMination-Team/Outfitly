@@ -1,8 +1,16 @@
 "use server";
 import { zodValidation } from "@/utils/zod.utils";
 import { CreateWardrobeItemDTOSchema, UpdateWardrobeItemDTOSchema } from "./wardrobe.schema";
-import { createWardrobeItemRepo, findWardrobeItemById, updateWardrobeItemRepo } from "./wardrobe.repo";
-import { CreateWardrobeItemResponse, UpdateWardrobeItemDTO, UpdateWardrobeItemResponse } from "./types/dto.types";
+import {
+  createWardrobeItemRepo,
+  findWardrobeItemById,
+  updateWardrobeItemRepo,
+} from "./wardrobe.repo";
+import {
+  CreateWardrobeItemResponse,
+  UpdateWardrobeItemDTO,
+  UpdateWardrobeItemResponse,
+} from "./types/dto.types";
 import { CreateWardrobeItemDTO } from "./types/dto.types";
 import userRepo from "../user/user.repo";
 import { findCategoryById } from "../category/category.repo";
@@ -28,10 +36,8 @@ export const updateWardrobeItemService = async (
 
   await userRepo.findById(userId);
   await findWardrobeItemById(id);
-  if (rest.categoryId)
-    await findCategoryById(rest.categoryId);
+  if (rest.categoryId) await findCategoryById(rest.categoryId);
 
   const wardrobeItem = await updateWardrobeItemRepo(id, userId, rest, images);
   return wardrobeItem;
 };
-

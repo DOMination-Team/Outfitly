@@ -40,7 +40,7 @@ export const CreateWardrobeItemDTOSchema = WardrobeItemBaseWithImagesSchema.pick
   notes: true,
   source: true,
   purchasedDate: true,
-  imageUrls: true
+  imageUrls: true,
 }) satisfies ZodType<CreateWardrobeItemDTO>;
 
 // UPDATE schema
@@ -55,16 +55,21 @@ export const UpdateWardrobeItemDTOSchema = WardrobeItemBaseSchema.pick({
   notes: true,
   source: true,
   purchasedDate: true,
-}).extend({
-  images: z.array(z.object({
-    id: z.uuid(),
-    imageUrl: z.string(),
-    altText: z.string().nullable(),
-    isPrimary: z.boolean(),
-    displayOrder: z.number(),
-    wardrobeItemId: z.uuid(),
-  }))
-}).partial().extend({
-  id: z.string(), // auto-generated
-  userId: z.string(),
-}) satisfies ZodType<UpdateWardrobeItemDTO>;
+})
+  .extend({
+    images: z.array(
+      z.object({
+        id: z.uuid(),
+        imageUrl: z.string(),
+        altText: z.string().nullable(),
+        isPrimary: z.boolean(),
+        displayOrder: z.number(),
+        wardrobeItemId: z.uuid(),
+      }),
+    ),
+  })
+  .partial()
+  .extend({
+    id: z.string(), // auto-generated
+    userId: z.string(),
+  }) satisfies ZodType<UpdateWardrobeItemDTO>;

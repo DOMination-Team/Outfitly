@@ -76,16 +76,12 @@ export const updateWardrobeItemRepo = async (
       }
 
       // 4. Delete images that were removed
-      const incomingIds = normalizedImages
-        .map((img) => img.id)
-        .filter(Boolean) as string[];
+      const incomingIds = normalizedImages.map((img) => img.id).filter(Boolean) as string[];
 
       await tx.wardrobeItemImage.deleteMany({
         where: {
           wardrobeItemId: id,
-          ...(incomingIds.length > 0
-            ? { id: { notIn: incomingIds } }
-            : {}), // if no images → delete all
+          ...(incomingIds.length > 0 ? { id: { notIn: incomingIds } } : {}), // if no images → delete all
         },
       });
     }
@@ -108,4 +104,4 @@ export const findWardrobeItemById = async (id: string) => {
       id,
     },
   });
-}
+};

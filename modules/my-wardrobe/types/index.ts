@@ -4,7 +4,7 @@ export type WardrobeItemWithoutAddedAt = Omit<WardrobeItem, "addedAt">;
 
 export type WardrobeItemWithoutAddedAtAndId = Omit<WardrobeItem, "addedAt" | "id">;
 
-export type WardrobeItemWithImages = WardrobeItem & { images: WardrobeItemImage[] }
+export type WardrobeItemWithImages = WardrobeItem & { images: WardrobeItemImage[] };
 
 export const WardrobeItemSourceEnum = {
   manual: "manual",
