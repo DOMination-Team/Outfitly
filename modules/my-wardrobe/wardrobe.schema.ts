@@ -65,6 +65,6 @@ export const UpdateWardrobeItemDTOSchema = WardrobeItemBaseSchema.pick({
     wardrobeItemId: z.uuid(),
   }))
 }).partial().extend({
-  id: z.uuid(), // auto-generated
-  userId: z.uuid(),
+  id: z.string(), // auto-generated
+  userId: z.string(),
 }) satisfies ZodType<UpdateWardrobeItemDTO>;

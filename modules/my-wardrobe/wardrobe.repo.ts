@@ -102,8 +102,8 @@ export const updateWardrobeItemRepo = async (
   });
 };
 
-export const findWardrobeItemById = (id: string) => {
-  return prisma.user.findUniqueOrThrow({
+export const findWardrobeItemById = async (id: string) => {
+  return prisma.wardrobeItem.findUniqueOrThrow({
     where: {
       id,
     },
