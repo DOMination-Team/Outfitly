@@ -4,7 +4,7 @@ import { Navbar } from "@/components/navbar";
 import { PageHeader } from "@/components/page-header";
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from '../contexts/ThemeContext'
-import { Button } from "@/components/Button/Button";
+import { Button } from "@/components/button";
 
 
 export default function Home({ Component, pageProps }: AppProps) {
