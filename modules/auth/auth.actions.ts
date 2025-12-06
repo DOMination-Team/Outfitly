@@ -19,4 +19,4 @@ export const revalidateUserAction = actionHandler(revalidateUser, {
 export const getUserAndRefreshAction = actionHandler(getAuthedUserAndRefresh, {
   statusCode: 200,
   message: "User and refresh token retrieved successfully!",
-})
+});

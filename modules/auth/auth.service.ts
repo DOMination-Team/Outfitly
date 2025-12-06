@@ -65,20 +65,19 @@ export async function revalidateUser(token: string): Promise<TSignInResult> {
     token: newToken,
     user: userForClient,
   };
-
 }
 
-export const getAuthedUserAndRefresh = async() => {
-      const cookiesStore = await cookies();
-      const token =  cookiesStore.get('user-token')?.value;
+export const getAuthedUserAndRefresh = async () => {
+  const cookiesStore = await cookies();
+  const token = cookiesStore.get("user-token")?.value;
 
-      if(!token) {
-          throw new CustomError({message: 'No token found', statusCode: 401});
-      }
-
-      const verifiedUser = await revalidateUser(token);
-      
-      cookiesStore.set('user-token', verifiedUser.token); 
-      
-      return verifiedUser;
+  if (!token) {
+    throw new CustomError({ message: "No token found", statusCode: 401 });
   }
+
+  const verifiedUser = await revalidateUser(token);
+
+  cookiesStore.set("user-token", verifiedUser.token);
+
+  return verifiedUser;
+};

@@ -15,15 +15,15 @@ const useSignIn = () => {
   ) => {
     const data = await signInAction(values);
     setSubmitting(false);
-    
-    if(!data.success) {
+
+    if (!data.success) {
       toast.error(data.message);
       return;
     }
 
-    toast.success('Sign in successful');
+    toast.success("Sign in successful");
 
-    navigate.push('/');
+    navigate.push("/");
     resetForm();
   };
   const formik = useFormik<TFormValues>({
