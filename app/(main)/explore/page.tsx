@@ -1,6 +1,5 @@
 import { ExplorePage } from "@/modules/explore/components/explorePage";
 
-
 const Explore = () => {
   return <ExplorePage />;
 };
