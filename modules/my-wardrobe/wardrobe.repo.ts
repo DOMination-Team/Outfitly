@@ -240,35 +240,17 @@ export const deleteWardrobeItemRepo = async (
   userId: string,
 ) => {
   return await prisma.$transaction(async (tx) => {
-    // 1. Find the item + images (with ownership check)
-    const item = await tx.wardrobeItem.findUnique({
-      where: { id: itemId },
-      include: {
-        images: {
-          select: {
-            id: true,
-            imageUrl: true,
-          },
-        },
-      },
-    });
-
-    // 2. Security: not found OR not owned → throw
-    if (!item || item.userId !== userId) {
-      throw new Error("Item not found or not authorized");
-    }
-
-    // 3. Delete images first (foreign key constraint)
+    // 1. Delete images first (foreign key constraint)
     await tx.wardrobeItemImage.deleteMany({
       where: { wardrobeItemId: itemId },
     });
 
-    // 4. Delete the item
+    // 2. Delete the item
     const wardrobeItem = await tx.wardrobeItem.delete({
       where: { id: itemId },
     });
 
-    // 5. Return success
+    // 3. Return success
     return wardrobeItem;
   });
 };
