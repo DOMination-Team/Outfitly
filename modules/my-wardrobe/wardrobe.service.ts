@@ -3,18 +3,22 @@ import { zodValidation } from "@/utils/zod.utils";
 import {
   CreateWardrobeItemDTOSchema,
   GetUserWardrobeItemSchema,
+  GetWardrobeItemDetailsSchema,
   UpdateWardrobeItemDTOSchema,
 } from "./wardrobe.schema";
 import {
   createWardrobeItemRepo,
   findWardrobeItemById,
   getUserWardrobeItemRepo,
+  getWardrobeItemDetailsRepo,
   updateWardrobeItemRepo,
 } from "./wardrobe.repo";
 import {
   CreateWardrobeItemResponse,
   GetUserWardrobeItemDTO,
   GetUserWardrobeItemResponse,
+  GetWardrobeItemDetailsDTO,
+  GetWardrobeItemDetailsResponse,
   UpdateWardrobeItemDTO,
   UpdateWardrobeItemResponse,
 } from "./types/dto.types";
@@ -22,6 +26,7 @@ import { CreateWardrobeItemDTO } from "./types/dto.types";
 import userRepo from "../user/user.repo";
 import { findCategoryById } from "../category/category.repo";
 import { PAGE, PAGE_SIZE } from "@/app.constant";
+import { getUserFromSession } from "../auth/auth.service";
 
 export const createWardrobeItemService = async (
   CreateWardrobeItemDTO: CreateWardrobeItemDTO,
@@ -61,4 +66,17 @@ export const getUserWardrobeService = async (
   const { page, pageSize, ...rest } = data;
   const skip = ((page || PAGE) - 1) * (pageSize || PAGE_SIZE);
   return getUserWardrobeItemRepo({ ...rest, skip, take: pageSize });
+};
+
+export const getWardrobeItemDetailsService = async (
+  getWardrobeItemDetailsDTO: GetWardrobeItemDetailsDTO,
+): Promise<GetWardrobeItemDetailsResponse> => {
+  const data = zodValidation(GetWardrobeItemDetailsSchema, getWardrobeItemDetailsDTO);
+
+  const user = await getUserFromSession();
+
+  await userRepo.findById(user.sub);
+  await findWardrobeItemById(data.id);
+
+  return getWardrobeItemDetailsRepo(data.id, user.sub);
 };

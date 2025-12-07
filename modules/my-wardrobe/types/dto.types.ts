@@ -46,3 +46,4 @@ export type GetUserWardrobeItemResponse = {
 };
 
 export type GetWardrobeItemDetailsDTO = { id: string };
+export type GetWardrobeItemDetailsResponse = WardrobeItemWithImages | null;
