@@ -5,6 +5,7 @@ import {
   deleteWardrobeItemService,
   getUserWardrobeService,
   getWardrobeItemDetailsService,
+  getWardrobeStatsService,
   updateWardrobeItemService,
 } from "./wardrobe.service";
 
@@ -22,3 +23,5 @@ export const getUserWardrobeItemAction = actionHandler(getUserWardrobeService);
 export const getWardrobeItemDetailsAction = actionHandler(getWardrobeItemDetailsService);
 
 export const deleteWardrobeItemAction = actionHandler(deleteWardrobeItemService);
+
+export const getWardrobeStatsAction = actionHandler(getWardrobeStatsService);
