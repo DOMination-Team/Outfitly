@@ -49,4 +49,4 @@ export type GetWardrobeItemDetailsDTO = { id: string };
 export type GetWardrobeItemDetailsResponse = WardrobeItemWithImages | null;
 
 export type DeleteWardrobeItemDTO = { id: string };
-export type DeleteWardrobeItemResponse = WardrobeItem; 
+export type DeleteWardrobeItemResponse = WardrobeItem;

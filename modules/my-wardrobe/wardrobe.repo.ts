@@ -235,10 +235,7 @@ export const getWardrobeStatsRepo = async (userId: string) => {
   return { byCategory };
 };
 
-export const deleteWardrobeItemRepo = async (
-  itemId: string,
-  userId: string,
-) => {
+export const deleteWardrobeItemRepo = async (itemId: string, userId: string) => {
   return await prisma.$transaction(async (tx) => {
     // 1. Delete images first (foreign key constraint)
     await tx.wardrobeItemImage.deleteMany({
