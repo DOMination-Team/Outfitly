@@ -2,7 +2,6 @@
 
 import { useTheme } from "next-themes";
 
-
 export function usePageHeader() {
   const { theme } = useTheme();
 
