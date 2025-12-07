@@ -15,9 +15,7 @@ const SignInCard = () => {
 
       {/* Welcome Text */}
       <div className="mb-8">
-        <h2 className="mb-2 text-[var(--outfitly-heading)]">
-          Welcome Back!
-        </h2>
+        <h2 className="mb-2 text-[var(--outfitly-heading)]">Welcome Back!</h2>
         <p className="text-sm text-[var(--outfitly-muted-foreground)]">
           Sign in to continue to your wardrobe
         </p>
