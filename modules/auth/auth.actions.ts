@@ -1,6 +1,12 @@
 "use server";
 import { actionHandler } from "@/utils/action-handler.utils";
-import { getAuthedUserAndRefresh, revalidateUser, signIn, signUp } from "./auth.service";
+import {
+  getAuthedUserAndRefresh,
+  getUserFromSession,
+  revalidateUser,
+  signIn,
+  signUp,
+} from "./auth.service";
 
 export const signInAction = actionHandler(signIn, {
   statusCode: 200,
@@ -19,4 +25,9 @@ export const revalidateUserAction = actionHandler(revalidateUser, {
 export const getUserAndRefreshAction = actionHandler(getAuthedUserAndRefresh, {
   statusCode: 200,
   message: "User and refresh token retrieved successfully!",
+});
+
+export const getUserFromSessionAction = actionHandler(getUserFromSession, {
+  statusCode: 200,
+  message: "User session retrieved successfully!",
 });
