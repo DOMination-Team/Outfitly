@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import useSignUp from "../hook/useSignUp";
-import { Button } from "@/components/ui/button";
 import CustomButton from "@/components/custom-button";
 
 const SignUpForm = () => {
@@ -84,6 +83,7 @@ const SignUpForm = () => {
             <CustomButton
               type="button"
               variant="link"
+              onClick={() => router.push("/sign-in")}
               className="!p-0 m-0 cursor-pointer text-[var(--outfitly-primary)] hover:text-[var(--outfitly-primary-hover)] dark:hover:text-[var(--outfitly-primary-active)] transition-colors duration-300"
             >
               Sign In

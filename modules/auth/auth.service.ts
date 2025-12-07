@@ -45,10 +45,8 @@ export async function signIn(
   return { token, user: userForClient };
 }
 
-export async function revalidateUser(token: string): Promise<TSignInResult> {
-  const result = await verifyToken(token);
-
-  const payload = result.payload;
+export async function revalidateUser(): Promise<TSignInResult> {
+  const payload = await getUserFromSession();
 
   const user = await userService.findById(payload.sub);
 
@@ -67,7 +65,7 @@ export async function revalidateUser(token: string): Promise<TSignInResult> {
   };
 }
 
-export const getAuthedUserAndRefresh = async () => {
+export const getUserFromSession = async () => {
   const cookiesStore = await cookies();
   const token = cookiesStore.get("user-token")?.value;
 
@@ -75,7 +73,14 @@ export const getAuthedUserAndRefresh = async () => {
     throw new CustomError({ message: "No token found", statusCode: 401 });
   }
 
-  const verifiedUser = await revalidateUser(token);
+  const { payload } = await verifyToken(token);
+
+  return payload;
+};
+
+export const getAuthedUserAndRefresh = async () => {
+  const cookiesStore = await cookies();
+  const verifiedUser = await revalidateUser();
 
   cookiesStore.set("user-token", verifiedUser.token);
 
