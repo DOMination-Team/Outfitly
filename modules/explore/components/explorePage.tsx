@@ -25,15 +25,6 @@ interface Outfit {
   style?: string;
   season?: string;
 }
-interface Outfit {
-  id: string;
-  image: string;
-  username: string;
-  likes: number;
-  isLiked: boolean;
-  style?: string;
-  season?: string;
-}
 
 // Mock data with varied image heights for masonry effect
 const mockOutfits: Outfit[] = [
@@ -125,11 +116,6 @@ export function ExplorePage() {
   const [outfits, setOutfits] = useState(mockOutfits);
   const [styleFilter, setStyleFilter] = useState("All Styles");
   const [seasonFilter, setSeasonFilter] = useState("All Seasons");
-export function ExplorePage() {
-  const { theme } = useTheme();
-  const [outfits, setOutfits] = useState(mockOutfits);
-  const [styleFilter, setStyleFilter] = useState("All Styles");
-  const [seasonFilter, setSeasonFilter] = useState("All Seasons");
 
   const toggleLike = (id: string) => {
     setOutfits(
@@ -149,13 +135,7 @@ export function ExplorePage() {
     // Simulate loading more outfits
     console.log("Loading more outfits...");
   };
-  const loadMore = () => {
-    // Simulate loading more outfits
-    console.log("Loading more outfits...");
-  };
 
-  const styles = ["All Styles", "Casual", "Elegant", "Street", "Boho", "Classic"];
-  const seasons = ["All Seasons", "Spring", "Summer", "Fall", "Winter"];
   const styles = ["All Styles", "Casual", "Elegant", "Street", "Boho", "Classic"];
   const seasons = ["All Seasons", "Spring", "Summer", "Fall", "Winter"];
 
@@ -168,22 +148,7 @@ export function ExplorePage() {
       }}
     >
       <Navbar />
-  return (
-    <div
-      className="min-h-screen transition-colors duration-300"
-      style={{
-        // #1a1a1a / #FAF1ED -> var(--outfitly-bg-primary) (theme handled in CSS)
-        backgroundColor: "var(--outfitly-bg-primary)",
-      }}
-    >
-      <Navbar />
 
-      <main className="pt-20 pb-16">
-        {/* Page Header */}
-        <PageHeader
-          title="Explore Outfits"
-          subtitle="Discover inspiring looks from the community"
-        />
       <main className="pt-20 pb-16">
         {/* Page Header */}
         <PageHeader
@@ -291,116 +256,7 @@ export function ExplorePage() {
                     ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
-                {/* Style Filter */}
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="outline"
-                      className="transition-all duration-300 border-2 hover:scale-105"
-                      style={{
-                        // #1a1a1a / #F2E8E3
-                        backgroundColor:
-                          theme === "dark"
-                            ? "var(--outfitly-bg-primary)"
-                            : "var(--outfitly-bg-secondary)",
-                        // #671425
-                        borderColor: "var(--outfitly-primary)",
-                        // #FAF1ED / #671425
-                        color:
-                          theme === "dark"
-                            ? "var(--outfitly-text-light)"
-                            : "var(--outfitly-primary)",
-                      }}
-                    >
-                      {styleFilter}
-                      <ChevronDown className="ml-2 w-4 h-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent
-                    className="border-2"
-                    style={{
-                      // #2a2a2a / #FFFFFF
-                      backgroundColor:
-                        theme === "dark"
-                          ? "var(--outfitly-bg-secondary)"
-                          : "var(--outfitly-bg-white)",
-                      // #671425
-                      borderColor: "var(--outfitly-primary)",
-                    }}
-                  >
-                    {styles.map((style) => (
-                      <DropdownMenuItem
-                        key={style}
-                        onClick={() => setStyleFilter(style)}
-                        style={{
-                          // #FAF1ED / #671425
-                          color:
-                            theme === "dark"
-                              ? "var(--outfitly-text-light)"
-                              : "var(--outfitly-primary)",
-                        }}
-                        // hover:bg-[#671425]/10 -> still using primary; if you want full variable,
-                        // you can define a soft token like --outfitly-primary-soft and use it here.
-                        className="cursor-pointer hover:bg-[#671425]/10"
-                      >
-                        {style}
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
 
-                {/* Season Filter */}
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="outline"
-                      className="transition-all duration-300 border-2 hover:scale-105"
-                      style={{
-                        backgroundColor:
-                          theme === "dark"
-                            ? "var(--outfitly-bg-primary)"
-                            : "var(--outfitly-bg-secondary)",
-                        borderColor: "var(--outfitly-primary)",
-                        color:
-                          theme === "dark"
-                            ? "var(--outfitly-text-light)"
-                            : "var(--outfitly-primary)",
-                      }}
-                    >
-                      {seasonFilter}
-                      <ChevronDown className="ml-2 w-4 h-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent
-                    className="border-2"
-                    style={{
-                      backgroundColor:
-                        theme === "dark"
-                          ? "var(--outfitly-bg-secondary)"
-                          : "var(--outfitly-bg-white)",
-                      borderColor: "var(--outfitly-primary)",
-                    }}
-                  >
-                    {seasons.map((season) => (
-                      <DropdownMenuItem
-                        key={season}
-                        onClick={() => setSeasonFilter(season)}
-                        style={{
-                          color:
-                            theme === "dark"
-                              ? "var(--outfitly-text-light)"
-                              : "var(--outfitly-primary)",
-                        }}
-                        className="cursor-pointer hover:bg-[#671425]/10"
-                      >
-                        {season}
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-            </div>
-          </motion.div>
                 {/* Season Filter */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -492,8 +348,6 @@ export function ExplorePage() {
 
                       {/* Gradient Overlay (kept as black overlay, not brand gradient) */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      {/* Gradient Overlay (kept as black overlay, not brand gradient) */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                       {/* Like Button Overlay */}
                       <motion.button
@@ -522,67 +376,7 @@ export function ExplorePage() {
                         />
                       </motion.button>
                     </div>
-                      {/* Like Button Overlay */}
-                      <motion.button
-                        onClick={() => toggleLike(outfit.id)}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-300 border-2"
-                        style={{
-                          backgroundColor: outfit.isLiked
-                            ? "var(--outfitly-primary)" // #671425
-                            : "rgba(255, 255, 255, 0.2)",
-                          borderColor: outfit.isLiked
-                            ? "var(--outfitly-primary)" // #671425
-                            : "var(--outfitly-bg-white)", // #FFFFFF
-                        }}
-                      >
-                        <Heart
-                          className={`w-5 h-5 transition-all duration-300 ${
-                            outfit.isLiked ? "fill-current" : ""
-                          }`}
-                          style={{
-                            color: outfit.isLiked
-                              ? "var(--outfitly-text-light)" // #FAF1ED
-                              : "var(--outfitly-bg-white)", // #FFFFFF
-                          }}
-                        />
-                      </motion.button>
-                    </div>
 
-                    {/* Info Section */}
-                    <div
-                      className="p-4 transition-colors duration-300"
-                      style={{
-                        backgroundColor:
-                          theme === "dark"
-                            ? "var(--outfitly-bg-secondary)"
-                            : "var(--outfitly-bg-white)",
-                      }}
-                    >
-                      {/* Username */}
-                      <div className="flex items-center gap-2 mb-2">
-                        <div
-                          className="w-8 h-8 rounded-full flex items-center justify-center"
-                          style={{ backgroundColor: "var(--outfitly-primary)" }} // #671425
-                        >
-                          <User
-                            className="w-4 h-4"
-                            style={{ color: "var(--outfitly-text-light)" }} // #FAF1ED
-                          />
-                        </div>
-                        <span
-                          className="transition-colors duration-300"
-                          style={{
-                            color:
-                              theme === "dark"
-                                ? "var(--outfitly-text-light)"
-                                : "var(--outfitly-primary)",
-                          }}
-                        >
-                          @{outfit.username}
-                        </span>
-                      </div>
                     {/* Info Section */}
                     <div
                       className="p-4 transition-colors duration-300"
@@ -681,10 +475,6 @@ export function ExplorePage() {
         </div>
       </main>
 
-      <Footer />
-    </div>
-  );
-}
       <Footer />
     </div>
   );
