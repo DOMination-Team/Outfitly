@@ -1,6 +1,6 @@
 "use server";
 import { actionHandler } from "@/utils/action-handler.utils";
-import { createWardrobeItemService, updateWardrobeItemService } from "./wardrobe.service";
+import { createWardrobeItemService, getUserWardrobeService, updateWardrobeItemService } from "./wardrobe.service";
 
 export const createWardrobeItemAction = actionHandler(createWardrobeItemService, {
   statusCode: 201,
@@ -10,3 +10,5 @@ export const createWardrobeItemAction = actionHandler(createWardrobeItemService,
 export const updateWardrobeItemAction = actionHandler(updateWardrobeItemService, {
   message: "Wardrobe item updated successfully",
 });
+
+export const getUserWardrobeItemAction = actionHandler(getUserWardrobeService);
