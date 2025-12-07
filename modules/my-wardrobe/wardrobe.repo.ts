@@ -200,3 +200,54 @@ export const getWardrobeItemDetailsRepo = async (itemId: string, userId: string)
     },
   });
 };
+
+export const getWardrobeStatsRepo = async (userId: string) => {
+  const result = await prisma.wardrobeItem.groupBy({
+    by: ["categoryId"],
+    where: {
+      userId,
+    },
+    _count: {
+      _all: true,
+    },
+  });
+
+  // Initialize all categories with 0
+  //** I need inside the database */
+  const byCategory: Record<string, number> = {
+    TOP: 0,
+    BOTTOM: 0,
+    SHOES: 0,
+    OUTERWEAR: 0,
+    ACCESSORY: 0,
+    DRESS: 0,
+    BAG: 0,
+    // Add any custom categories here
+  };
+
+  // Fill in the actual counts
+  for (const item of result) {
+    if (item.categoryId) {
+      byCategory[item.categoryId] = item._count._all;
+    }
+  }
+
+  return { byCategory };
+};
+
+export const deleteWardrobeItemRepo = async (itemId: string, userId: string) => {
+  return await prisma.$transaction(async (tx) => {
+    // 1. Delete images first (foreign key constraint)
+    await tx.wardrobeItemImage.deleteMany({
+      where: { wardrobeItemId: itemId },
+    });
+
+    // 2. Delete the item
+    const wardrobeItem = await tx.wardrobeItem.delete({
+      where: { id: itemId },
+    });
+
+    // 3. Return success
+    return wardrobeItem;
+  });
+};

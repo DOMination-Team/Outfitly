@@ -2,12 +2,14 @@
 import { zodValidation } from "@/utils/zod.utils";
 import {
   CreateWardrobeItemDTOSchema,
+  DeleteWardrobeItemSchema,
   GetUserWardrobeItemSchema,
   GetWardrobeItemDetailsSchema,
   UpdateWardrobeItemDTOSchema,
 } from "./wardrobe.schema";
 import {
   createWardrobeItemRepo,
+  deleteWardrobeItemRepo,
   findWardrobeItemById,
   getUserWardrobeItemRepo,
   getWardrobeItemDetailsRepo,
@@ -15,6 +17,8 @@ import {
 } from "./wardrobe.repo";
 import {
   CreateWardrobeItemResponse,
+  DeleteWardrobeItemDTO,
+  DeleteWardrobeItemResponse,
   GetUserWardrobeItemDTO,
   GetUserWardrobeItemResponse,
   GetWardrobeItemDetailsDTO,
@@ -27,6 +31,8 @@ import userRepo from "../user/user.repo";
 import { findCategoryById } from "../category/category.repo";
 import { PAGE, PAGE_SIZE } from "@/app.constant";
 import { getUserFromSession } from "../auth/auth.service";
+import CustomError from "@/utils/CustomError";
+import { HttpStatusError } from "@/@types/status-code.type";
 
 export const createWardrobeItemService = async (
   CreateWardrobeItemDTO: CreateWardrobeItemDTO,
@@ -75,8 +81,29 @@ export const getWardrobeItemDetailsService = async (
 
   const user = await getUserFromSession();
 
-  await userRepo.findById(user.sub);
-  await findWardrobeItemById(data.id);
+  const userData = await userRepo.findById(user.sub);
+  const wardrobeItemData = await findWardrobeItemById(data.id);
+
+  if (userData.id != wardrobeItemData.id) {
+    throw new CustomError({ message: "not authorized", statusCode: HttpStatusError.Unauthorized });
+  }
 
   return getWardrobeItemDetailsRepo(data.id, user.sub);
+};
+
+export const deleteWardrobeItemService = async (
+  deleteWardrobeItemDTO: DeleteWardrobeItemDTO,
+): Promise<DeleteWardrobeItemResponse> => {
+  const data = zodValidation(DeleteWardrobeItemSchema, deleteWardrobeItemDTO);
+
+  const user = await getUserFromSession();
+
+  const userData = await userRepo.findById(user.sub);
+  const wardrobeItemData = await findWardrobeItemById(data.id);
+
+  if (userData.id != wardrobeItemData.id) {
+    throw new CustomError({ message: "not authorized", statusCode: HttpStatusError.Unauthorized });
+  }
+
+  return deleteWardrobeItemRepo(data.id, user.sub);
 };
