@@ -107,7 +107,7 @@ export const findWardrobeItemById = async (id: string) => {
   });
 };
 
-export const getUserWardrobe = async ({
+export const getUserWardrobeRepo = async ({
   userId,
   categoryId,
   sortBy = "addedAt",
