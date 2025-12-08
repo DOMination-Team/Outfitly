@@ -1,3 +1,4 @@
+"use server";
 import { IPaginationQuery } from "@/@types/database.type";
 import { Outfit } from "@/app/generated/prisma/client";
 import { SortOrder } from "@/app/generated/prisma/internal/prismaNamespace";
@@ -5,7 +6,7 @@ import { findAll, likeOutfit } from "./outfit.repo";
 import { zodValidation } from "@/utils/zod.utils";
 import { outfitListQuerySchema } from "./validation/outfit.validation";
 
-export const getAllOutfitsPaginated = (
+export const getAllOutfitsPaginated = async (
   query: IPaginationQuery,
   order: SortOrder = "desc",
   field: Extract<keyof Outfit, "createdAt" | "name"> = "createdAt",
@@ -15,6 +16,6 @@ export const getAllOutfitsPaginated = (
   return findAll(validQuery, validData.order, validData.field);
 };
 
-export const addLikeOutfit = (userId: string, outfitId: string) => {
+export const addLikeOutfit = async (userId: string, outfitId: string) => {
   return likeOutfit(outfitId, userId);
 };

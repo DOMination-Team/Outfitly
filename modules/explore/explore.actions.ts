@@ -1,3 +1,4 @@
+"use server";
 import { actionHandler } from "@/utils/action-handler.utils";
 import { getOutfitsForExplore, likeOutfitForExplore } from "./explore.service";
 
