@@ -6,17 +6,13 @@ import { Action } from "../state/explore.reducer";
 import useOutfit from "../hook/useOutfit";
 
 interface OutfitCardProps {
-  outfit: IOutfit
+  outfit: IOutfit;
   index: number;
-  dispatch: ActionDispatch<[action: Action]>
+  dispatch: ActionDispatch<[action: Action]>;
 }
 
 export const OutfitCard = ({ outfit, index, dispatch }: OutfitCardProps) => {
-    const {
-        isPending,
-        theme,
-        onToggleLike,
-    } = useOutfit(outfit, dispatch);
+  const { isPending, theme, onToggleLike } = useOutfit(outfit, dispatch);
   return (
     <motion.div
       key={outfit.id}
@@ -25,14 +21,9 @@ export const OutfitCard = ({ outfit, index, dispatch }: OutfitCardProps) => {
       transition={{ duration: 0.5, delay: index * 0.05 }}
       className="group relative overflow-hidden rounded-xl border-2 transition-all duration-300 shadow-lg hover:shadow-2xl"
       style={{
-        borderColor:
-          theme === "dark"
-            ? "var(--outfitly-primary)"
-            : "var(--outfitly-bg-secondary)",
+        borderColor: theme === "dark" ? "var(--outfitly-primary)" : "var(--outfitly-bg-secondary)",
         backgroundColor:
-          theme === "dark"
-            ? "var(--outfitly-bg-secondary)"
-            : "var(--outfitly-bg-white)",
+          theme === "dark" ? "var(--outfitly-bg-secondary)" : "var(--outfitly-bg-white)",
       }}
     >
       <div className="relative overflow-hidden">
@@ -53,9 +44,7 @@ export const OutfitCard = ({ outfit, index, dispatch }: OutfitCardProps) => {
             backgroundColor: outfit.isLiked
               ? "var(--outfitly-primary)"
               : "rgba(255, 255, 255, 0.2)",
-            borderColor: outfit.isLiked
-              ? "var(--outfitly-primary)"
-              : "var(--outfitly-bg-white)",
+            borderColor: outfit.isLiked ? "var(--outfitly-primary)" : "var(--outfitly-bg-white)",
           }}
         >
           <Heart
@@ -63,9 +52,7 @@ export const OutfitCard = ({ outfit, index, dispatch }: OutfitCardProps) => {
               outfit.isLiked ? "fill-current" : ""
             }`}
             style={{
-              color: outfit.isLiked
-                ? "var(--outfitly-text-light)"
-                : "var(--outfitly-bg-white)",
+              color: outfit.isLiked ? "var(--outfitly-text-light)" : "var(--outfitly-bg-white)",
             }}
           />
         </motion.button>
@@ -75,29 +62,20 @@ export const OutfitCard = ({ outfit, index, dispatch }: OutfitCardProps) => {
         className="p-4 transition-colors duration-300"
         style={{
           backgroundColor:
-            theme === "dark"
-              ? "var(--outfitly-bg-secondary)"
-              : "var(--outfitly-bg-white)",
+            theme === "dark" ? "var(--outfitly-bg-secondary)" : "var(--outfitly-bg-white)",
         }}
       >
-
         <div className="flex items-center gap-2 mb-2">
           <div
             className="w-8 h-8 rounded-full flex items-center justify-center"
             style={{ backgroundColor: "var(--outfitly-primary)" }}
           >
-            <User
-              className="w-4 h-4"
-              style={{ color: "var(--outfitly-text-light)" }}
-            />
+            <User className="w-4 h-4" style={{ color: "var(--outfitly-text-light)" }} />
           </div>
           <span
             className="transition-colors duration-300"
             style={{
-              color:
-                theme === "dark"
-                  ? "var(--outfitly-text-light)"
-                  : "var(--outfitly-primary)",
+              color: theme === "dark" ? "var(--outfitly-text-light)" : "var(--outfitly-primary)",
             }}
           >
             @{outfit.username}
@@ -119,9 +97,7 @@ export const OutfitCard = ({ outfit, index, dispatch }: OutfitCardProps) => {
             className="text-sm transition-colors duration-300"
             style={{
               color:
-                theme === "dark"
-                  ? "var(--outfitly-text-light)"
-                  : "var(--outfitly-text-primary)",
+                theme === "dark" ? "var(--outfitly-text-light)" : "var(--outfitly-text-primary)",
             }}
           >
             {outfit.likes.toLocaleString()}
