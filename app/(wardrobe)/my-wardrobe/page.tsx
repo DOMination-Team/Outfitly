@@ -1,4 +1,4 @@
-import MyWardrobe from "@/modules/wardrobe/my-wardrobe/components/myWardrobePage";
+import MyWardrobe from "@/modules/wardrobe/my-wardrobe";
 
 const MyWardrobePage = () => {
   return <MyWardrobe />;
