@@ -1,3 +1,4 @@
+"use client";
 import { motion } from "framer-motion";
 import { Heart, User } from "lucide-react";
 import { IOutfit } from "../types/explore.type";

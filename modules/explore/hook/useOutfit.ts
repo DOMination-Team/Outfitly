@@ -1,3 +1,4 @@
+"use client";
 import { useAuth } from "@/providers/auth/auth.provider";
 import { useTheme } from "next-themes";
 import { ActionDispatch, useTransition } from "react";

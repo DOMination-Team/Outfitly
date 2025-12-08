@@ -1,3 +1,4 @@
+"use server";
 import { IPaginationQuery, IPaginationResult } from "@/@types/database.type";
 import { addLikeOutfit, getAllOutfitsPaginated } from "../outfit/outfit.service";
 import { IOutfit } from "./types/explore.type";
@@ -28,6 +29,6 @@ export const getOutfitsForExplore = async (
   };
 };
 
-export const likeOutfitForExplore = (outfitId: string, userId: string) => {
+export const likeOutfitForExplore = async (outfitId: string, userId: string) => {
   return addLikeOutfit(outfitId, userId);
 };
