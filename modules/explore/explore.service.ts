@@ -5,7 +5,7 @@ import { User } from "@/app/generated/prisma/client";
 import { isUserLike } from "./utils";
 
 export const getOutfitsForExplore = async (
-  query: IPaginationQuery = {limit: 10, page:1},
+  query: IPaginationQuery = { limit: 10, page: 1 },
   userId: User["id"],
 ): Promise<IPaginationResult<IOutfit>> => {
   const outfits = await getAllOutfitsPaginated(query);
@@ -30,4 +30,4 @@ export const getOutfitsForExplore = async (
 
 export const likeOutfitForExplore = (outfitId: string, userId: string) => {
   return addLikeOutfit(outfitId, userId);
-}
+};

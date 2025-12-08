@@ -8,7 +8,7 @@ import { TLikeOutfitDTO, TOutfitDTO } from "./types/outfit.dto";
 export const findAll = async (
   query: IPaginationQuery,
   order: SortOrder,
-  field: Extract<keyof Outfit, "createdAt" | "name"> ,
+  field: Extract<keyof Outfit, "createdAt" | "name">,
 ): Promise<IPaginationResult<TOutfitDTO>> => {
   const outfits = await prisma.$transaction(async (tx) => {
     const pagination = createPaginationForPrisma(query);
@@ -62,9 +62,8 @@ export const likeOutfit = (outfitId: string, userId: string): Promise<TLikeOutfi
     select: {
       id: true,
       _count: {
-        select: { likedBy: true }, 
+        select: { likedBy: true },
       },
     },
   });
 };
-

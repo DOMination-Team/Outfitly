@@ -10,11 +10,11 @@ export const getAllOutfitsPaginated = (
   order: SortOrder = "desc",
   field: Extract<keyof Outfit, "createdAt" | "name"> = "createdAt",
 ) => {
-  const validData = zodValidation(outfitListQuerySchema, {...query, order, field})
-  const validQuery = {page: validData.page, limit: validData.limit}
+  const validData = zodValidation(outfitListQuerySchema, { ...query, order, field });
+  const validQuery = { page: validData.page, limit: validData.limit };
   return findAll(validQuery, validData.order, validData.field);
 };
 
 export const addLikeOutfit = (userId: string, outfitId: string) => {
-    return likeOutfit(outfitId, userId)
-}
+  return likeOutfit(outfitId, userId);
+};
