@@ -1,3 +1,4 @@
+import { LucideIcon } from "lucide-react";
 export interface WeatherData {
   location: string;
   temperature: number;
@@ -18,7 +19,7 @@ export interface Outfit {
   image: string;
   description: string;
   temperature: string;
-  icon: any; // Lucide icon
+  icon: LucideIcon; 
 }
 
 export interface WardrobeItem {

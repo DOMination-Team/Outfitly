@@ -1,10 +1,10 @@
-import { motion } from "framer-motion";
-import { MapPin, Droplets, Wind, Eye } from "lucide-react";
-import { Card } from "../../../../components/ui/card"; // Or '@/components/ui/card' if using aliases
+import { motion } from 'framer-motion';
+import { MapPin, Droplets, Wind, Eye } from 'lucide-react';
+import { Card } from '../../../../components/ui/card'; // Or '@/components/ui/card' if using aliases
 import { useTheme } from "next-themes";
-import { WeatherData } from "../../weather.types";
-import { getWeatherIcon } from "../../weather.utils";
-
+import { WeatherData } from '../../weather.types';
+import { getWeatherIcon } from '../../weather.utils';
+import { LucideIcon } from 'lucide-react';
 // Interface for weather details to ensure type safety and reduce duplication
 interface WeatherDetail {
   icon: React.ComponentType<{ className?: string }>; // Lucide icon component
@@ -18,7 +18,7 @@ interface WeatherWidgetProps {
 
 export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ weather }) => {
   const { theme } = useTheme();
-  const WeatherIcon = getWeatherIcon(weather.condition);
+  const WeatherIcon: LucideIcon = getWeatherIcon(weather.condition); 
 
   // Array of weather details for dynamic rendering (eliminates duplication)
   const weatherDetails: WeatherDetail[] = [
@@ -29,11 +29,7 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ weather }) => {
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-    >
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
       <Card
         className="p-8 border-2 shadow-2xl transition-all duration-300 relative overflow-hidden"
         style={{
