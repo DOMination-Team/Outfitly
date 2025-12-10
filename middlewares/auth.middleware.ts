@@ -1,10 +1,10 @@
-import CustomError from "./CustomError";
+import CustomError from "../utils/CustomError";
 import { HttpStatusError } from "@/@types/status-code.type";
 import { User } from "@/app/generated/prisma/client";
 import { getUserFromSession } from "@/modules/auth/auth.service";
 import userRepo from "@/modules/user/user.repo";
 
-export function authHandler<Args extends unknown[], Return>(
+export function authMiddleware<Args extends unknown[], Return>(
   actionFn: (user?: User, ...args: Args) => Promise<Return>,
 ) {
   return async (...args: Args): Promise<Return> => {
