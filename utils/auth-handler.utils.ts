@@ -13,7 +13,10 @@ export function authHandler<Args extends unknown[], Return>(
     const userData = await userRepo.findById(payload.sub);
 
     if (!userData) {
-      throw new CustomError({ message: "not authenticated", statusCode: HttpStatusError.Unauthorized });
+      throw new CustomError({
+        message: "not authenticated",
+        statusCode: HttpStatusError.Unauthorized,
+      });
     }
 
     return actionFn(userData, ...args);
