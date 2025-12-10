@@ -17,14 +17,13 @@ const useExplore = () => {
   const [loading, setLoading] = useState(false);
   const loaderRef = useRef<HTMLDivElement>(null);
   const isFetchingRef = useRef(false);
-  
+
   useEffect(() => {
-    
     const node = loaderRef.current;
     if (!node) return;
-    
+
     const loadOutfits = async () => {
-      console.log(user, loading)
+      console.log(user, loading);
       if (!hasMore || loading || isFetchingRef.current || !user?.id) return;
 
       isFetchingRef.current = true;

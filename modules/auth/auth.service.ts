@@ -26,12 +26,12 @@ export async function signIn(
   const normalizedEmail = creds.email.toLowerCase().trim();
 
   const user = await userService.findUserByEmail(normalizedEmail);
-  console.log(user)
+  console.log(user);
   const isPasswordValid = await verifyPassword(creds.password, user.password);
 
   if (!isPasswordValid) {
     console.log("throw");
-    throw new CustomError({message: "Invalid credentials", statusCode: 500});
+    throw new CustomError({ message: "Invalid credentials", statusCode: 500 });
   }
 
   const tokenPayload: ITokenPayload = {
