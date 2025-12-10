@@ -68,11 +68,7 @@ export const likeOutfit = (outfitId: string, userId: string): Promise<TLikeOutfi
   });
 };
 
-
-export const unlikeOutfit = (
-  outfitId: string,
-  userId: string
-): Promise<TLikeOutfitDTO> => {
+export const unlikeOutfit = (outfitId: string, userId: string): Promise<TLikeOutfitDTO> => {
   return prisma.outfit.update({
     where: { id: outfitId },
     data: {

@@ -33,7 +33,6 @@ export const likeOutfitForExplore = async (outfitId: string, userId: string) => 
   return addLikeOutfit(userId, outfitId);
 };
 
-
-export const unlikeOutfitForExplore = async(outfitId: string, userId: string) => {
-  return removeLike(userId, outfitId)
-}
+export const unlikeOutfitForExplore = async (outfitId: string, userId: string) => {
+  return removeLike(userId, outfitId);
+};

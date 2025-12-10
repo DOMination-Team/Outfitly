@@ -4,13 +4,12 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { Navbar } from "@/components/navbar";
 import { PageHeader } from "@/components/page-header";
 import { Footer } from "@/components/footer";
-import useExplore from "@/modules/explore/hook/useExplore"; 
+import useExplore from "@/modules/explore/hook/useExplore";
 import { OutfitCard } from "./outfitCard";
 import Filters from "./filters";
 import InfinteScroll from "./infinteScroll";
 
 export default function ExplorePage() {
-  
   const {
     outfits,
     loading,
@@ -33,14 +32,12 @@ export default function ExplorePage() {
       <Navbar />
 
       <main className="pt-20 pb-16">
-
         <PageHeader
           title="Explore Outfits"
           subtitle="Discover inspiring looks from the community"
         />
 
         <div className="container mx-auto px-4 max-w-7xl mt-12">
-
           <Filters
             seasonFilter={seasonFilter}
             setSeasonFilter={setSeasonFilter}
@@ -62,11 +59,7 @@ export default function ExplorePage() {
             </ResponsiveMasonry>
           </motion.div>
 
-          <InfinteScroll
-            hasMore= {hasMore}
-            loaderRef={loaderRef}
-            loading={loading}
-          />
+          <InfinteScroll hasMore={hasMore} loaderRef={loaderRef} loading={loading} />
         </div>
       </main>
 
