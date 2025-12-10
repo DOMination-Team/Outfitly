@@ -1,6 +1,6 @@
 "use server";
 import { IPaginationQuery, IPaginationResult } from "@/@types/database.type";
-import { addLikeOutfit, getAllOutfitsPaginated } from "../outfit/outfit.service";
+import { addLikeOutfit, getAllOutfitsPaginated, removeLike } from "../outfit/outfit.service";
 import { IOutfit } from "./types/explore.type";
 import { User } from "@/app/generated/prisma/client";
 import { isUserLike } from "./utils";
@@ -30,5 +30,10 @@ export const getOutfitsForExplore = async (
 };
 
 export const likeOutfitForExplore = async (outfitId: string, userId: string) => {
-  return addLikeOutfit(outfitId, userId);
+  return addLikeOutfit(userId, outfitId);
 };
+
+
+export const unlikeOutfitForExplore = async(outfitId: string, userId: string) => {
+  return removeLike(userId, outfitId)
+}

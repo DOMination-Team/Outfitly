@@ -1,10 +1,11 @@
 "use server";
 import { IPaginationQuery } from "@/@types/database.type";
 import { Outfit } from "@/app/generated/prisma/client";
-import { SortOrder } from "@/app/generated/prisma/internal/prismaNamespace";
-import { findAll, likeOutfit } from "./outfit.repo";
+import { PrismaClientKnownRequestError, SortOrder } from "@/app/generated/prisma/internal/prismaNamespace";
+import { findAll, likeOutfit, unlikeOutfit } from "./outfit.repo";
 import { zodValidation } from "@/utils/zod.utils";
 import { outfitListQuerySchema } from "./validation/outfit.validation";
+import CustomError from "@/utils/CustomError";
 
 export const getAllOutfitsPaginated = async (
   query: IPaginationQuery,
@@ -17,5 +18,19 @@ export const getAllOutfitsPaginated = async (
 };
 
 export const addLikeOutfit = async (userId: string, outfitId: string) => {
-  return likeOutfit(outfitId, userId);
+  try {
+    return await likeOutfit(outfitId, userId);
+  } catch (error) {
+    if (
+      error instanceof PrismaClientKnownRequestError &&
+      error.code === 'P2002'
+    ) {
+      throw new CustomError({message: 'You already liked the outfit!', statusCode: 409});
+    }
+    throw error; 
+  }
 };
+
+export const removeLike = async(userId: string, outfitId: string) => {
+  return unlikeOutfit(outfitId, userId);
+}
