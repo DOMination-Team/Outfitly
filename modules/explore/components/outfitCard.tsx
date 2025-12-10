@@ -13,7 +13,7 @@ interface OutfitCardProps {
 }
 
 export const OutfitCard = ({ outfit, index, dispatch }: OutfitCardProps) => {
-  const { isPending, theme, onToggleLike } = useOutfit(outfit, dispatch);
+  const { theme, onToggleLike } = useOutfit(outfit, dispatch);
   return (
     <motion.div
       key={outfit.id}
