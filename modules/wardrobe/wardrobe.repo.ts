@@ -3,8 +3,9 @@ import prisma from "@/lib/prisma";
 import { WardrobeItemWithoutAddedAtAndId } from "./types";
 import { WardrobeItemImage } from "@/app/generated/prisma/client";
 import { MAX_IMAGES } from "./constant";
-import { GetUserWardrobeRepoParams } from "./types/dto.types";
+import { FilteredItemsDTO, GetUserWardrobeRepoParams } from "./types/dto.types";
 import { PAGE_SIZE } from "@/app.constant";
+import { IGeneratorFilters } from "../AI-generator/types/generator.types";
 
 export const createWardrobeItemRepo = async (
   data: WardrobeItemWithoutAddedAtAndId,
@@ -262,3 +263,25 @@ export const getWardrobeStatsRepo = async (userId: string) => {
     byCategory,
   };
 };
+
+export const getWardrobeItemsFiltered = async(filters: IGeneratorFilters, userId: string): Promise<FilteredItemsDTO[]> => {
+  const { style, weather } = filters;
+  const items = await prisma.wardrobeItem.findMany({
+    where: {
+      userId,
+      season: weather,
+      category: {
+        name: {
+          contains: style,
+          mode: "insensitive",
+        }
+      }
+    },
+    include: {
+      category: true,
+      images: true,
+    }
+  });
+
+  return items;
+}

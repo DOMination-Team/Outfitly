@@ -13,6 +13,7 @@ import {
   findWardrobeItemById,
   getUserWardrobeItemRepo,
   getWardrobeItemDetailsRepo,
+  getWardrobeItemsFiltered,
   getWardrobeStatsRepo,
   updateWardrobeItemRepo,
 } from "./wardrobe.repo";
@@ -35,6 +36,7 @@ import { PAGE, PAGE_SIZE } from "@/app.constant";
 import { getUserFromSession } from "../auth/auth.service";
 import CustomError from "@/utils/CustomError";
 import { HttpStatusError } from "@/@types/status-code.type";
+import { IGeneratorFilters } from "../AI-generator/types/generator.types";
 
 export const createWardrobeItemService = async (
   CreateWardrobeItemDTO: CreateWardrobeItemDTO,
@@ -117,3 +119,8 @@ export const getWardrobeStatsService = async (): Promise<GetWardrobeStatsRespons
 
   return getWardrobeStatsRepo(userData.id);
 };
+
+export const getFilteredItemsForGenerator = async (filters: IGeneratorFilters, userId: string) => {
+  const items = await getWardrobeItemsFiltered(filters, userId);
+  return items;
+}
