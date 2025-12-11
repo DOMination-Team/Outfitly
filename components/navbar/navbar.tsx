@@ -14,6 +14,9 @@ export function Navbar() {
   const { theme, setTheme } = useTheme();
   const { isOpen, toggleMenu, closeMenu, isActive, NAV_LINKS, NAVBAR_COLORS } = useNavbar();
 
+  // Use CSS variable for text color (matches dark mode)
+  const iconColor = "var(--outfitly-text-primary)";
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -56,9 +59,9 @@ export function Navbar() {
                 <Button
                   variant="ghost"
                   className="hover:bg-transparent p-2 relative"
-                  style={{ color: NAVBAR_COLORS.primary }}
+                  style={{ color: iconColor }}
                 >
-                  <Bell className="w-5 h-5" />
+                  <Bell className="w-5 h-5" style={{ color: iconColor }} />
                   <span
                     className="absolute -top-1 -right-1 w-5 h-5 rounded-full text-xs flex items-center justify-center"
                     style={{
@@ -77,17 +80,13 @@ export function Navbar() {
                 variant="ghost"
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                 className="hover:bg-transparent p-2"
-                style={{ color: NAVBAR_COLORS.primary }}
+                style={{ color: iconColor }}
               >
-                {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                {theme === "dark" ? <Sun className="w-5 h-5" style={{ color: iconColor }} /> : <Moon className="w-5 h-5" style={{ color: iconColor }} />}
               </CustomButton>
 
               <Link href="/sign-in">
-                <Button
-                  variant="ghost"
-                  className="hover:bg-transparent"
-                  style={{ color: NAVBAR_COLORS.primary }}
-                >
+                <Button variant="ghost" className="hover:bg-transparent" style={{ color: iconColor }}>
                   Sign In
                 </Button>
               </Link>
@@ -108,7 +107,7 @@ export function Navbar() {
             {/* Mobile Icons */}
             <div className="lg:hidden flex items-center gap-2">
               <Link href="/notifications" className="relative p-2">
-                <Bell className="w-5 h-5" style={{ color: NAVBAR_COLORS.link }} />
+                <Bell className="w-5 h-5" style={{ color: iconColor }} />
                 <span
                   className="absolute -top-1 -right-1 w-4 h-4 rounded-full text-xs flex items-center justify-center"
                   style={{
@@ -122,28 +121,12 @@ export function Navbar() {
                 </span>
               </Link>
 
-              <CustomButton
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="p-2"
-                style={{ color: NAVBAR_COLORS.primary }}
-              >
-                {theme === "dark" ? (
-                  <Sun className="w-5 h-5" style={{ color: NAVBAR_COLORS.primary }} />
-                ) : (
-                  <Moon className="w-5 h-5" style={{ color: NAVBAR_COLORS.primary }} />
-                )}
+              <CustomButton onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="p-2" style={{ color: iconColor }}>
+                {theme === "dark" ? <Sun className="w-5 h-5" style={{ color: iconColor }} /> : <Moon className="w-5 h-5" style={{ color: iconColor }} />}
               </CustomButton>
 
-              <CustomButton
-                onClick={toggleMenu}
-                className="p-2"
-                style={{ color: NAVBAR_COLORS.primary }}
-              >
-                {isOpen ? (
-                  <X className="w-6 h-6" style={{ color: NAVBAR_COLORS.primary }} />
-                ) : (
-                  <Menu className="w-6 h-6" style={{ color: NAVBAR_COLORS.primary }} />
-                )}
+              <CustomButton onClick={toggleMenu} className="p-2" style={{ color: iconColor }}>
+                {isOpen ? <X className="w-6 h-6" style={{ color: iconColor }} /> : <Menu className="w-6 h-6" style={{ color: iconColor }} />}
               </CustomButton>
             </div>
           </div>
@@ -172,11 +155,7 @@ export function Navbar() {
 
               <div className="pt-4 space-y-3">
                 <Link href="/login">
-                  <Button
-                    variant="ghost"
-                    className="w-full"
-                    style={{ color: NAVBAR_COLORS.primary }}
-                  >
+                  <Button variant="ghost" className="w-full" style={{ color: iconColor }}>
                     Sign In
                   </Button>
                 </Link>
