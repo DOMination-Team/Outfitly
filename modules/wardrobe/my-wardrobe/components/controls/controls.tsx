@@ -10,7 +10,7 @@ import { useQueryState } from "nuqs";
 const Controls = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [sortBy, setSortBy] = useQueryState("sortBy", {
-    defaultValue: "",
+    defaultValue: "name",
     shallow: false,
   });
 
@@ -67,7 +67,7 @@ const Controls = () => {
             </button>
           </div>
 
-          {/* Sort Dropdown */}
+          {/* SortBy Dropdown */}
           <div className="relative">
             <select
               value={sortBy}
