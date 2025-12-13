@@ -35,7 +35,7 @@ import CustomError from "@/utils/CustomError";
 import { HttpStatusError } from "@/@types/status-code.type";
 import { authMiddleware } from "@/middlewares/auth.middleware";
 import { IGeneratorFilters } from "../AI-generator/types/generator.types";
-import {CreateWardrobeItemDTO} from "./types/dto.types"
+import { CreateWardrobeItemDTO } from "./types/dto.types";
 
 export const createWardrobeItemService = async (
   createWardrobeItemDTO: CreateWardrobeItemDTO,
