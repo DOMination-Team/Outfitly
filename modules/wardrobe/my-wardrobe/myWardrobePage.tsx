@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import StatsErrorFallback from "./components/stats-error-fallback";
 import StatsLoadingFallback from "./components/stats-loading-fallback";
 import { ErrorBoundary } from "react-error-boundary";
+import WardrobeFilters from "./components/wardrobe-filters";
 
 const Home = () => {
   return (
@@ -17,6 +18,11 @@ const Home = () => {
             <MyWardrobeStats />
           </Suspense>
         </ErrorBoundary>
+      </div>
+
+      {/* Filters and Content */}
+      <div className="container mx-auto px-4 mt-12">
+        <WardrobeFilters />
       </div>
     </main>
   );
