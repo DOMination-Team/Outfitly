@@ -6,6 +6,7 @@ import { useState } from "react";
 import { createArrayFromDiscriminatedUnion } from "@/utils/types.utils";
 import { WardrobeSortBy } from "@/modules/wardrobe/types/dto.types";
 import { useQueryState } from "nuqs";
+import { SortOrder } from "@/app/generated/prisma/internal/prismaNamespace";
 
 const Controls = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -13,12 +14,19 @@ const Controls = () => {
     defaultValue: "name",
     shallow: false,
   });
-
+  const [sortOrder, setSortOrder] = useQueryState("sortOrder", {
+    defaultValue: "asc",
+    shallow: false,
+  });
   const onViewModeChange = (value: "grid" | "list") => {
     setViewMode(value);
   };
 
   const onSortByChange = (value: WardrobeSortBy) => {
+    setSortBy(value);
+  };
+
+  const onSortOrderChange = (value: SortOrder) => {
     setSortBy(value);
   };
   return (
@@ -79,6 +87,20 @@ const Controls = () => {
                   <option key={sortBy}>{sortBy}</option>
                 ),
               )}
+            </select>
+            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#4C1420]/60 dark:text-white/60 pointer-events-none" />
+          </div>
+
+          {/* SortOrder Dropdown*/}
+          <div className="relative">
+            <select
+              value={sortOrder}
+              onChange={(e) => onSortOrderChange(e.target.value as SortOrder)}
+              className="appearance-none pl-4 pr-10 py-3 rounded-xl bg-[#FAF1ED] dark:bg-[#1C1C20] border border-[#F2E8E3] dark:border-[#35353D] text-[#4C1420] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#671425] dark:focus:ring-[#8B1D35] transition-all duration-300 cursor-pointer"
+            >
+              {createArrayFromDiscriminatedUnion<SortOrder>("asc", "desc").map((sortOrder) => (
+                <option key={sortOrder}>{sortOrder}</option>
+              ))}
             </select>
             <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#4C1420]/60 dark:text-white/60 pointer-events-none" />
           </div>
