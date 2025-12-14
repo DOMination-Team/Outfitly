@@ -1,4 +1,4 @@
-'use server';
+"use server";
 import { errorMiddleware } from "@/middlewares/error.middleware";
 import { findAllCategoriesService } from "./category.service";
 

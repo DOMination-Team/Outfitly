@@ -1,1 +1,1 @@
-export { default } from "./wardrobeFilters"
+export { default } from "./wardrobeFilters";
