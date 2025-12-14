@@ -29,11 +29,11 @@ export function ProfileTabs({ activeTab, onTabChange }: ProfileTabsProps) {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className={`px-6 py-3 rounded-xl flex items-center gap-2 transition-all duration-300 ${
-                isActive ? "bg-primary text-primary-foreground" : "bg-muted text-primary"
+                isActive ? "bg-primary text-primary-foreground" : "bg-muted text-primary-foreground"
               }`}
             >
               <Icon className="w-5 h-5" />
-              <span className="hidden sm:inline">{tab.label}</span>
+              <span className="hidden sm:inline ">{tab.label}</span>
               <Badge
                 className={`ml-1 ${isActive ? "bg-secondary text-secondary-foreground" : "bg-muted text-muted-foreground"}`}
               >

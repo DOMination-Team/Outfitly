@@ -2,10 +2,30 @@ import { motion } from "framer-motion";
 import { MapPin, Link as LinkIcon, Calendar } from "lucide-react";
 import { Card } from "../../../../components/ui/card";
 import { Button } from "../../../../components/ui/button";
+import { Input } from "../../../../components/ui/input"; // Assuming you have a UI Input component
+import { Textarea } from "../../../../components/ui/textarea"; // Assuming you have a UI Textarea component
 import type { ProfileHeaderProps } from "./profileHeader.types";
 import { getAvatarAlt } from "./profileHeader.utils";
 
-export function ProfileHeader({ user }: ProfileHeaderProps) {
+// Extend props to include edit handlers
+interface ExtendedProfileHeaderProps extends ProfileHeaderProps {
+  isEditing: boolean;
+  editForm: ProfileHeaderProps["user"];
+  onStartEditing: () => void;
+  onCancelEditing: () => void;
+  onSaveEditing: () => void;
+  onUpdateForm: (field: keyof ProfileHeaderProps["user"], value: string) => void;
+}
+
+export function ProfileHeader({
+  user,
+  isEditing,
+  editForm,
+  onStartEditing,
+  onCancelEditing,
+  onSaveEditing,
+  onUpdateForm,
+}: ExtendedProfileHeaderProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -27,31 +47,100 @@ export function ProfileHeader({ user }: ProfileHeaderProps) {
               </div>
             </div>
             <div className="flex-1 text-center md:text-left">
-              <h2 className="mb-1 text-primary">{user.name}</h2>
-              <p className="text-lg mb-3 opacity-70 text-muted-foreground">{user.username}</p>
-              <p className="mb-4 max-w-2xl text-muted-foreground">{user.bio}</p>
+              {isEditing ? (
+                <>
+                  <Input
+                    value={editForm.name}
+                    onChange={(e) => onUpdateForm("name", e.target.value)}
+                    className="mb-1 text-primary"
+                    placeholder="Name"
+                  />
+                  <Input
+                    value={editForm.username}
+                    onChange={(e) => onUpdateForm("username", e.target.value)}
+                    className="text-lg mb-3 opacity-70 text-muted-foreground"
+                    placeholder="Username"
+                    disabled // Keep username read-only if needed
+                  />
+                  <Textarea
+                    value={editForm.bio}
+                    onChange={(e) => onUpdateForm("bio", e.target.value)}
+                    className="mb-4 max-w-2xl text-muted-foreground"
+                    placeholder="Bio"
+                  />
+                </>
+              ) : (
+                <>
+                  <h2 className="mb-1 text-primary">{user.name}</h2>
+                  <p className="text-lg mb-3 opacity-70 text-muted-foreground">{user.username}</p>
+                  <p className="mb-4 max-w-2xl text-muted-foreground">{user.bio}</p>
+                </>
+              )}
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm mb-4">
-                <div className="flex items-center gap-2 opacity-70">
-                  <MapPin className="w-4 h-4 text-primary" />
-                  <span className="text-muted-foreground">{user.location}</span>
-                </div>
-                <div className="flex items-center gap-2 opacity-70">
-                  <LinkIcon className="w-4 h-4 text-primary" />
-                  <a
-                    href={`https://${user.website}`}
-                    className="hover:underline transition-colors duration-300 text-primary"
-                  >
-                    {user.website}
-                  </a>
-                </div>
+                {isEditing ? (
+                  <>
+                    <div className="flex items-center gap-2 opacity-70">
+                      <MapPin className="w-4 h-4 text-primary" />
+                      <Input
+                        value={editForm.location}
+                        onChange={(e) => onUpdateForm("location", e.target.value)}
+                        className="text-muted-foreground"
+                        placeholder="Location"
+                      />
+                    </div>
+                    <div className="flex items-center gap-2 opacity-70">
+                      <LinkIcon className="w-4 h-4 text-primary" />
+                      <Input
+                        value={editForm.website}
+                        onChange={(e) => onUpdateForm("website", e.target.value)}
+                        className="text-primary"
+                        placeholder="Website"
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex items-center gap-2 opacity-70">
+                      <MapPin className="w-4 h-4 text-primary" />
+                      <span className="text-muted-foreground">{user.location}</span>
+                    </div>
+                    <div className="flex items-center gap-2 opacity-70">
+                      <LinkIcon className="w-4 h-4 text-primary" />
+                      <a href={`https://${user.website}`} className="hover:underline transition-colors duration-300 text-primary">
+                        {user.website}
+                      </a>
+                    </div>
+                  </>
+                )}
                 <div className="flex items-center gap-2 opacity-70">
                   <Calendar className="w-4 h-4 text-primary" />
                   <span className="text-muted-foreground">{user.joinDate}</span>
                 </div>
               </div>
-              <Button className="transition-all duration-300 hover:scale-105 shadow-lg bg-primary text-primary-foreground">
-                Edit Profile
-              </Button>
+              {isEditing ? (
+                <div className="flex gap-2">
+                  <Button
+                    onClick={onSaveEditing}
+                    className="transition-all duration-300 hover:scale-105 shadow-lg bg-primary text-primary-foreground"
+                  >
+                    Save
+                  </Button>
+                  <Button
+                    onClick={onCancelEditing}
+                    variant="outline"
+                    className="transition-all duration-300 hover:scale-105 shadow-lg"
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              ) : (
+                <Button
+                  onClick={onStartEditing}
+                  className="transition-all duration-300 hover:scale-105 shadow-lg bg-primary text-primary-foreground"
+                >
+                  Edit Profile
+                </Button>
+              )}
             </div>
           </div>
           <div className="grid grid-cols-3 gap-4 pt-6 border-t-2 border-border">
@@ -59,7 +148,7 @@ export function ProfileHeader({ user }: ProfileHeaderProps) {
               className="text-center p-4 rounded-xl transition-all duration-300 hover:shadow-lg cursor-pointer bg-muted"
               whileHover={{ scale: 1.05 }}
             >
-              <div className="mb-1 text-2xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+              <div className="mb-1 text-2xl font-bold bg-gradient-to-r from-[#671425] via-[#8B1D35] to-[#A82444] bg-clip-text text-transparent">
                 {user.stats.outfits}
               </div>
               <div className="text-sm opacity-70 text-muted-foreground">Outfits</div>
@@ -68,7 +157,7 @@ export function ProfileHeader({ user }: ProfileHeaderProps) {
               className="text-center p-4 rounded-xl transition-all duration-300 hover:shadow-lg cursor-pointer bg-muted"
               whileHover={{ scale: 1.05 }}
             >
-              <div className="mb-1 text-2xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+              <div className="mb-1 text-2xl font-bold bg-gradient-to-r from-[#671425] via-[#8B1D35] to-[#A82444] bg-clip-text text-transparent">
                 {user.stats.followers.toLocaleString()}
               </div>
               <div className="text-sm opacity-70 text-muted-foreground">Followers</div>
@@ -77,7 +166,7 @@ export function ProfileHeader({ user }: ProfileHeaderProps) {
               className="text-center p-4 rounded-xl transition-all duration-300 hover:shadow-lg cursor-pointer bg-muted"
               whileHover={{ scale: 1.05 }}
             >
-              <div className="mb-1 text-2xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+              <div className="mb-1 text-2xl font-bold bg-gradient-to-r from-[#671425] via-[#8B1D35] to-[#A82444] bg-clip-text text-transparent">
                 {user.stats.following}
               </div>
               <div className="text-sm opacity-70 text-muted-foreground">Following</div>

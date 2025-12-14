@@ -22,17 +22,33 @@ function renderContent(activeTab: TabType) {
       return <ProfileLikedOutfitsGrid outfits={mockOutfits} />;
   }
 }
-
 export function ProfilePage() {
-  const { activeTab, setActiveTab } = useProfile();
-
+  const {
+    activeTab,
+    setActiveTab,
+    user,
+    isEditing,
+    editForm,
+    startEditing,
+    cancelEditing,
+    saveEditing,
+    updateEditForm,
+  } = useProfile();
   return (
     <div className="min-h-screen bg-background transition-colors duration-300">
       <Navbar />
       <main className="pt-20 pb-16">
         <PageHeader title="Profile" subtitle="Your personal style collection" />
         <div className="container mx-auto px-4 max-w-6xl mt-12">
-          <ProfileHeader user={mockUser} />
+          <ProfileHeader
+            user={user}
+            isEditing={isEditing}
+            editForm={editForm}
+            onStartEditing={startEditing}
+            onCancelEditing={cancelEditing}
+            onSaveEditing={saveEditing}
+  onUpdateForm={updateEditForm}
+          />
           <ProfileTabs activeTab={activeTab} onTabChange={setActiveTab} />
           <motion.div
             key={activeTab}
