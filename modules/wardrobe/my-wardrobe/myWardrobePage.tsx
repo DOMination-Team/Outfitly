@@ -5,13 +5,13 @@ import StatsErrorFallback from "./components/stats-error-fallback";
 import StatsLoadingFallback from "./components/stats-loading-fallback";
 import { ErrorBoundary } from "react-error-boundary";
 import WardrobeFilters from "./components/wardrobe-filters";
-import type { SearchParams } from "nuqs";
 import WardrobeList from "./components/wardrobe-list";
 import { ViewModeProvider } from "./provider/viewMode.provider";
 import WardrobeListLoadingFallback from "./components/wardrobe-list/wardrobeListLoadingFallback";
 import WardrobeListErrorFallback from "./components/wardrobe-list/wardrobeListErrorFallback";
+import { GetUserWardrobeItemDTO } from "../types/dto.types";
 
-const Home = ({ searchParams }: { searchParams: SearchParams }) => {
+const Home = ({ searchParams }: { searchParams: GetUserWardrobeItemDTO }) => {
   return (
     <main className="pt-20 pb-16">
       <PageHeader title="My Wardrobe" subtitle="Manage and organize your fashion collection" />

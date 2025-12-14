@@ -7,9 +7,13 @@ import { WardrobeGridItem } from "./wardrobeGridItem";
 import { AddNewListCard } from "./addNewListCard";
 import { WardrobeListItem } from "./wardrobeListItem";
 
-export function WardrobeCards({ wardrobeItems }: { wardrobeItems: GetUserWardrobeItemResponse }) {
+export function WardrobeCards({
+  wardrobeItems,
+}: {
+  wardrobeItems: GetUserWardrobeItemResponse["items"];
+}) {
   const { viewMode } = useViewMode();
-  const items = wardrobeItems.items || [];
+  const items = wardrobeItems || [];
 
   const containerVariants = {
     hidden: { opacity: 0 },
