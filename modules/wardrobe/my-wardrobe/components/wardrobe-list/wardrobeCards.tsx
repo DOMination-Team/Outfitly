@@ -8,7 +8,88 @@ import { useViewMode } from "../../provider/viewMode.provider";
 
 export function WardrobeCards({ wardrobeItems }: { wardrobeItems: GetUserWardrobeItemResponse }) {
   const router = useRouter();
-  const { viewMode, toggleMode } = useViewMode();
+  const { viewMode } = useViewMode();
+
+  if (viewMode === "grid") {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+      >
+        {/* Add New Item Card */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          onClick={() => router.push("/wardrobe/add")}
+          className="group relative aspect-3/4 rounded-2xl overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-[#671425]/30 transition-all duration-500"
+        >
+          <div className="absolute inset-0 bg-linear-to-br from-[#671425] via-[#8B1D35] to-[#A82444]"></div>
+          <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent"></div>
+
+          {/* Animated Background Pattern */}
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-0 left-0 w-32 h-32 bg-white/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+            <div className="absolute bottom-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+          </div>
+
+          <div className="relative h-full flex flex-col items-center justify-center p-6 text-center">
+            <div className="w-16 h-16 mb-4 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 group-hover:rotate-90 transition-all duration-500">
+              <Plus className="w-8 h-8 text-white" />
+            </div>
+            <h3 className="text-white mb-2">Add New</h3>
+            <p className="text-white/80">Upload item</p>
+          </div>
+        </motion.div>
+
+        {/* Wardrobe Items */}
+        {wardrobeItems.items.map((item, index) => (
+          <motion.div
+            key={item.id}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: (index + 1) * 0.05 }}
+            onClick={() => router.push(`/wardrobe/item/${item.id}`)}
+            className="group relative aspect-3/4 rounded-2xl overflow-hidden cursor-pointer hover:shadow-2xl hover:shadow-[#671425]/20 transition-all duration-500"
+          >
+            {/* Image */}
+            <Image
+              src={item.primaryImageUrl}
+              alt={item.primaryImageAlt}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              width={100}
+              height={100}
+            />
+
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
+
+            {/* Item Info */}
+            <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+              <h3 className="text-white mb-1">{item.name}</h3>
+              <p className="text-white/80 capitalize mb-3">{item.category?.name}</p>
+
+              {/* Action Buttons */}
+              <div
+                className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button className="flex-1 py-2 px-3 rounded-lg bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-all duration-300 flex items-center justify-center gap-2">
+                  <Edit className="w-4 h-4" />
+                  <span>Edit</span>
+                </button>
+                <button className="py-2 px-3 rounded-lg bg-red-500/20 backdrop-blur-md text-white hover:bg-red-500/30 transition-all duration-300">
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
