@@ -11,11 +11,11 @@ import { SortOrder } from "@/app/generated/prisma/internal/prismaNamespace";
 const Controls = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [sortBy, setSortBy] = useQueryState("sortBy", {
-    defaultValue: "name",
+    defaultValue: "addedAt",
     shallow: false,
   });
   const [sortOrder, setSortOrder] = useQueryState("sortOrder", {
-    defaultValue: "asc",
+    defaultValue: "desc",
     shallow: false,
   });
   const onViewModeChange = (value: "grid" | "list") => {
@@ -27,7 +27,7 @@ const Controls = () => {
   };
 
   const onSortOrderChange = (value: SortOrder) => {
-    setSortBy(value);
+    setSortOrder(value);
   };
   return (
     <div>
