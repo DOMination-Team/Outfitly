@@ -6,6 +6,7 @@ import StatsLoadingFallback from "./components/stats-loading-fallback";
 import { ErrorBoundary } from "react-error-boundary";
 import WardrobeFilters from "./components/wardrobe-filters";
 import type { SearchParams } from "nuqs";
+import WardrobeList from "./components/wardrobe-list";
 
 const Home = ({ searchParams }: { searchParams: SearchParams }) => {
   return (
@@ -24,6 +25,12 @@ const Home = ({ searchParams }: { searchParams: SearchParams }) => {
       {/* Filters and Content */}
       <div className="container mx-auto px-4 mt-12">
         <WardrobeFilters />
+
+        <ErrorBoundary fallbackRender={StatsErrorFallback}>
+          <Suspense fallback={<StatsLoadingFallback />}>
+            <WardrobeList searchParams={searchParams} />
+          </Suspense>
+        </ErrorBoundary>
       </div>
     </main>
   );
