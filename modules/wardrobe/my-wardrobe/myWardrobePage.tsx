@@ -9,6 +9,7 @@ import type { SearchParams } from "nuqs";
 import WardrobeList from "./components/wardrobe-list";
 import { ViewModeProvider } from "./provider/viewMode.provider";
 import WardrobeListLoadingFallback from "./components/wardrobe-list/wardrobeListLoadingFallback";
+import WardrobeListErrorFallback from "./components/wardrobe-list/wardrobeListErrorFallback";
 
 const Home = ({ searchParams }: { searchParams: SearchParams }) => {
   return (
@@ -29,7 +30,7 @@ const Home = ({ searchParams }: { searchParams: SearchParams }) => {
         <ViewModeProvider>
           <WardrobeFilters />
 
-          <ErrorBoundary fallbackRender={StatsErrorFallback}>
+          <ErrorBoundary fallbackRender={WardrobeListErrorFallback}>
             <Suspense fallback={<WardrobeListLoadingFallback />}>
               <WardrobeList searchParams={searchParams} />
             </Suspense>
