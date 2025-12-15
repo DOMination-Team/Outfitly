@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Loader2, Trash2 } from "lucide-react";
 import Image from "next/image";
 
-export function Uploader() {
+export default function Uploader() {
   const [files, setFiles] = useState<
     Array<{
       id: string;
