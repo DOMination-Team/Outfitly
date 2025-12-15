@@ -12,7 +12,7 @@ export const myWardrobeSearchParams = {
   sortOrder: parseAsStringEnum<SortOrder>(
     createArrayFromDiscriminatedUnion<SortOrder>("asc", "desc"),
   ).withDefault("asc"),
-  page: parseAsInteger.withDefault(1)
+  page: parseAsInteger.withDefault(1),
 };
 
 export const loadMyWardrobeSearchParams = createLoader(myWardrobeSearchParams);
