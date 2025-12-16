@@ -5,7 +5,7 @@ import { AIOutfitResponse, IItemsForAI, IUserRequirements } from "./types/genera
 export function createPrompt(
   wardrobeItems: IItemsForAI[],
   availableOccasions: AllOccasions[],
-  userRequest: IUserRequirements
+  userRequest: IUserRequirements,
 ): string {
   const occasionsJson = JSON.stringify(availableOccasions, null, 2);
   const itemsJson = JSON.stringify(wardrobeItems, null, 2);
@@ -18,7 +18,7 @@ export function createPrompt(
       requirements: userRequest.requirments, // normalize key for the model
     },
     null,
-    2
+    2,
   );
 
   return `
@@ -85,32 +85,29 @@ export function createPrompt(
     `.trim();
 }
 
-
-export function transformAIResponse(
-  ai: AIOutfitResponse,
-  userId: string
-): CreateOutfitDTO {
+export function transformAIResponse(ai: AIOutfitResponse, userId: string): CreateOutfitDTO {
   return {
     name: ai.name,
     description: ai.description ?? null,
     imageUrl: ai.imageUrl ?? null,
     isAiGenerated: true,
-    visibility: 'public',
-    user: { connect: { id: userId } }, 
-    
+    visibility: "public",
+    user: { connect: { id: userId } },
+
     occasion: ai.occasion
-      ? ('id' in ai.occasion
-          ? { connect: { id: ai.occasion.id } }
-          : { create: ai.occasion })
+      ? "id" in ai.occasion
+        ? { connect: { id: ai.occasion.id } }
+        : { create: ai.occasion }
       : undefined,
-    
-    items: ai.wardrobeItemIds.length > 0
-      ? {
-          create: ai.wardrobeItemIds.map(id => ({ 
-            wardrobeItem: { connect: { id } }
-          }))
-        }
-      : undefined,
+
+    items:
+      ai.wardrobeItemIds.length > 0
+        ? {
+            create: ai.wardrobeItemIds.map((id) => ({
+              wardrobeItem: { connect: { id } },
+            })),
+          }
+        : undefined,
   };
 }
 
@@ -124,16 +121,13 @@ export const normalizeResponse = (text: string): AIOutfitResponse[] => {
   return Array.isArray(parsed) ? parsed : [parsed];
 };
 
-
 export const getItemsByIds = (allItems: IItemsForAI[], ids: string[]) => {
-    const selectedItems = allItems.filter((item) => ids.includes(item.id));
+  const selectedItems = allItems.filter((item) => ids.includes(item.id));
 
-    return selectedItems;
-}
+  return selectedItems;
+};
 
-export function toUserRequirements(
-  formData: AIGeneratorFormData
-): IUserRequirements {
+export function toUserRequirements(formData: AIGeneratorFormData): IUserRequirements {
   return {
     occasion: formData.occasion.trim(),
     weather: formData.weather.trim(),
@@ -142,16 +136,13 @@ export function toUserRequirements(
   };
 }
 
-export function toGeneratedOutfits(
-  ai: AIOutfitResponse[]
-): IGeneratedOutfit[] {
-
+export function toGeneratedOutfits(ai: AIOutfitResponse[]): IGeneratedOutfit[] {
   return ai.map((o) => ({
     name: o.name,
     description: o.description ?? "",
     confidence: 90,
-    style: o.style ?? "", 
-    items: o.wardrobeItemIds,     
-    image: o.imageUrl ?? "",      
+    style: o.style ?? "",
+    items: o.wardrobeItemIds,
+    image: o.imageUrl ?? "",
   }));
 }

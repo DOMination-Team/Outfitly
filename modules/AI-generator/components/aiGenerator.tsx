@@ -1,5 +1,5 @@
-'use client'
-import { Activity, } from "react";
+"use client";
+import { Activity } from "react";
 import { IItemsForAI } from "../types/generator.types";
 import { OutfitPreviewModal } from "./outfitModal";
 import { useAIGenerator } from "../hook/useAIGenerator";
@@ -10,14 +10,14 @@ import AnimatedBg from "./animatedBg";
 export interface IGeneratedOutfit {
   name: string;
   description: string;
-  style: string
+  style: string;
   confidence: number;
   items: string[];
   image: string;
 }
 
 export interface IOutfitForModal extends Omit<IGeneratedOutfit, "items"> {
-    items: IItemsForAI[]
+  items: IItemsForAI[];
 }
 export type AIGeneratorFormData = {
   occasion: string;
@@ -26,7 +26,6 @@ export type AIGeneratorFormData = {
   requirements: string;
 };
 // Generate dots once
-
 
 // const matchWardrobeItems = (items: any, occasion: string, weather: string, style: string): IGeneratedOutfit[] => {
 //   return [
@@ -68,7 +67,7 @@ export type AIGeneratorFormData = {
 // };
 
 export default function AIGeneratorPage() {
-    const {
+  const {
     formData,
     customOccasion,
     canGenerate,
@@ -81,14 +80,12 @@ export default function AIGeneratorPage() {
     setCustomOccasion,
     handleGenerate,
     onSelectOutfit,
-    setViewingOutfit
+    setViewingOutfit,
   } = useAIGenerator();
-
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950">
-      
-    <AnimatedBg />
+      <AnimatedBg />
 
       <header className="relative z-10 border-b border-slate-800 bg-slate-900/50 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4">
@@ -99,32 +96,30 @@ export default function AIGeneratorPage() {
       <main className="relative z-10 pt-20 pb-16">
         <ConfigHeader />
         <ConfigCard
-            formData={formData}
-            customOccasion={customOccasion}
-            canGenerate={canGenerate}
-            isGenerating={isGenerating}
-            showResults={showResults}
-            generatedOutfits={generatedOutfits}
-            onFormChange={setFormData}
-            onCustomOccasionChange={setCustomOccasion}
-            onSelectOutfit={onSelectOutfit}
-            onGenerate={handleGenerate}
+          formData={formData}
+          customOccasion={customOccasion}
+          canGenerate={canGenerate}
+          isGenerating={isGenerating}
+          showResults={showResults}
+          generatedOutfits={generatedOutfits}
+          onFormChange={setFormData}
+          onCustomOccasionChange={setCustomOccasion}
+          onSelectOutfit={onSelectOutfit}
+          onGenerate={handleGenerate}
         />
       </main>
 
       <footer className="relative z-10 border-t border-slate-800 bg-slate-900/50 backdrop-blur-sm mt-16">
         <div className="container mx-auto px-4 py-8">
-          <p className="text-center text-slate-400">
-            © 2024 Outfitly. Powered by AI.
-          </p>
+          <p className="text-center text-slate-400">© 2024 Outfitly. Powered by AI.</p>
         </div>
-      </footer> 
+      </footer>
       <Activity mode={open ? "visible" : "hidden"}>
-              <OutfitPreviewModal
-                open={open}
-                outfit={viewingOutfit!}
-                onClose={() =>  setViewingOutfit(null)}
-              />
+        <OutfitPreviewModal
+          open={open}
+          outfit={viewingOutfit!}
+          onClose={() => setViewingOutfit(null)}
+        />
       </Activity>
       {/* ================= MODAL ================= */}
       {/* <AnimatePresence>

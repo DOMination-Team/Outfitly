@@ -1,13 +1,10 @@
-import { createPrompt } from '@/modules/AI-generator/ai.utils';
-import { generateAIOutfit } from '@/modules/AI-generator/generator.service'
-import { IItemsForAI, IUserRequirements } from '@/modules/AI-generator/types/generator.types';
-
-
+import { createPrompt } from "@/modules/AI-generator/ai.utils";
+import { generateAIOutfit } from "@/modules/AI-generator/generator.service";
+import { IItemsForAI, IUserRequirements } from "@/modules/AI-generator/types/generator.types";
 
 export const ITEMS_FOR_AI_DUMMY: IItemsForAI[] = [
   {
-
-    id: '1',
+    id: "1",
     name: "White Cotton T-Shirt",
     color: "White",
     notes: "Basic, fits slightly oversized.",
@@ -15,7 +12,7 @@ export const ITEMS_FOR_AI_DUMMY: IItemsForAI[] = [
     images: "https://picsum.photos/seed/tshirt/600/800",
   },
   {
-    id: '2',
+    id: "2",
     name: "Light Blue Denim Jeans",
     color: "Light Blue",
     notes: "Straight fit, comfortable for daily wear.",
@@ -23,7 +20,7 @@ export const ITEMS_FOR_AI_DUMMY: IItemsForAI[] = [
     images: "https://picsum.photos/seed/jeans/600/800",
   },
   {
-    id: '3',
+    id: "3",
     name: "Black Sneakers",
     color: "Black",
     notes: "Everyday sneakers, clean look.",
@@ -31,7 +28,7 @@ export const ITEMS_FOR_AI_DUMMY: IItemsForAI[] = [
     images: "https://picsum.photos/seed/sneakers/600/800",
   },
   {
-    id: '4',
+    id: "4",
     name: "Beige Hoodie",
     color: "Beige",
     notes: "Warm hoodie, good for layering.",
@@ -39,7 +36,7 @@ export const ITEMS_FOR_AI_DUMMY: IItemsForAI[] = [
     images: "https://picsum.photos/seed/hoodie/600/800",
   },
   {
-    id: '5',
+    id: "5",
     name: "Olive Bomber Jacket",
     color: "Olive",
     notes: "Light jacket, perfect for spring evenings.",
@@ -47,7 +44,7 @@ export const ITEMS_FOR_AI_DUMMY: IItemsForAI[] = [
     images: "https://picsum.photos/seed/jacket/600/800",
   },
   {
-    id: '6',
+    id: "6",
     name: "Brown Leather Belt",
     color: "Brown",
     notes: "Simple classic belt.",
@@ -55,7 +52,6 @@ export const ITEMS_FOR_AI_DUMMY: IItemsForAI[] = [
     images: "https://picsum.photos/seed/belt/600/800",
   },
 ];
-
 
 export const ALL_OCCASIONS_DUMMY = [
   {
@@ -107,13 +103,11 @@ const dummyUserReq: IUserRequirements = {
   requirments: "Light colors, comfortable shoes",
 };
 
-const AIGenerator = async() => {
-    // const prompt= createPrompt(ITEMS_FOR_AI_DUMMY, ALL_OCCASIONS_DUMMY, dummyUserReq)
-    // const content = await generateAIOutfit(prompt)
-    // console.log(JSON.parse(content));
-  return (
-    <div>Test</div>
-  )
-}
+const AIGenerator = async () => {
+  // const prompt= createPrompt(ITEMS_FOR_AI_DUMMY, ALL_OCCASIONS_DUMMY, dummyUserReq)
+  // const content = await generateAIOutfit(prompt)
+  // console.log(JSON.parse(content));
+  return <div>Test</div>;
+};
 
-export default AIGenerator
+export default AIGenerator;

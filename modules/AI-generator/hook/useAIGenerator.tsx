@@ -3,21 +3,19 @@
 import { useCallback, useMemo, useState } from "react";
 
 import type { IItemsForAI } from "../types/generator.types";
-import type { AIGeneratorFormData, IGeneratedOutfit, IOutfitForModal } from "../components/aiGenerator";
+import type {
+  AIGeneratorFormData,
+  IGeneratedOutfit,
+  IOutfitForModal,
+} from "../components/aiGenerator";
 
-import {
-  createPrompt,
-  getItemsByIds,
-  toGeneratedOutfits,
-  toUserRequirements,
-} from "../ai.utils";
+import { createPrompt, getItemsByIds, toGeneratedOutfits, toUserRequirements } from "../ai.utils";
 
 import {
   generateAIOutfitAction,
   getItemsForGeneratorAction,
   getOccasionsForAIAction,
 } from "../generator.actions";
-
 
 export function useAIGenerator() {
   const [formData, setFormData] = useState<AIGeneratorFormData>({
@@ -39,9 +37,9 @@ export function useAIGenerator() {
   const canGenerate = useMemo(() => {
     return Boolean(
       formData.occasion &&
-        formData.weather &&
-        formData.style &&
-        (formData.occasion !== "Other" || customOccasion.trim())
+      formData.weather &&
+      formData.style &&
+      (formData.occasion !== "Other" || customOccasion.trim()),
     );
   }, [formData.occasion, formData.weather, formData.style, customOccasion]);
 
@@ -98,7 +96,7 @@ export function useAIGenerator() {
         items: itemsForView,
       });
     },
-    [generatedOutfits, filteredFromDB]
+    [generatedOutfits, filteredFromDB],
   );
 
   const closeModal = useCallback(() => setViewingOutfit(null), []);
@@ -110,7 +108,7 @@ export function useAIGenerator() {
         setCustomOccasion("");
       }
     },
-    []
+    [],
   );
 
   return {

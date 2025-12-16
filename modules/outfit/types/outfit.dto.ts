@@ -55,4 +55,3 @@ export type AllOccasions = Prisma.OccasionGetPayload<{
     description: true;
   };
 }>;
-

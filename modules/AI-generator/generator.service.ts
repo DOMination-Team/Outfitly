@@ -5,7 +5,6 @@ import { normalizeResponse } from "./ai.utils";
 import { IGeneratorFilters, IItemsForAI } from "./types/generator.types";
 import { GoogleGenAI } from "@google/genai";
 
-
 export const getItemsForGenerator = async (filters: IGeneratorFilters, userId: string) => {
   const items = await getFilteredItemsForGenerator(filters, userId);
   const itemsForReturn: IItemsForAI[] = items.map((item) => {
@@ -23,20 +22,19 @@ export const getItemsForGenerator = async (filters: IGeneratorFilters, userId: s
   return itemsForReturn;
 };
 
-
 const ai = new GoogleGenAI({
   // Recommended: put your key in env, don't hardcode it
   apiKey: process.env.GEMINI_API_KEY,
 });
 
 export const generateAIOutfit = async (prompt: string) => {
-    const res = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: prompt,
-    });
-    return normalizeResponse(res.text || "");
+  const res = await ai.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: prompt,
+  });
+  return normalizeResponse(res.text || "");
 };
 
-export const getOccasionsForAI = async() => {
-  return await getAllOccasions()
-}
+export const getOccasionsForAI = async () => {
+  return await getAllOccasions();
+};

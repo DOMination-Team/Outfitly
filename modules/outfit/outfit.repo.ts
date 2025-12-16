@@ -83,7 +83,6 @@ export const unlikeOutfit = (outfitId: string, userId: string): Promise<TLikeOut
   });
 };
 
-
 export const createOutfit = (outfit: CreateOutfitDTO) => {
   return prisma.outfit.create({
     data: outfit,

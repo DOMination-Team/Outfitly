@@ -18,7 +18,7 @@ interface IProps extends IFormProps {
   onSelectOutfit: (name: string) => void;
 
   onGenerate: () => void;
-};
+}
 
 const ConfigCard = ({
   formData,
@@ -41,9 +41,7 @@ const ConfigCard = ({
           transition={{ duration: 6, repeat: Infinity }}
         />
 
-        <h2 className="text-white text-2xl font-bold relative z-10">
-          Configure Your Perfect Look
-        </h2>
+        <h2 className="text-white text-2xl font-bold relative z-10">Configure Your Perfect Look</h2>
 
         <p className="mt-1 text-slate-400 opacity-70 relative z-10">
           Select your preferences and let AI do the magic

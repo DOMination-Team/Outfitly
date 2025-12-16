@@ -2,13 +2,12 @@
 import { DEFAULT_OCCASIONS, DEFAULT_STYLES, DEFAULT_WEATHER } from "../constants";
 import type { AIGeneratorFormData } from "./aiGenerator";
 
-export interface IFormProps  {
+export interface IFormProps {
   formData: AIGeneratorFormData;
   customOccasion: string;
   onFormChange: (next: AIGeneratorFormData) => void;
   onCustomOccasionChange: (value: string) => void;
-};
-
+}
 
 export function AIGeneratorFiltersForm({
   formData,
@@ -19,9 +18,7 @@ export function AIGeneratorFiltersForm({
   return (
     <div className="grid md:grid-cols-2 gap-6 mt-6 relative z-10">
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">
-          Occasion
-        </label>
+        <label className="block text-sm font-medium text-slate-300 mb-2">Occasion</label>
         <select
           value={formData.occasion}
           onChange={(e) => onFormChange({ ...formData, occasion: e.target.value })}
@@ -37,9 +34,7 @@ export function AIGeneratorFiltersForm({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">
-          Weather
-        </label>
+        <label className="block text-sm font-medium text-slate-300 mb-2">Weather</label>
         <select
           value={formData.weather}
           onChange={(e) => onFormChange({ ...formData, weather: e.target.value })}
@@ -55,9 +50,7 @@ export function AIGeneratorFiltersForm({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">
-          Style
-        </label>
+        <label className="block text-sm font-medium text-slate-300 mb-2">Style</label>
         <select
           value={formData.style}
           onChange={(e) => onFormChange({ ...formData, style: e.target.value })}
@@ -74,9 +67,7 @@ export function AIGeneratorFiltersForm({
 
       {formData.occasion === "Other" && (
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
-            Custom Occasion
-          </label>
+          <label className="block text-sm font-medium text-slate-300 mb-2">Custom Occasion</label>
           <input
             type="text"
             value={customOccasion}

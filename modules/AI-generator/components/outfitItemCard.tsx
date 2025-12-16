@@ -1,16 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  ImageOff,
-  Palette,
-  StickyNote,
-  Snowflake,
-  Sun,
-  Leaf,
-} from "lucide-react";
+import { ImageOff, Palette, StickyNote, Snowflake, Sun, Leaf } from "lucide-react";
 import { useTheme } from "next-themes";
-
 
 type OutfitItemCardProps = {
   index?: number;
@@ -24,7 +16,6 @@ type OutfitItemCardProps = {
     category?: { name?: string };
   };
 };
-
 
 const getSeasonIconEl = (season?: string) => {
   const s = (season || "").toLowerCase();
@@ -58,8 +49,7 @@ export function OutfitItemCard({ item, index = 0 }: OutfitItemCardProps) {
       <div
         className="pointer-events-none absolute -inset-1 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"
         style={{
-          background:
-            "linear-gradient(135deg, #671425 0%, #8B1D35 50%, #A82444 100%)",
+          background: "linear-gradient(135deg, #671425 0%, #8B1D35 50%, #A82444 100%)",
         }}
       />
 

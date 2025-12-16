@@ -4,9 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { IGeneratedOutfit } from "./aiGenerator";
 
-
-
-
 type IProps = {
   showResults: boolean;
   isGenerating: boolean;
@@ -37,8 +34,6 @@ export function AIOutfitResults({
 
           <div className="grid md:grid-cols-3 gap-6">
             {generatedOutfits.map((outfit, i) => {
-              
-
               return (
                 <motion.div
                   key={outfit.name + "xyz"}
@@ -68,9 +63,7 @@ export function AIOutfitResults({
                     </div>
 
                     <div className="p-4">
-                      <h3 className="text-white font-bold text-lg">
-                        {outfit.name}
-                      </h3>
+                      <h3 className="text-white font-bold text-lg">{outfit.name}</h3>
 
                       {outfit.description ? (
                         <p className="text-sm text-slate-400 opacity-70 mt-1">

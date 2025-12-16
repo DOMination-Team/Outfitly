@@ -10,7 +10,7 @@ export interface IItemsForAI {
   name: WardrobeItem["name"];
   color: WardrobeItem["color"];
   notes: WardrobeItem["notes"];
-  images: WardrobeItemImage['imageUrl'];
+  images: WardrobeItemImage["imageUrl"];
   season: WardrobeItem["season"];
 }
 
@@ -18,17 +18,14 @@ export type AIOutfitResponse = {
   name: string;
   description?: string;
   imageUrl?: string;
-  style?: string,
-  occasion?:
-    | { id: string }
-    | { name: string; description?: string };
+  style?: string;
+  occasion?: { id: string } | { name: string; description?: string };
   wardrobeItemIds: string[];
 };
 
 export type AIOutfitBatchResponse = {
   outfits: AIOutfitResponse[];
 };
-
 
 export type TDot = {
   id: number;
@@ -39,9 +36,8 @@ export type TDot = {
 };
 
 export interface IUserRequirements {
-  weather: string,
-  style: string,
-  occasion: string,
-  requirments: string,
+  weather: string;
+  style: string;
+  occasion: string;
+  requirments: string;
 }
-

@@ -158,10 +158,14 @@ export function OutfitPreviewModal({ open, onClose, outfit }: OutfitPreviewModal
                       <div
                         className="shrink-0 w-10 h-10 rounded-lg flex items-center justify-center shadow-md"
                         style={{
-                          background: "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary)/0.75) 100%)",
+                          background:
+                            "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary)/0.75) 100%)",
                         }}
                       >
-                        <Shirt className="w-5 h-5" style={{ color: "hsl(var(--primary-foreground))" }} />
+                        <Shirt
+                          className="w-5 h-5"
+                          style={{ color: "hsl(var(--primary-foreground))" }}
+                        />
                       </div>
 
                       <h3 className="font-bold" style={{ color: "hsl(var(--foreground))" }}>
@@ -215,10 +219,14 @@ export function OutfitPreviewModal({ open, onClose, outfit }: OutfitPreviewModal
                       <div
                         className="shrink-0 w-10 h-10 rounded-lg flex items-center justify-center shadow-md"
                         style={{
-                          background: "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary)/0.75) 100%)",
+                          background:
+                            "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary)/0.75) 100%)",
                         }}
                       >
-                        <ShoppingBag className="w-5 h-5" style={{ color: "hsl(var(--primary-foreground))" }} />
+                        <ShoppingBag
+                          className="w-5 h-5"
+                          style={{ color: "hsl(var(--primary-foreground))" }}
+                        />
                       </div>
 
                       <h3 className="font-bold" style={{ color: "hsl(var(--foreground))" }}>
@@ -229,7 +237,6 @@ export function OutfitPreviewModal({ open, onClose, outfit }: OutfitPreviewModal
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4 min-w-0">
                       {outfit.items.map((item, index) => (
                         <div key={`${item.id ?? item.name}-${index}`} className="min-w-0">
-                          
                           <OutfitItemCard
                             index={index}
                             item={{
@@ -249,7 +256,8 @@ export function OutfitPreviewModal({ open, onClose, outfit }: OutfitPreviewModal
                       whileTap={{ scale: 0.98 }}
                       className="flex-1 min-w-[220px] px-6 py-4 rounded-xl shadow-lg transition-all duration-300 flex items-center justify-center gap-2 relative overflow-hidden group max-w-full"
                       style={{
-                        background: "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary)/0.75) 100%)",
+                        background:
+                          "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary)/0.75) 100%)",
                         color: "hsl(var(--primary-foreground))",
                       }}
                     >
