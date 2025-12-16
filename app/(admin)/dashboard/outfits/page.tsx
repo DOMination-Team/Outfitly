@@ -1,8 +1,5 @@
 "use client";
 import React from "react";
-import { Download, Filter } from "lucide-react";
-import { motion } from "framer-motion";
-import { NAVBAR_COLORS } from "@/components/navbar/navbar.constants";
 import { OutfitsStats } from "@/components/admin/outfits/outfits-stats";
 import { OutfitsTable } from "@/components/admin/outfits/outfits-table";
 
