@@ -33,9 +33,9 @@ const ItemDetailsForm: React.FC<ItemDetailsFormProps> = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="space-y-6"
+      className=" bg-white dark:bg-[#2A2A30] rounded-2xl p-6 md:p-8 shadow-lg"
     >
-      <h2 className="text-2xl font-semibold text-[#4C1420] dark:text-white">Item Details</h2>
+      <h2 className="text-[#4C1420] dark:text-white mb-6">Item Details</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Name */}

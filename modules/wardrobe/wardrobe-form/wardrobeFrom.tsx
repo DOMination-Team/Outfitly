@@ -10,6 +10,7 @@ import useWardrobeForm from "./hook/useWardrobeForm";
 import type { CreateWardrobeForm } from "../constant";
 import type { Category } from "@/app/generated/prisma/browser";
 import { useMemo } from "react";
+import { PageHeader } from "@/components/page-header";
 
 interface WardrobeFormProps {
   initialData?: CreateWardrobeForm | null;
@@ -61,52 +62,60 @@ const WardrobeFrom: React.FC<WardrobeFormProps> = ({
   }, [formik.values, formik.isSubmitting]);
 
   return (
-    <main className="container mx-auto px-4 mt-12 max-w-4xl">
-      <FormikProvider value={formik}>
-        <Form className="space-y-8">
-          {/* Image Upload Section */}
-          <Uploader
-            onImageUpload={handleImageUpload}
-            onImageDelete={handleImageDelete}
-            initialImages={formik.values.imageUrls}
-          />
+    <main className="pt-20 pb-16">
+      {/* Page Header with Gradient */}
+      <PageHeader
+        title="Add Item to Wardrobe"
+        subtitle="Upload photos and details of your new item"
+        backTo="/my-wardrobe"
+      />
+      <div className="container mx-auto px-4 mt-12 max-w-4xl">
+        <FormikProvider value={formik}>
+          <Form className="space-y-8">
+            {/* Image Upload Section */}
+            <Uploader
+              onImageUpload={handleImageUpload}
+              onImageDelete={handleImageDelete}
+              initialImages={formik.values.imageUrls}
+            />
 
-          {/* Item Details Form */}
-          <ItemDetailsForm categories={categories} brands={brands} />
+            {/* Item Details Form */}
+            <ItemDetailsForm categories={categories} brands={brands} />
 
-          {/* Action Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-end pt-6"
-          >
-            <CustomButton
-              type="button"
-              onClick={handleCancel}
-              variant="link"
-              className="px-8 py-4 bg-white dark:bg-[#2A2A30] text-[#4C1420] dark:text-white border-2 border-[#F2E8E3] dark:border-[#35353D] hover:border-[#671425] dark:hover:border-[#8B1D35]"
+            {/* Action Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="flex flex-col sm:flex-row gap-4 justify-end pt-6"
             >
-              Cancel
-            </CustomButton>
-            <CustomButton
-              type="submit"
-              variant="primary"
-              disabled={!isFormValid || formik.isSubmitting}
-              loading={formik.isSubmitting}
-              className="px-8 py-4"
-            >
-              {formik.isSubmitting
-                ? initialData
-                  ? "Updating"
-                  : "Saving"
-                : initialData
-                  ? "Update Item"
-                  : "Save to Wardrobe"}
-            </CustomButton>
-          </motion.div>
-        </Form>
-      </FormikProvider>
+              <CustomButton
+                type="button"
+                onClick={handleCancel}
+                variant="link"
+                className="px-8 py-4 rounded-xl bg-white dark:bg-[#2A2A30] text-[#4C1420] dark:text-white border-2 border-[#F2E8E3] dark:border-[#35353D] hover:border-[#671425] dark:hover:border-[#8B1D35] transition-all duration-300"
+              >
+                Cancel
+              </CustomButton>
+              <CustomButton
+                type="submit"
+                variant="gradient"
+                animate={false}
+                disabled={!isFormValid || formik.isSubmitting}
+                loading={formik.isSubmitting}
+              >
+                {formik.isSubmitting
+                  ? initialData
+                    ? "Updating"
+                    : "Saving"
+                  : initialData
+                    ? "Update Item"
+                    : "Save to Wardrobe"}
+              </CustomButton>
+            </motion.div>
+          </Form>
+        </FormikProvider>
+      </div>
     </main>
   );
 };
