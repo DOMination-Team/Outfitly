@@ -1,37 +1,7 @@
-import React from "react";
-import { UserGrowthChart } from "@/components/admin/charts/user-growth-chart";
-import { ItemCategoriesChart } from "@/components/admin/charts/item-categories-chart";
-import { OutfitEngagementChart } from "@/components/admin/charts/outfit-engagement-chart";
-import { DashboardKPICards } from "@/components/admin/kpi/kpi-stats";
-import { DashboardStats } from "@/components/admin/stats/dashboard-stats";
+import HomePage from "@/modules/dashboard/home/components/homePage";
 
 const DashboardPage = () => {
-  return (
-    <div className="pt-8 space-y-8">
-      {/* Top Stats Section */}
-      <DashboardStats />
-
-      {/* Middle Section: User Growth & Item Categories */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 h-full min-h-[450px]">
-          <UserGrowthChart />
-        </div>
-        <div className="lg:col-span-1 h-full min-h-[450px]">
-          <ItemCategoriesChart />
-        </div>
-      </div>
-
-      {/* Bottom Section: Engagement & KPIs */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 h-full min-h-[400px]">
-          <OutfitEngagementChart />
-        </div>
-        <div className="lg:col-span-1 h-full">
-          <DashboardKPICards />
-        </div>
-      </div>
-    </div>
-  );
+  return <HomePage />;
 };
 
 export default DashboardPage;
