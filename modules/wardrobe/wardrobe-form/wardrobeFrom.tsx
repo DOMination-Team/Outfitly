@@ -92,11 +92,17 @@ const WardrobeFrom: React.FC<WardrobeFormProps> = ({
             <CustomButton
               type="submit"
               variant="primary"
-              disabled={!isFormValid}
+              disabled={!isFormValid || formik.isSubmitting}
               loading={formik.isSubmitting}
               className="px-8 py-4"
             >
-              {initialData ? "Update Item" : "Save to Wardrobe"}
+              {formik.isSubmitting
+                ? initialData
+                  ? "Updating"
+                  : "Saving"
+                : initialData
+                  ? "Update Item"
+                  : "Save to Wardrobe"}
             </CustomButton>
           </motion.div>
         </Form>
