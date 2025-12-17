@@ -3,15 +3,27 @@ import { motion } from "framer-motion";
 import { Edit, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useDeleteWardrobeItem } from "../../hooks/useDeleteWardrobeItem";
+import { DeleteConfirmationDialog } from "../delete-confirmation-dialog";
 
 export function WardrobeListItem({
   item,
   index,
+  onDelete,
 }: {
   item: GetUserWardrobeItemResponse["items"][number];
   index: number;
+  onDelete: (itemId: string) => void;
 }) {
   const router = useRouter();
+  const {
+    isDeleteDialogOpen,
+    itemToDelete,
+    isPending,
+    openDeleteDialog,
+    closeDeleteDialog,
+    confirmDelete,
+  } = useDeleteWardrobeItem();
 
   const handleEditClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -20,11 +32,11 @@ export function WardrobeListItem({
 
   const handleDeleteClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    // TODO: Add delete confirmation dialog
-    console.log(`Deleting item ${item.id}`);
+    openDeleteDialog({ id: item.id, name: item.name });
   };
 
   return (
+    <>
     <motion.div
       key={item.id}
       initial={{ opacity: 0, y: 20 }}
@@ -80,5 +92,14 @@ export function WardrobeListItem({
         </div>
       </div>
     </motion.div>
+    <DeleteConfirmationDialog
+      open={isDeleteDialogOpen}
+      onOpenChange={closeDeleteDialog}
+      itemName={itemToDelete?.name}
+      onConfirm={() => confirmDelete(onDelete)}
+      onCancel={closeDeleteDialog}
+      isPending={isPending}
+    />
+  </>
   );
 }

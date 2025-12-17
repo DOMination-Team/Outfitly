@@ -111,7 +111,7 @@ export const deleteWardrobeItemService = async (
   const user = await authMiddleware();
   const wardrobeItemData = await findWardrobeItemById(data.id);
 
-  if (user.id != wardrobeItemData.id) {
+  if (user.id != wardrobeItemData.userId) {
     throw new CustomError({ message: "not authorized", statusCode: HttpStatusError.Unauthorized });
   }
 
