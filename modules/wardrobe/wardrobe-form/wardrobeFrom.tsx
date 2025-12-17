@@ -65,8 +65,8 @@ const WardrobeFrom: React.FC<WardrobeFormProps> = ({
     <main className="pt-20 pb-16">
       {/* Page Header with Gradient */}
       <PageHeader
-        title="Add Item to Wardrobe"
-        subtitle="Upload photos and details of your new item"
+        title={`${Boolean(initialData) ? "Update" : "Add"} Item to Wardrobe`}
+        subtitle={`${Boolean(initialData) ? "edit" : ""} Upload${Boolean(initialData) ? "ed" : ""} photos and details of your ${Boolean(initialData) ? "" : "new"} item`}
         backTo="/my-wardrobe"
       />
       <div className="container mx-auto px-4 mt-12 max-w-4xl">
