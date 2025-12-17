@@ -71,7 +71,7 @@ export const updateWardrobeItemService = async (
 
   // Pass imageUrls to repo - repo handles reconstruction
   const wardrobeItem = await updateWardrobeItemRepo(id, user.id, rest, imageUrls);
-  revalidateTag(`wardrobe-item-details-${id}-${user.id}`, 'max');
+  revalidateTag(`wardrobe-item-details-${id}-${user.id}`, "max");
   return wardrobeItem;
 };
 

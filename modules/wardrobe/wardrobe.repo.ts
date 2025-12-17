@@ -209,7 +209,7 @@ export const getUserWardrobeItemRepo = async ({
 };
 
 export const getWardrobeItemDetailsRepo = async (itemId: string, userId: string) => {
-  'use cache';
+  "use cache";
   cacheTag(`wardrobe-item-details-${itemId}-${userId}`);
   return await prisma.wardrobeItem.findUnique({
     where: {
