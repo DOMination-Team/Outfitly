@@ -115,7 +115,12 @@ export const deleteWardrobeItemService = async (
     throw new CustomError({ message: "not authorized", statusCode: HttpStatusError.Unauthorized });
   }
 
-  return deleteWardrobeItemRepo(data.id, user.id);
+  const deletedWardrobeItem = await deleteWardrobeItemRepo(data.id, user.id);
+  revalidateTag(`wardrobe-user-items-${deletedWardrobeItem.userId}`, {
+    expire: 0
+  });
+
+  return deletedWardrobeItem;
 };
 
 export const getWardrobeStatsService = async (): Promise<GetWardrobeStatsResponse> => {
