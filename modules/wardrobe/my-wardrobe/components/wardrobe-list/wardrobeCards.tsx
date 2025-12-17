@@ -20,7 +20,7 @@ export function WardrobeCards({
     wardrobeItems,
     (state, deletedItemId: string) => {
       return state.filter((item) => item.id !== deletedItemId);
-    }
+    },
   );
 
   const handleDeleteItem = (itemId: string) => {
