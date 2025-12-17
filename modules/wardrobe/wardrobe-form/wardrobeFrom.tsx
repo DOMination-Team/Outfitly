@@ -100,7 +100,6 @@ const WardrobeFrom: React.FC<WardrobeFormProps> = ({
               <CustomButton
                 type="submit"
                 variant="gradient"
-                animate={false}
                 disabled={!isFormValid || formik.isSubmitting}
                 loading={formik.isSubmitting}
               >
