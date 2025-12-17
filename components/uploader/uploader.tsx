@@ -57,7 +57,7 @@ export default function Uploader({
         return;
       }
 
-      onImageDelete(files.find((f) => f.id === fileId)?.key);
+      onImageDelete(fileToRemove?.key);
 
       setFiles((prevFiles) => prevFiles.filter((f) => f.id !== fileId));
       toast.success("File removed successfully");
@@ -100,9 +100,7 @@ export default function Uploader({
 
       const { presignedUrl, key } = await presignedResponse.json();
 
-      console.log(presignedUrl);
       // 2. Upload file to S3
-
       await new Promise<void>((resolve, reject) => {
         const xhr = new XMLHttpRequest();
 
@@ -119,9 +117,7 @@ export default function Uploader({
 
         xhr.onload = () => {
           if (xhr.status === 200 || xhr.status === 204) {
-            const fff = files.find((f) => f.file === file);
-            console.log("file", fff);
-            onImageUpload(fff?.key);
+            onImageUpload(key);
 
             // 3. File fully uploaded - set progress to 100
             setFiles((prevFiles) =>
