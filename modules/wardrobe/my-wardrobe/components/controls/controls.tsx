@@ -30,6 +30,7 @@ const Controls = () => {
   const onSortOrderChange = (value: SortOrder) => {
     setSortOrder(value);
   };
+
   return (
     <div>
       {/* Search and Controls */}
@@ -44,14 +45,6 @@ const Controls = () => {
 
         {/* Controls */}
         <div className="flex gap-3 items-center">
-          {/* Add Item Button */}
-          <Link
-            href="/my-wardrobe/add"
-            className="flex items-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-[#671425] to-[#8B1D35] hover:from-[#6A1526] hover:to-[#9A1E3A] text-white shadow-lg shadow-[#671425]/30 hover:shadow-xl hover:shadow-[#671425]/40 transition-all duration-300 hover:scale-105 whitespace-nowrap"
-          >
-            <Plus className="w-5 h-5" />
-            <span className="hidden sm:inline">Add Item</span>
-          </Link>
           {/* View Mode Toggle */}
           <div className="flex gap-2 bg-[#FAF1ED] dark:bg-[#1C1C20] p-1 rounded-lg">
             <button
