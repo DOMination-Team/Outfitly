@@ -61,7 +61,6 @@ const useWardrobeForm = ({ initialData, onSuccess, categories }: UseWardrobeForm
           toast.success("Wardrobe item updated successfully");
           onSuccess?.();
           router.push("/my-wardrobe");
-          router.refresh();
         } else {
           toast.error(JSON.stringify(response.errors) || "Failed to update item");
         }
