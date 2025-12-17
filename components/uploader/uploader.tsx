@@ -187,6 +187,18 @@ export default function Uploader({
 
   const onDrop = (acceptedFiles: File[]) => {
     if (acceptedFiles.length) {
+      // Check if adding these files would exceed the limit
+      const currentFileCount = files.filter((file) => !(file.isDeleting || file.error)).length;
+      const newFileCount = acceptedFiles.length;
+      const totalFiles = currentFileCount + newFileCount;
+
+      if (totalFiles > 5) {
+        toast.error(
+          `Cannot add ${newFileCount} file(s). Maximum is 5 files total (currently ${currentFileCount})`,
+        );
+        return;
+      }
+
       setFiles((prevFiles) => [
         ...prevFiles,
         ...acceptedFiles.map((file) => ({
@@ -227,7 +239,6 @@ export default function Uploader({
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     onDropRejected: rejectedFiles,
-    maxFiles: 5,
     maxSize: 1024 * 1024 * 10, // 10mb
     accept: {
       "image/*": [],
