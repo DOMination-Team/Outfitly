@@ -10,7 +10,13 @@ import { v4 as uuidv4 } from "uuid";
 import { Loader2, Trash2 } from "lucide-react";
 import Image from "next/image";
 
-export default function Uploader() {
+export default function Uploader({
+  onImageDelete,
+  onImageUpload,
+}: {
+  onImageUpload: (key?: string) => void;
+  onImageDelete: (key?: string) => void;
+}) {
   const [files, setFiles] = useState<
     Array<{
       id: string;
@@ -50,6 +56,8 @@ export default function Uploader() {
         );
         return;
       }
+
+      onImageDelete(files.find((f) => f.id === fileId)?.key);
 
       setFiles((prevFiles) => prevFiles.filter((f) => f.id !== fileId));
       toast.success("File removed successfully");
@@ -92,6 +100,7 @@ export default function Uploader() {
 
       const { presignedUrl, key } = await presignedResponse.json();
 
+      console.log(presignedUrl);
       // 2. Upload file to S3
 
       await new Promise<void>((resolve, reject) => {
@@ -110,6 +119,10 @@ export default function Uploader() {
 
         xhr.onload = () => {
           if (xhr.status === 200 || xhr.status === 204) {
+            const fff = files.find((f) => f.file === file);
+            console.log("file", fff);
+            onImageUpload(fff?.key);
+
             // 3. File fully uploaded - set progress to 100
             setFiles((prevFiles) =>
               prevFiles.map((f) =>
@@ -144,7 +157,7 @@ export default function Uploader() {
     }
   };
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
+  const onDrop = (acceptedFiles: File[]) => {
     if (acceptedFiles.length) {
       setFiles((prevFiles) => [
         ...prevFiles,
@@ -161,7 +174,7 @@ export default function Uploader() {
 
       acceptedFiles.forEach(uploadFile);
     }
-  }, []);
+  };
 
   const rejectedFiles = useCallback((fileRejection: FileRejection[]) => {
     if (fileRejection.length) {

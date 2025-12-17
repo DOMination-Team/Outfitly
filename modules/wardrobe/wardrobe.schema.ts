@@ -41,7 +41,6 @@ const WardrobeItemBaseWithImagesSchema = WardrobeItemBaseSchema.extend({
 // CREATE schema
 export const CreateWardrobeItemDTOSchema = WardrobeItemBaseWithImagesSchema.pick({
   categoryId: true,
-  variantId: true,
   name: true,
   color: true,
   size: true,
@@ -87,7 +86,7 @@ export const UpdateWardrobeItemDTOSchema = WardrobeItemBaseSchema.pick({
 
 // GET USER WARDROBE ITEM
 export const GetUserWardrobeItemSchema = z.object({
-  categoryId: z.uuid().optional(),
+  categoryId: z.string().optional(),
   search: z.string().optional(),
   sortBy: z
     .enum(createArrayFromDiscriminatedUnion<WardrobeSortBy>("addedAt", "name"))

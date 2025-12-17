@@ -1,5 +1,6 @@
 import { getEnvOrDefault, getEnvOrThrow } from "@/utils/env.utils";
 
-export const DATABASE_URL = getEnvOrThrow("DATABASE_URL");
-
 export const S3_BUCKET_NAME = getEnvOrDefault("S3_BUCKET_NAME", "outfitly"); // getEnvOrThrow("S3_BUCKET_NAME");
+
+// export const DATABASE_URL = getEnvOrThrow("DATABASE_URL");
+
