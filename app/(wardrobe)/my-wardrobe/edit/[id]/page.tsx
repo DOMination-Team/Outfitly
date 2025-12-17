@@ -94,9 +94,7 @@ async function EditWardrobeItemContent({ id }: { id: string }) {
     size: wardrobeItem?.size || "",
     season: wardrobeItem?.season || "",
     style: wardrobeItem?.style || "CASUAL",
-    purchasedDate:
-      wardrobeItem?.purchasedDate.toISOString().split("T")[0] ||
-      new Date().toISOString().split("T")[0],
+    purchasedDate: wardrobeItem?.purchasedDate.toISOString().split("T")[0] || "",
     notes: wardrobeItem?.notes || "",
     imageUrls: wardrobeItem?.images.map((img) => img.imageUrl) || [],
   };
