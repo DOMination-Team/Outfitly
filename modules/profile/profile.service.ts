@@ -51,7 +51,7 @@ export const getLikedProductsPaginated = async (
 // Update profile
 export const updateProfile = async (
   userId: string,
-  data: { name?: string; bio?: string; location?: string; website?: string  ; avatar?: string },
+  data: { name?: string; bio?: string; location?: string; website?: string  ; avatarUrl?: string },
 ) => {
   const validData = zodValidation(profileUpdateSchema, data);
   try {

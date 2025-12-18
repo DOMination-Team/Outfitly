@@ -32,7 +32,7 @@ export function ProfileHeader({
 }: ExtendedProfileHeaderProps) {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [crop, setCrop] = useState<Crop>({ unit: "%", width: 50, aspect: 1 });
+  const [crop, setCrop] = useState<Crop>({ unit: "%", width: 50, height: 50, x: 25, y: 25 });
   const [croppedImage, setCroppedImage] = useState<string | null>(null);
   const [isCropping, setIsCropping] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -70,7 +70,7 @@ export function ProfileHeader({
     // Replace with your upload logic (e.g., fetch to /api/upload-avatar)
     const formData = new FormData();
     formData.append("file", file);
-    const response = await fetch("/api/upload-avatar", {
+    const response = await fetch("/api/upload-avatarUrl", {
       method: "POST",
       body: formData,
     });
@@ -83,7 +83,7 @@ export function ProfileHeader({
     if (imageFile) {
       try {
         const uploadedUrl = await uploadImage(imageFile);
-        onUpdateForm("avatar", uploadedUrl); // Update form
+        onUpdateForm("avatarUrl", uploadedUrl); // Update form
         setImageFile(null);
         setImagePreview(null);
         setCroppedImage(null);
@@ -96,7 +96,7 @@ export function ProfileHeader({
 
   // Delete avatar
   const deleteAvatar = () => {
-    onUpdateForm("avatar", ""); // Reset to default or empty
+    onUpdateForm("avatarUrl", ""); // Reset to default or empty
     setImageFile(null);
     setImagePreview(null);
     setCroppedImage(null);
@@ -116,7 +116,7 @@ export function ProfileHeader({
               <div className="absolute -inset-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-full blur-sm opacity-75"></div>
               <div className="relative">
                 <img
-                  src={croppedImage || user.avatar}
+                  src={croppedImage || user.avatarUrl}
                   alt={getAvatarAlt(user.name)}
                   className="w-32 h-32 rounded-full object-cover border-4 bg-background"
                 />

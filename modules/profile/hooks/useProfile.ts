@@ -97,7 +97,7 @@ export function useProfile() {
         bio: editForm.bio.trim() || undefined,
         location: editForm.location.trim() || undefined,
         website: editForm.website.trim() || undefined,
-        avatarUrl: editForm.avatar || undefined, // Include avatarUrl for image updates
+        avatarUrl: editForm.avatarUrl || undefined, // Include avatarUrl for image updates
       };
       console.log("Sending update data:", updateData);
       await updateProfile(authUser.id, updateData);

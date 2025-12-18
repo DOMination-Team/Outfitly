@@ -8,7 +8,7 @@ export interface User {
   location: string;
   website: string;
   joinDate: string;
-  avatar: string;
+  avatarUrl: string;
   stats: { outfits: number; followers: number; following: number };
 }
 

@@ -8,7 +8,7 @@ export const mockUser: User = {
   location: "New York, NY",
   website: "www.sarahstyle.com",
   joinDate: "Joined March 2024",
-  avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80",
+  avatarUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80",
   stats: {
     outfits: 156,
     followers: 2847,

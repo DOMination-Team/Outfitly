@@ -22,7 +22,7 @@ export const findUserProfile = async (userId: string): Promise<UIUser | null> =>
     location: user.location || "",
     website: user.website || "",
     joinDate: user.createdAt.toISOString().split("T")[0],
-    avatar: user.avatarUrl || "",
+    avatarUrl: user.avatarUrl || "",
     stats: {
       outfits: user.outfits.length,
       followers: user.likedOutfits.length,
@@ -127,7 +127,7 @@ export const findLikedProducts = async (
 // Update user profile
 export const updateUserProfile = async (
   userId: string,
-  data: { name?: string; bio?: string; location?: string; website?: string },
+  data: { name?: string; bio?: string; location?: string; website?: string, avatarUrl?: string },
 ) => {
   return prisma.user.update({
     where: { id: userId },
@@ -136,6 +136,8 @@ export const updateUserProfile = async (
       bio: data.bio,
       location: data.location,
       website: data.website,
+      avatarUrl:data.avatarUrl
+      
     },
   });
 };
