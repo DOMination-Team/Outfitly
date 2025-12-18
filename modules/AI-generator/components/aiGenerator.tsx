@@ -76,22 +76,17 @@ export default function AIGenerator() {
           onSelectOutfit={onSelectOutfit}
           onGenerate={handleGenerate}
         />
-          <AIGeneratorLoading show={isGenerating} />
-
+        <AIGeneratorLoading show={isGenerating} />
       </main>
 
-      {
-          viewingOutfit && (
-            <OutfitPreviewModal
-              open={open}
-              outfit={viewingOutfit!}
-              onSave={onSave}
-              onClose={() => setViewingOutfit(null)}
-            />
-
-          )
-      }
-      
+      {viewingOutfit && (
+        <OutfitPreviewModal
+          open={open}
+          outfit={viewingOutfit!}
+          onSave={onSave}
+          onClose={() => setViewingOutfit(null)}
+        />
+      )}
     </div>
   );
 }

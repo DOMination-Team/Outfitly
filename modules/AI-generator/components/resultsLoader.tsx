@@ -32,7 +32,6 @@ export function AIGeneratorLoading({
               backgroundColor: "color-mix(in srgb, var(--card) 85%, transparent)",
             }}
           >
-
             <motion.div
               className="h-1 w-full"
               style={{
@@ -56,10 +55,16 @@ export function AIGeneratorLoading({
                   transition={{ duration: 0.9, repeat: Infinity, ease: "linear" }}
                 />
                 <div className="flex-1">
-                  <p className="font-semibold" style={{ color: "var(--outfitly-text-primary, var(--foreground))" }}>
+                  <p
+                    className="font-semibold"
+                    style={{ color: "var(--outfitly-text-primary, var(--foreground))" }}
+                  >
                     {title}
                   </p>
-                  <p className="text-sm opacity-70" style={{ color: "var(--outfitly-text-primary, var(--foreground))" }}>
+                  <p
+                    className="text-sm opacity-70"
+                    style={{ color: "var(--outfitly-text-primary, var(--foreground))" }}
+                  >
                     {subtitle}
                   </p>
                 </div>

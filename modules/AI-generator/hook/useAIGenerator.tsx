@@ -30,14 +30,14 @@ import { useTheme } from "next-themes";
 
 export function useAIGenerator() {
   const { user } = useAuth();
-  const {theme} = useTheme()
+  const { theme } = useTheme();
   const [formData, setFormData] = useState<AIGeneratorFormData>({
     occasion: "",
     weather: "",
     style: "",
     requirements: "",
   });
-  const isDark = theme === "dark"
+  const isDark = theme === "dark";
   console.log(user);
   const [customOccasion, setCustomOccasion] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
@@ -129,11 +129,11 @@ export function useAIGenerator() {
   };
 
   const scrollToResults = () => {
-  const resultsSection = document.querySelector('[data-results-section]');
-  if (resultsSection) {
-    resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-};
+    const resultsSection = document.querySelector("[data-results-section]");
+    if (resultsSection) {
+      resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   const setFormField = useCallback(
     <K extends keyof AIGeneratorFormData>(key: K, value: AIGeneratorFormData[K]) => {

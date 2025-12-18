@@ -36,8 +36,7 @@ export function ResultsReadyIndicator({
             <div
               className="text-center px-6 py-2 rounded-full backdrop-blur-md shadow-lg border relative overflow-hidden"
               style={{
-                backgroundColor:
-                  "color-mix(in srgb, var(--outfitly-primary) 92%, transparent)",
+                backgroundColor: "color-mix(in srgb, var(--outfitly-primary) 92%, transparent)",
                 borderColor: "var(--outfitly-border-light, var(--border))",
                 color: "var(--outfitly-text-light, #fff)",
               }}
