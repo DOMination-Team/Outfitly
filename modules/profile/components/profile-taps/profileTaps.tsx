@@ -6,7 +6,6 @@ import { isTabActive } from "./profileTaps.utils";
 
 const tabs = [
   { id: "outfits" as const, label: "My Outfits", icon: Grid3X3 },
-  { id: "liked-products" as const, label: "Liked Products", icon: ShoppingBag },
   { id: "liked-outfits" as const, label: "Liked Outfits", icon: Heart },
 ];
 
@@ -35,10 +34,8 @@ export function ProfileTabs({ activeTab, onTabChange, counts }: ProfileTabsWithC
           const count =
             counts[
               tab.id === "outfits"
-                ? "outfits"
-                : tab.id === "liked-products"
-                  ? "likedProducts"
-                  : "likedOutfits"
+                ? "outfits":
+                 "likedOutfits"
             ];
           return (
             <motion.button

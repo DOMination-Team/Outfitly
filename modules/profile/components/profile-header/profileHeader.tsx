@@ -11,6 +11,7 @@ import "react-image-crop/dist/ReactCrop.css";
 import type { ProfileHeaderProps } from "./profileHeader.types";
 import { getAvatarAlt } from "./profileHeader.utils";
 import type { User } from "../../profile.types";
+import { updateProfile } from "../../profile.service"; // make sure path is correct
 
 interface ExtendedProfileHeaderProps extends ProfileHeaderProps {
   isEditing: boolean;
@@ -42,7 +43,6 @@ export function ProfileHeader({
   const safeEditForm = editForm || user;
 
   /* ================== IMAGE HELPERS ================== */
-
   const getCroppedImg = async (image: HTMLImageElement, crop: Crop): Promise<File> => {
     const canvas = document.createElement("canvas");
     const scaleX = image.naturalWidth / image.width;
@@ -74,7 +74,6 @@ export function ProfileHeader({
   };
 
   /* ================== UPLOAD HELPER ================== */
-
   const uploadAvatar = async (file: File): Promise<string> => {
     const formData = new FormData();
     formData.append("file", file);
@@ -87,11 +86,10 @@ export function ProfileHeader({
     if (!res.ok) throw new Error("Upload failed");
 
     const data = await res.json();
-    return data.url; // URL to store in DB
+    return data.url;
   };
 
   /* ================== HANDLERS ================== */
-
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -105,14 +103,10 @@ export function ProfileHeader({
 
     try {
       const croppedFile = await getCroppedImg(imgRef.current, completedCrop);
-
-      // 1️⃣ Upload cropped file
       const avatarUrl = await uploadAvatar(croppedFile);
 
-      // 2️⃣ Save URL in edit form
+      // update form state and preview
       onUpdateForm("avatarUrl", avatarUrl);
-
-      // 3️⃣ Update preview
       setImagePreview(avatarUrl);
       setIsCropping(false);
     } catch (error) {
@@ -121,13 +115,64 @@ export function ProfileHeader({
     }
   };
 
-  const deleteAvatar = () => {
-    onUpdateForm("avatarUrl", "");
-    setImageFile(null);
-    setImagePreview(null);
+  const deleteAvatar = async () => {
+    try {
+      // reset UI
+      onUpdateForm("avatarUrl", "");
+      setImageFile(null);
+      setImagePreview(null);
+
+      // update DB immediately
+      if (safeEditForm?.id) {
+        await updateProfile(safeEditForm.id, { avatarUrl: "" });
+      }
+    } catch (error) {
+      console.error("Failed to delete avatar:", error);
+      alert("Failed to delete avatar.");
+    }
   };
 
   const websiteUrl = user.website.startsWith("http") ? user.website : `https://${user.website}`;
+
+  /* ================== RENDER AVATAR ================== */
+  const renderAvatar = () => {
+    if (imagePreview || safeEditForm.avatarUrl) {
+      return (
+        <img
+          src={imagePreview || safeEditForm.avatarUrl}
+          alt={getAvatarAlt(user.name)}
+          className="w-full h-full object-cover"
+        />
+      );
+    }
+
+    // fallback to initials
+    const initials = user.name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .slice(0, 2)
+      .toUpperCase();
+
+    return (
+      <div className="
+    w-full h-full 
+    flex items-center justify-center 
+    rounded-full 
+    text-white text-2xl font-extrabold 
+    shadow-lg 
+    animate-gradient animate-float
+    "
+  style={{
+    background: `linear-gradient( var(--outfitly-gradient-start), var(--outfitly-gradient-mid), var(--outfitly-gradient-end))`,
+    backgroundSize: "200% 200%",
+    textShadow: "1px 1px 3px rgba(0,0,0,0.4)",
+  }}>
+        {initials}
+      </div>
+   
+    );
+  };
 
   return (
     <>
@@ -137,11 +182,7 @@ export function ProfileHeader({
             {/* AVATAR */}
             <div className="relative w-32 h-32 md:w-40 md:h-40 flex-shrink-0">
               <div className="w-full h-full rounded-full overflow-hidden border border-gray-300">
-                <img
-                  src={imagePreview || user.avatarUrl}
-                  alt={getAvatarAlt(user.name)}
-                  className="w-full h-full object-cover"
-                />
+                {renderAvatar()}
               </div>
 
               {isEditing && (
