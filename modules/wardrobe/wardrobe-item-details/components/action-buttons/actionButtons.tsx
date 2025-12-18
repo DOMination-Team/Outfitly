@@ -16,7 +16,13 @@ const ActionButtons = ({ onEdit, onDelete, isPending }: ActionButtonsProps) => {
       </motion.div>
 
       <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-        <Button onClick={onDelete} variant="outline" className="w-full" size="lg" disabled={isPending}>
+        <Button
+          onClick={onDelete}
+          variant="outline"
+          className="w-full"
+          size="lg"
+          disabled={isPending}
+        >
           <Trash2 className="w-4 h-4" />
           Delete
         </Button>

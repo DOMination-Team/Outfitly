@@ -5,7 +5,12 @@ import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import type { ImageGalleryProps } from "./imageGallery.types";
 
-const ImageGallery = ({ sortedImages, selectedImage, onImageSelect, itemName }: ImageGalleryProps) => {
+const ImageGallery = ({
+  sortedImages,
+  selectedImage,
+  onImageSelect,
+  itemName,
+}: ImageGalleryProps) => {
   return (
     <div className="space-y-4">
       {/* Main Image */}
