@@ -37,5 +37,5 @@ export const removeLike = async (userId: string, outfitId: string) => {
 };
 
 export const createOutfitService = async (data: CreateOutfitDTO) => {
-  return await createOutfit(data)
-}
+  return await createOutfit(data);
+};

@@ -16,10 +16,11 @@ type OutfitPreviewModalProps = {
   outfit: IOutfitForModal;
 };
 
-
-
 export function OutfitPreviewModal({ open, onClose, onSave, outfit }: OutfitPreviewModalProps) {
-  const coverImage = useMemo(() => safeImageSrc(outfit.image ?? outfit?.items[0]?.images), [outfit]);
+  const coverImage = useMemo(
+    () => safeImageSrc(outfit.image ?? outfit?.items[0]?.images),
+    [outfit],
+  );
   const itemsCount = outfit?.items?.length ?? 0;
 
   useEffect(() => {
@@ -44,7 +45,6 @@ export function OutfitPreviewModal({ open, onClose, onSave, outfit }: OutfitPrev
     [],
   );
 
-  
   const panelBorder = "border-2 border-[var(--outfitly-border-medium)]";
   const panelBg = "bg-[var(--outfitly-bg-primary)]";
   const subtleBg = "bg-[var(--outfitly-bg-secondary)]";
@@ -91,11 +91,11 @@ export function OutfitPreviewModal({ open, onClose, onSave, outfit }: OutfitPrev
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ 
-                type: "spring", 
-                stiffness: 300, 
+              transition={{
+                type: "spring",
+                stiffness: 300,
                 damping: 30,
-                duration: 0.3
+                duration: 0.3,
               }}
               onClick={(e) => e.stopPropagation()}
               className={[

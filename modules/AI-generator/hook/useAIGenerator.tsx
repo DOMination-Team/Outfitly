@@ -9,7 +9,13 @@ import type {
   IOutfitForModal,
 } from "../components/aiGenerator";
 
-import { createPrompt, getItemsByIds, toGeneratedOutfits, toUserRequirements, transfromAIResponse } from "../ai.utils";
+import {
+  createPrompt,
+  getItemsByIds,
+  toGeneratedOutfits,
+  toUserRequirements,
+  transfromAIResponse,
+} from "../ai.utils";
 
 import {
   createOutfitAction,
@@ -35,8 +41,8 @@ export function useAIGenerator() {
   const [showResults, setShowResults] = useState(false);
   const [generatedOutfits, setGeneratedOutfits] = useState<IGeneratedOutfit[]>([]);
   const [viewingOutfit, setViewingOutfit] = useState<IOutfitForModal | null>(null);
-  const [filteredFromDB, setFilteredFromDB] = useState<IItemsForAI[] | null>(null); 
-  const [aiResults, setAIResults] = useState<AIOutfitResponse[]>([])
+  const [filteredFromDB, setFilteredFromDB] = useState<IItemsForAI[] | null>(null);
+  const [aiResults, setAIResults] = useState<AIOutfitResponse[]>([]);
   const canGenerate = useMemo(() => {
     return Boolean(
       formData.occasion &&
@@ -75,7 +81,7 @@ export function useAIGenerator() {
     const aiRes = await generateAIOutfitAction(prompt);
     console.log(aiRes);
     setIsGenerating(false);
-    
+
     if (!aiRes.success) return;
 
     setAIResults(aiRes.data);
@@ -87,42 +93,38 @@ export function useAIGenerator() {
   }, [canGenerate, isGenerating, formData]);
 
   const onSelectOutfit = (name: string) => {
-      const outfit = generatedOutfits.find((o) => o.name === name);
-      if (!outfit || !filteredFromDB) return;
+    const outfit = generatedOutfits.find((o) => o.name === name);
+    if (!outfit || !filteredFromDB) return;
 
-      const itemsForView = getItemsByIds(ITEMS_FOR_AI_DUMMY, outfit.items);
+    const itemsForView = getItemsByIds(ITEMS_FOR_AI_DUMMY, outfit.items);
 
-      setViewingOutfit({
-        ...outfit,
-        items: itemsForView,
-      });
-  }
-
+    setViewingOutfit({
+      ...outfit,
+      items: itemsForView,
+    });
+  };
 
   const closeModal = () => setViewingOutfit(null);
 
-  const onSave = async(name: string) => {
+  const onSave = async (name: string) => {
+    if (!generatedOutfits || !aiResults || !user) return;
 
-    if(!generatedOutfits || !aiResults || !user) return;
+    const outfit = aiResults.find((i) => i.name === name);
 
-    const outfit = aiResults.find((i) => (i.name === name));
-
-    if(!outfit) {
-        return;
+    if (!outfit) {
+      return;
     }
 
     const outfitForCreate = transfromAIResponse(outfit, user.id);
     const createdOutfit = await createOutfitAction(outfitForCreate);
-    if(!createdOutfit.success) {
+    if (!createdOutfit.success) {
       toast.error("Failed to save the outfit, please try again!");
       return;
     }
 
     toast.success(`${createdOutfit.data.name} Outfit created successfully!`);
-  }
+  };
 
-
- 
   const setFormField = useCallback(
     <K extends keyof AIGeneratorFormData>(key: K, value: AIGeneratorFormData[K]) => {
       setFormData((prev) => ({ ...prev, [key]: value }));
