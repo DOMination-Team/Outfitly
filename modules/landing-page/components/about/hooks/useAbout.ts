@@ -49,28 +49,32 @@ export function useAbout() {
         }
       );
 
-      // Feature cards staggered animation with 3D effect
+      // Feature cards slide in from outside the page
+      // Left cards (even index) come from left, right cards (odd index) come from right
       featureCardsRef.current.forEach((card, index) => {
         if (!card) return;
+
+        const isLeftCard = index % 2 === 0;
+        const xOffset = isLeftCard ? -150 : 150; // percentage offset from current position
 
         gsap.fromTo(
           card,
           {
             opacity: 0,
-            y: 60,
-            rotateX: 15,
+            x: xOffset,
+            rotateY: isLeftCard ? -15 : 15,
             transformPerspective: 1000,
           },
           {
             opacity: 1,
-            y: 0,
-            rotateX: 0,
-            duration: duration * 1.2,
-            ease: "back.out(1.2)",
-            delay: index * staggerDelay,
+            x: 0,
+            rotateY: 0,
+            duration: duration * 1.4,
+            ease: "power3.out",
+            delay: Math.floor(index / 2) * staggerDelay, // stagger by row
             scrollTrigger: {
               trigger: featuresRef.current,
-              start: "top 75%",
+              start: "top 80%",
               toggleActions: "play none none reverse",
             },
           }
