@@ -1,27 +1,28 @@
 "use client";
+
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
 import { useProfile } from "./hooks/useProfile";
-import { mockUser, mockOutfits, mockLikedProducts } from "./profile.constants";
-import type { TabType } from "./profile.types";
+import type { TabType, Outfit, LikedProduct } from "./profile.types";  // Added imports for types
 import { ProfileHeader } from "./components/profile-header/profileHeader";
 import { ProfileTabs } from "./components/profile-taps/profileTaps";
 import { ProfileOutfitsGrid } from "./components/profile-outfits/profileOutfits";
 import { ProfileLikedProductsGrid } from "./components/profile-liked-products/likedProducts";
 import { ProfileLikedOutfitsGrid } from "./components/profile-liked-outfits/likedOutfits";
 
-function renderContent(activeTab: TabType) {
+function renderContent(activeTab: TabType, outfits: Outfit[], likedProducts: LikedProduct[], likedOutfits: Outfit[]) {  // Typed parameters
   switch (activeTab) {
     case "outfits":
-      return <ProfileOutfitsGrid outfits={mockOutfits} />;
+      return <ProfileOutfitsGrid outfits={outfits} />;
     case "liked-products":
-      return <ProfileLikedProductsGrid products={mockLikedProducts} />;
+      return <ProfileLikedProductsGrid products={likedProducts} />;
     case "liked-outfits":
-      return <ProfileLikedOutfitsGrid outfits={mockOutfits} />;
+      return <ProfileLikedOutfitsGrid outfits={likedOutfits} />;
   }
 }
+
 export function ProfilePage() {
   const {
     activeTab,
@@ -29,11 +30,32 @@ export function ProfilePage() {
     user,
     isEditing,
     editForm,
+    loading,
+    outfits,
+    likedProducts,
+    likedOutfits,
     startEditing,
     cancelEditing,
     saveEditing,
     updateEditForm,
   } = useProfile();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background transition-colors duration-300 flex items-center justify-center">
+        <div>Loading profile...</div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-background transition-colors duration-300 flex items-center justify-center">
+        <div>No profile found. Please log in.</div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background transition-colors duration-300">
       <Navbar />
@@ -47,7 +69,7 @@ export function ProfilePage() {
             onStartEditing={startEditing}
             onCancelEditing={cancelEditing}
             onSaveEditing={saveEditing}
-  onUpdateForm={updateEditForm}
+            onUpdateForm={updateEditForm}
           />
           <ProfileTabs activeTab={activeTab} onTabChange={setActiveTab} />
           <motion.div
@@ -56,7 +78,7 @@ export function ProfilePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            {renderContent(activeTab)}
+            {renderContent(activeTab, outfits, likedProducts, likedOutfits)}
           </motion.div>
         </div>
       </main>

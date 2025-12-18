@@ -49,6 +49,7 @@
     "shadcn": "^3.5.1",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",
+    "zod": "^4.2.1",
     "zod-formik-adapter": "^2.0.0",
     "zustand": "^5.0.9"
   },
@@ -60,6 +61,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-responsive-masonry": "^2.7.0",
+    "baseline-browser-mapping": "^2.9.8",
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
     "eslint-config-prettier": "^10.1.8",

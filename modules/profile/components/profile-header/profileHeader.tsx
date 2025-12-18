@@ -2,19 +2,20 @@ import { motion } from "framer-motion";
 import { MapPin, Link as LinkIcon, Calendar } from "lucide-react";
 import { Card } from "../../../../components/ui/card";
 import { Button } from "../../../../components/ui/button";
-import { Input } from "../../../../components/ui/input"; // Assuming you have a UI Input component
-import { Textarea } from "../../../../components/ui/textarea"; // Assuming you have a UI Textarea component
+import { Input } from "../../../../components/ui/input";
+import { Textarea } from "../../../../components/ui/textarea";
 import type { ProfileHeaderProps } from "./profileHeader.types";
 import { getAvatarAlt } from "./profileHeader.utils";
+import type { User } from "../../profile.types";
 
 // Extend props to include edit handlers
 interface ExtendedProfileHeaderProps extends ProfileHeaderProps {
   isEditing: boolean;
-  editForm: ProfileHeaderProps["user"];
+  editForm: User | null;
   onStartEditing: () => void;
   onCancelEditing: () => void;
   onSaveEditing: () => void;
-  onUpdateForm: (field: keyof ProfileHeaderProps["user"], value: string) => void;
+  onUpdateForm: (field: keyof User, value: string) => void;
 }
 
 export function ProfileHeader({
@@ -26,6 +27,9 @@ export function ProfileHeader({
   onSaveEditing,
   onUpdateForm,
 }: ExtendedProfileHeaderProps) {
+  // Fallback to prevent null access errors
+  const safeEditForm = editForm || user;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -50,20 +54,20 @@ export function ProfileHeader({
               {isEditing ? (
                 <>
                   <Input
-                    value={editForm.name}
+                    value={safeEditForm.name}
                     onChange={(e) => onUpdateForm("name", e.target.value)}
                     className="mb-1 text-primary"
                     placeholder="Name"
                   />
                   <Input
-                    value={editForm.username}
+                    value={safeEditForm.username}
                     onChange={(e) => onUpdateForm("username", e.target.value)}
                     className="text-lg mb-3 opacity-70 text-muted-foreground"
                     placeholder="Username"
-                    disabled // Keep username read-only if needed
+                    disabled
                   />
                   <Textarea
-                    value={editForm.bio}
+                    value={safeEditForm.bio}
                     onChange={(e) => onUpdateForm("bio", e.target.value)}
                     className="mb-4 max-w-2xl text-muted-foreground"
                     placeholder="Bio"
@@ -82,7 +86,7 @@ export function ProfileHeader({
                     <div className="flex items-center gap-2 opacity-70">
                       <MapPin className="w-4 h-4 text-primary" />
                       <Input
-                        value={editForm.location}
+                        value={safeEditForm.location}
                         onChange={(e) => onUpdateForm("location", e.target.value)}
                         className="text-muted-foreground"
                         placeholder="Location"
@@ -91,7 +95,7 @@ export function ProfileHeader({
                     <div className="flex items-center gap-2 opacity-70">
                       <LinkIcon className="w-4 h-4 text-primary" />
                       <Input
-                        value={editForm.website}
+                        value={safeEditForm.website}
                         onChange={(e) => onUpdateForm("website", e.target.value)}
                         className="text-primary"
                         placeholder="Website"

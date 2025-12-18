@@ -1,35 +1,118 @@
-import { useState } from "react";
-import type { TabType, User } from "../profile.types";
-import { mockUser } from "../profile.constants";
+import { useState, useEffect } from "react";
+import type { TabType, User, Outfit, LikedProduct } from "../profile.types";
+import { useAuth } from "@/providers/auth/auth.provider"; // Your auth store
+import { getUserProfile, getUserOutfitsPaginated, getLikedOutfitsPaginated, getLikedProductsPaginated, updateProfile } from "../profile.service";
+import type { IPaginationQuery } from "@/@types/database.type";
 
 export function useProfile() {
+  const { user: authUser } = useAuth(); // Get current user ID
   const [activeTab, setActiveTab] = useState<TabType>("outfits");
-  const [user, setUser] = useState<User>(mockUser); // Local state for user data
+  const [user, setUser] = useState<User | null>(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [editForm, setEditForm] = useState<User>(mockUser); // Temporary form data
+  const [editForm, setEditForm] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [outfits, setOutfits] = useState<Outfit[]>([]);
+  const [likedOutfits, setLikedOutfits] = useState<Outfit[]>([]);
+  const [likedProducts, setLikedProducts] = useState<LikedProduct[]>([]);
+
+  useEffect(() => {
+    if (authUser?.id) {
+      fetchProfile();
+      fetchOutfits();
+      fetchLikedOutfits();
+      fetchLikedProducts();
+    }
+  }, [authUser?.id]);
+
+  const fetchProfile = async () => {
+    try {
+      console.log("Fetching profile for user:", authUser?.id);
+      const profile = await getUserProfile(authUser!.id);
+      if (profile) {
+        setUser(profile); // Repo already returns User type, no mapping needed
+        setEditForm(profile);
+        console.log("Profile fetched and set:", profile);
+      } else {
+        console.error("No profile data returned");
+      }
+    } catch (error) {
+      console.error("Failed to fetch profile:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchOutfits = async (query: IPaginationQuery = { page: 1, limit: 10 }) => {
+    try {
+      const result = await getUserOutfitsPaginated(authUser!.id, query);
+      setOutfits(result.data); // Repo already returns Outfit[], no mapping needed
+    } catch (error) {
+      console.error("Failed to fetch outfits:", error);
+    }
+  };
+
+  const fetchLikedOutfits = async (query: IPaginationQuery = { page: 1, limit: 10 }) => {
+    try {
+      const result = await getLikedOutfitsPaginated(authUser!.id, query);
+      setLikedOutfits(result.data); // Repo already returns Outfit[], no mapping needed
+    } catch (error) {
+      console.error("Failed to fetch liked outfits:", error);
+    }
+  };
+
+  const fetchLikedProducts = async (query: IPaginationQuery = { page: 1, limit: 10 }) => {
+    try {
+      const result = await getLikedProductsPaginated(authUser!.id, query);
+      setLikedProducts(result.data); // Repo already returns LikedProduct[], no mapping needed
+    } catch (error) {
+      console.error("Failed to fetch liked products:", error);
+    }
+  };
 
   const startEditing = () => {
-    setEditForm(user); // Copy current user data to form
-    setIsEditing(true);
+    if (user) {
+      setEditForm(user);
+      setIsEditing(true);
+    }
   };
 
   const cancelEditing = () => {
     setIsEditing(false);
-    setEditForm(user); // Reset form
+    setEditForm(user);
   };
 
-  const saveEditing = () => {
-    // Basic validation (expand as needed)
-    if (!editForm.name.trim()) {
+  const saveEditing = async () => {
+    if (!editForm || !authUser?.id) {
+      console.error("Missing editForm or authUser.id");
+      return;
+    }
+    const trimmedName = editForm.name.trim();
+    if (!trimmedName) {
       alert("Name is required");
       return;
     }
-    setUser(editForm); // Update user data
-    setIsEditing(false);
+    try {
+      const updateData = {
+        name: trimmedName, // Changed from fullName to name to match service
+        bio: editForm.bio.trim() || undefined,
+        location: editForm.location.trim() || undefined,
+        website: editForm.website.trim() || undefined,
+      };
+      console.log("Sending update data:", updateData);
+      await updateProfile(authUser.id, updateData);
+      console.log("Profile updated successfully");
+      setUser(editForm);
+      setIsEditing(false);
+      await fetchProfile();
+      console.log("Profile refreshed after save");
+    } catch (error) {
+      console.error("Failed to save profile:", error);
+      alert("Failed to save profile. Please check the console for details.");
+    }
   };
 
   const updateEditForm = (field: keyof User, value: string) => {
-    setEditForm((prev) => ({ ...prev, [field]: value }));
+    setEditForm((prev) => prev ? { ...prev, [field]: value } : null);
   };
 
   return {
@@ -38,9 +121,16 @@ export function useProfile() {
     user,
     isEditing,
     editForm,
+    loading,
+    outfits,
+    likedOutfits,
+    likedProducts,
     startEditing,
     cancelEditing,
     saveEditing,
     updateEditForm,
+    fetchOutfits,
+    fetchLikedOutfits,
+    fetchLikedProducts,
   };
 }

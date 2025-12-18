@@ -1,6 +1,7 @@
 export type TabType = "outfits" | "liked-products" | "liked-outfits";
 
 export interface User {
+  id: string;
   name: string;
   username: string;
   bio: string;
@@ -8,11 +9,7 @@ export interface User {
   website: string;
   joinDate: string;
   avatar: string;
-  stats: {
-    outfits: number;
-    followers: number;
-    following: number;
-  };
+  stats: { outfits: number; followers: number; following: number };
 }
 
 export interface Outfit {
@@ -28,3 +25,17 @@ export interface LikedProduct {
   name: string;
   price: string;
 }
+
+export interface IPaginationQuery {
+  page: number;
+  limit: number;
+  order?: "asc" | "desc";
+  field?: "createdAt" | "name";
+}
+
+export interface IPaginationResult<T> {
+  data: T[];
+  meta: { total: number; page: number; limit: number; totalPages: number };
+}
+
+export type SortOrder = "asc" | "desc";
