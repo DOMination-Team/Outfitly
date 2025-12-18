@@ -48,7 +48,7 @@ export const useWeather = (): UseWeatherReturn => {
           const current = data.current_weather;
 
           const newWeather: WeatherData = {
-            location: `Lat: ${lat.toFixed(2)}, Lon: ${lon.toFixed(2)}`,
+            location: data.timezone.split("/")[1] || "Gaza", // "Gaza" from "Asia/Gaza"
             temperature: Math.round(current.temperature * 1.8 + 32), // Convert to °F
             temperatureCelsius: current.temperature,
             condition: "Cloudy", // Open-Meteo doesn’t provide condition strings, you can map from weathercode if needed
