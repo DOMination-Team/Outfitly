@@ -36,7 +36,7 @@ export function Navbar() {
             {/* Desktop Navigation */}
             <div className="hidden lg:flex gap-8">
               {NAV_LINKS.map((link) => (
-                <Link key={link.label} href={link.href}>
+                <Link key={link.label} href={link.href} prefetch={false}>
                   <motion.span
                     whileHover={{ y: -2 }}
                     className={`opacity-80 hover:opacity-100 transition-all duration-300 ${
