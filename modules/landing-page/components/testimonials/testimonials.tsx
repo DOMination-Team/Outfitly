@@ -8,11 +8,21 @@ import {
   TESTIMONIALS,
   TESTIMONIALS_GRADIENTS,
 } from "./testimonials.constants";
+import Image from "next/image";
 
 export function Testimonials() {
   const { theme } = useTheme();
-  const { sectionRef, headingRef, track1Ref, track2Ref, hoveredCard, handleCardHover, handleCardLeave, handleCardMouseMove, setCardRef } =
-    useTestimonials();
+  const {
+    sectionRef,
+    headingRef,
+    track1Ref,
+    track2Ref,
+    hoveredCard,
+    handleCardHover,
+    handleCardLeave,
+    handleCardMouseMove,
+    setCardRef,
+  } = useTestimonials();
   const isDark = theme === "dark";
   const gradients = isDark ? TESTIMONIALS_GRADIENTS.dark : TESTIMONIALS_GRADIENTS.light;
 
@@ -96,10 +106,13 @@ export function Testimonials() {
               isDark ? "ring-[#FAF1ED]/20" : "ring-[#671425]/20"
             }`}
           >
-            <img
+            <Image
               src={testimonial.avatar}
               alt={testimonial.name}
               className="w-full h-full object-cover"
+              width={100}
+              height={100}
+              objectFit="cover"
             />
           </div>
           <div>

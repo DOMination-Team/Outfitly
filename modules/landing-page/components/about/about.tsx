@@ -3,10 +3,18 @@
 import { useTheme } from "next-themes";
 import { usePinnedFeatures } from "./hooks/useAbout";
 import { FEATURES, PINNED_GRADIENTS } from "./about.constants";
+import Image from "next/image";
 
 export function About() {
   const { theme } = useTheme();
-  const { sectionRef, containerRef, progressRef, activeFeature, setFeaturePanelRef, setFeatureImageRef } = usePinnedFeatures();
+  const {
+    sectionRef,
+    containerRef,
+    progressRef,
+    activeFeature,
+    setFeaturePanelRef,
+    setFeatureImageRef,
+  } = usePinnedFeatures();
   const isDark = theme === "dark";
   const gradients = isDark ? PINNED_GRADIENTS.dark : PINNED_GRADIENTS.light;
 
@@ -109,10 +117,12 @@ export function About() {
                     // zIndex: FEATURES.length - index,
                   }}
                 >
-                  <img
+                  <Image
                     src={feature.image}
                     alt={feature.title}
                     className="w-full h-full object-cover"
+                    fill
+                    objectFit="cover"
                   />
                   {/* Overlay gradient */}
                   <div
@@ -145,10 +155,12 @@ export function About() {
                   ref={setFeatureImageRef(index + FEATURES.length)}
                   className="relative h-64 sm:h-80 rounded-2xl overflow-hidden mb-6"
                 >
-                  <img
+                  <Image
                     src={feature.image}
                     alt={feature.title}
                     className="w-full h-full object-cover"
+                    fill
+                    objectFit="cover"
                   />
                   <div
                     className="absolute inset-0"

@@ -10,6 +10,7 @@ import {
   GRADIENT_COLORS,
   PARALLAX_LAYERS,
 } from "./hero.constants";
+import Image from "next/image";
 
 export function Hero() {
   const { theme } = useTheme();
@@ -36,10 +37,11 @@ export function Hero() {
     >
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img
+        <Image
           src={HERO_BACKGROUND_IMAGE}
           alt="Fashion Background"
           className="w-full h-full object-cover"
+          fill
         />
       </div>
 
