@@ -1,5 +1,13 @@
-const UsersPage = () => {
-  return <div>UsersPage</div>;
+import type { Metadata } from "next";
+import UsersPage from "@/modules/dashboard/users/components/usersPage";
+
+export const metadata: Metadata = {
+  title: "Users Management",
+  description: "Manage user accounts on Outfitly.",
 };
 
-export default UsersPage;
+const Users = () => {
+  return <UsersPage />;
+};
+
+export default Users;
