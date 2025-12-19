@@ -9,7 +9,7 @@ export interface WeatherData {
   windSpeed: number;
   uvIndex: number;
   icon: string;
-  time:string
+  time: string;
 }
 
 export interface Outfit {

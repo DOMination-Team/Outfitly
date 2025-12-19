@@ -15,7 +15,7 @@ export class WeatherService {
 
           try {
             const response = await fetch(
-              `${this.API_URL}?latitude=${latitude}&longitude=${longitude}&current_weather=true&timezone=auto`
+              `${this.API_URL}?latitude=${latitude}&longitude=${longitude}&current_weather=true&timezone=auto`,
             );
 
             if (!response.ok) {
@@ -30,15 +30,14 @@ export class WeatherService {
               location: data.timezone.split("/")[1] || "Unknown", // "timezone": "Asia/Gaza",
               temperature: Math.round(current.temperature * 1.8 + 32), // Convert to °F
               temperatureCelsius: Math.round(current.temperature),
-              time:current.time,
+              time: current.time,
               feelsLike: Math.round(current.temperature * 1.8 + 32), // Approx
               windSpeed: Math.round(current.windspeed * 0.621371), // Convert km/h to mph
               // Fallback; could map from weathercode if expanded
-              humidity: 50, 
-              uvIndex: 5, 
+              humidity: 50,
+              uvIndex: 5,
               icon: "cloudy",
-              condition: "Cloudy", 
-              
+              condition: "Cloudy",
             };
 
             resolve(weatherData);
@@ -48,7 +47,7 @@ export class WeatherService {
         },
         (error) => {
           reject(new Error(`Geolocation error: ${error.message}`));
-        }
+        },
       );
     });
   }

@@ -1,7 +1,12 @@
 import { useState, useRef } from "react";
 import type { User } from "../../profile.types";
 import type { ExtendedProfileHeaderProps } from "./profileHeader.types";
-import { getCroppedImg, uploadAvatar, normalizeWebsite, isValidWebsiteFinal } from "./profileHeader.utils";
+import {
+  getCroppedImg,
+  uploadAvatar,
+  normalizeWebsite,
+  isValidWebsiteFinal,
+} from "./profileHeader.utils";
 import { updateProfile } from "../../profile.service";
 import type { Crop } from "react-image-crop";
 
