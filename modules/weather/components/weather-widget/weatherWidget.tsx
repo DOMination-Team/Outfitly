@@ -1,31 +1,74 @@
+"use client";
+
+import React from "react";
 import { motion } from "framer-motion";
-import { MapPin, Droplets, Wind, Eye } from "lucide-react";
+import { MapPin, Droplets, Wind, Eye, Thermometer, Clock } from "lucide-react";
 import { Card } from "../../../../components/ui/card";
 import { useTheme } from "next-themes";
-import { WeatherData } from "../../weather.types";
-import { getWeatherIcon } from "../../weather.utils";
-import { LucideIcon } from "lucide-react";
+import type { WeatherData } from "../../weather.types";
 
-interface WeatherDetail {
-  icon: React.ComponentType<{ className?: string }>;
+/**
+ * ✅ Return ICON ELEMENTS (JSX), not component types.
+ * This avoids: "Cannot create components during render".
+ */
+const getWeatherIconEl = (condition?: string) => {
+  const c = (condition || "").toLowerCase();
+
+  // Adjust these mappings to match your API strings
+  if (c.includes("thunder")) return <Wind className="w-32 h-32" />;
+  if (c.includes("rain") || c.includes("drizzle")) return <Droplets className="w-32 h-32" />;
+  if (c.includes("snow")) return <Eye className="w-32 h-32" />;
+  if (c.includes("cloud")) return <Wind className="w-32 h-32" />;
+  if (c.includes("clear") || c.includes("sun")) return <Eye className="w-32 h-32" />;
+
+  return <Eye className="w-32 h-32" />;
+};
+
+type WeatherDetailItem = {
+  key: "feelsLike" | "time" | "windSpeed" | "tempC";
   label: string;
-  value: string | number;
-}
+  value: string;
+  iconEl: React.ReactNode;
+};
 
-interface WeatherWidgetProps {
-  weather: WeatherData;
-}
+const buildWeatherDetails = (weather: WeatherData): WeatherDetailItem[] => [
+  {
+    key: "feelsLike",
+    label: "Feels Like",
+    value: `${weather.feelsLike}°F`,
+    iconEl: <Thermometer className="w-4 h-4" />,
+  },
+  {
+    key: "time",
+    label: "Time",
+    value: `${weather.time}`,
+    iconEl: <Clock className="w-4 h-4" />,
+  },
+  {
+    key: "windSpeed",
+    label: "Wind Speed",
+    value: `${weather.windSpeed} mph`,
+    iconEl: <Wind className="w-4 h-4" />,
+  },
+  {
+    key: "tempC",
+    label: "Temperature (C)",
+    value: `${weather.temperatureCelsius}°C`,
+    iconEl: <Eye className="w-4 h-4" />,
+  },
+];
 
-export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ weather }) => {
+export const WeatherWidget: React.FC<{ weather: WeatherData }> = ({ weather }) => {
   const { theme } = useTheme();
-  const WeatherIcon: LucideIcon = getWeatherIcon(weather.condition);
+  const isDark = theme === "dark";
 
-  const weatherDetails: WeatherDetail[] = [
-    { icon: Wind, label: "Feels Like", value: `${weather.feelsLike}°F` },
-    { icon: Droplets, label: "Time", value: `${weather.time}` },
-    { icon: Wind, label: "Wind Speed", value: `${weather.windSpeed} mph` },
-    { icon: Eye, label: "Temperature Celsius", value: `${weather.temperatureCelsius}` },
-  ];
+  const details = buildWeatherDetails(weather);
+
+  const cardBorder = isDark ? "var(--outfitly-primary)" : "var(--outfitly-bg-secondary)";
+  const titleColor = isDark ? "var(--outfitly-text-primary)" : "var(--outfitly-text-secondary)";
+  const secondaryColor = isDark ? "var(--outfitly-text-primary)" : "var(--outfitly-text-secondary)";
+  const accentColor = isDark ? "var(--outfitly-text-primary)" : "var(--outfitly-primary)";
+  const detailBg = isDark ? "var(--outfitly-bg-primary)" : "var(--outfitly-bg-secondary)";
 
   return (
     <motion.div
@@ -36,8 +79,7 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ weather }) => {
       <Card
         className="p-8 border-2 shadow-2xl transition-all duration-300 relative overflow-hidden"
         style={{
-          borderColor:
-            theme === "dark" ? "var(--outfitly-primary)" : "var(--outfitly-bg-secondary)",
+          borderColor: cardBorder,
           backgroundColor: "var(--card)",
         }}
       >
@@ -45,6 +87,7 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ weather }) => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             {/* Left */}
             <div>
+              {/* Location */}
               <div className="flex items-center gap-2 mb-6">
                 <div
                   className="w-10 h-10 rounded-lg flex items-center justify-center shadow-md"
@@ -55,15 +98,8 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ weather }) => {
                 >
                   <MapPin className="w-5 h-5" style={{ color: "var(--outfitly-text-light)" }} />
                 </div>
-                <span
-                  className="text-xl transition-colors duration-300 "
-                  style={{
-                    color:
-                      theme === "dark"
-                        ? "var(--outfitly-text-primary)"
-                        : "var(--outfitly-text-secondary)",
-                  }}
-                >
+
+                <span className="text-xl transition-colors duration-300" style={{ color: titleColor }}>
                   {weather.location}
                 </span>
               </div>
@@ -73,7 +109,7 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ weather }) => {
                 <div
                   className="text-7xl"
                   style={{
-                    fontWeight: "900",
+                    fontWeight: 900,
                     background:
                       "linear-gradient(to bottom right, var(--outfitly-gradient-start), var(--outfitly-gradient-mid), var(--outfitly-gradient-end))",
                     WebkitBackgroundClip: "text",
@@ -83,26 +119,15 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ weather }) => {
                 >
                   {weather.temperature}°
                 </div>
+
                 <div>
-                  <div
-                    className="text-2xl mb-1 transition-colors duration-300"
-                    style={{
-                      color:
-                        theme === "dark"
-                          ? "var(--outfitly-text-primary)"
-                          : "var(--outfitly-primary)",
-                    }}
-                  >
+                  <div className="text-2xl mb-1 transition-colors duration-300" style={{ color: accentColor }}>
                     {weather.condition}
                   </div>
+
                   <div
                     className="text-sm opacity-70 transition-colors duration-300"
-                    style={{
-                      color:
-                        theme === "dark"
-                          ? "var(--outfitly-text-primary)"
-                          : "var(--outfitly-text-secondary)",
-                    }}
+                    style={{ color: secondaryColor }}
                   >
                     {weather.temperatureCelsius}°C
                   </div>
@@ -111,55 +136,32 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ weather }) => {
 
               {/* Details Grid */}
               <div className="grid grid-cols-2 gap-4 mt-6">
-                {weatherDetails.map((detail, index) => {
-                  const IconComponent = detail.icon;
-                  return (
-                    <div
-                      key={index}
-                      className="p-4 rounded-xl transition-all duration-300"
-                      style={{
-                        backgroundColor:
-                          theme === "dark"
-                            ? "var(--outfitly-bg-primary)"
-                            : "var(--outfitly-bg-secondary)",
-                      }}
-                    >
-                      <div className="flex items-center gap-2 mb-2">
-                        <div
-                          className="w-8 h-8 rounded-lg flex items-center justify-center"
-                          style={{ backgroundColor: "rgba(103, 20, 37, 0.1)" }}
-                        >
-                          <IconComponent
-                            className="w-4 h-4"
-                            style={{ color: "var(--outfitly-primary)" }}
-                          />
-                        </div>
-                        <span
-                          className="text-sm opacity-70 transition-colors duration-300"
-                          style={{
-                            color:
-                              theme === "dark"
-                                ? "var(--outfitly-text-primary)"
-                                : "var(--outfitly-text-secondary)",
-                          }}
-                        >
-                          {detail.label}
+                {details.map((d) => (
+                  <div
+                    key={d.key}
+                    className="p-4 rounded-xl transition-all duration-300"
+                    style={{ backgroundColor: detailBg }}
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <div
+                        className="w-8 h-8 rounded-lg flex items-center justify-center"
+                        style={{ backgroundColor: "rgba(103, 20, 37, 0.1)" }}
+                      >
+                        <span className="w-4 h-4" style={{ color: "var(--outfitly-primary)" }}>
+                          {d.iconEl}
                         </span>
                       </div>
-                      <div
-                        className="transition-colors duration-300 pl-10"
-                        style={{
-                          color:
-                            theme === "dark"
-                              ? "var(--outfitly-text-primary)"
-                              : "var(--outfitly-primary)",
-                        }}
-                      >
-                        {detail.value}
-                      </div>
+
+                      <span className="text-sm opacity-70 transition-colors duration-300" style={{ color: secondaryColor }}>
+                        {d.label}
+                      </span>
                     </div>
-                  );
-                })}
+
+                    <div className="transition-colors duration-300 pl-10" style={{ color: accentColor }}>
+                      {d.value}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -175,10 +177,10 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ weather }) => {
                   boxShadow: "0 20px 60px rgba(103, 20, 37, 0.3)",
                 }}
               >
-                <WeatherIcon
-                  className="w-32 h-32"
-                  style={{ color: "var(--outfitly-text-light)" }}
-                />
+                {/* ✅ icon element, not component */}
+                <div style={{ color: "var(--outfitly-text-light)" }}>
+                  {getWeatherIconEl(weather.condition)}
+                </div>
               </motion.div>
             </div>
           </div>
@@ -187,3 +189,5 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ weather }) => {
     </motion.div>
   );
 };
+
+export default WeatherWidget;

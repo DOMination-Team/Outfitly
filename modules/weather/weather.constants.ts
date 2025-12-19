@@ -1,5 +1,5 @@
 import { WeatherData, Outfit, WardrobeItem } from "./weather.types";
-import { Sunrise, Sun, Cloud, Sunset, Moon } from "lucide-react";
+import { Sunrise, Sun, Sunset, Moon } from "lucide-react";
 
 export const mockWeather: WeatherData = {
   location: "Gaza, Palestine",
@@ -24,7 +24,7 @@ export const timeBasedOutfits: Outfit[] = [
     description: "Light layers for the cool morning",
     temperature: "68°F",
     icon: Sunrise,
-    season: "autumn",  // Mild, cloudy weather
+    season: "autumn", // Mild, cloudy weather
   },
   {
     id: 2,
@@ -35,7 +35,7 @@ export const timeBasedOutfits: Outfit[] = [
     description: "Comfortable for warmer temps",
     temperature: "75°F",
     icon: Sun,
-    season: "summer",  // Hot, sunny
+    season: "summer", // Hot, sunny
   },
   {
     id: 3,
@@ -46,7 +46,7 @@ export const timeBasedOutfits: Outfit[] = [
     description: "Perfect for cooling evenings",
     temperature: "65°F",
     icon: Sunset,
-    season: "spring",  // Rainy, mild
+    season: "spring", // Rainy, mild
   },
   {
     id: 4,
@@ -57,7 +57,7 @@ export const timeBasedOutfits: Outfit[] = [
     description: "Cozy and stylish for late nights",
     temperature: "55°F",
     icon: Moon,
-    season: "winter",  // Cold
+    season: "winter", // Cold
   },
 ];
 

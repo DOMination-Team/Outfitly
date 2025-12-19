@@ -20,12 +20,12 @@ const getSeasonFromWeather = (weather: WeatherData): string => {
 
   // Validate temperature
   if (typeof temp !== "number" || isNaN(temp)) {
-    return "autumn";  // Default fallback
+    return "autumn"; // Default fallback
   }
 
   // Temperature-based mapping
   if (temp > 75) {
-    return "summer";  // Hot
+    return "summer"; // Hot
   } else if (temp >= 60) {
     // Mild range: Use condition to distinguish autumn vs. summer edge
     return condition === "sunny" ? "summer" : "autumn";
