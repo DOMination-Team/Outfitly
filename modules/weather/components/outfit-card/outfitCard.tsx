@@ -21,7 +21,7 @@ export const OutfitCard: React.FC<OutfitCardProps> = ({ outfit, index }) => {
       transition={{ duration: 0.5, delay: 0.1 * index }}
     >
       <Card
-        className="group cursor-pointer overflow-hidden border-2 transition-all duration-300 hover:shadow-2xl h-full"
+        className="gap-0 py-0 group cursor-pointer overflow-hidden border-2 transition-all duration-300 hover:shadow-2xl h-full"
         style={{
           borderColor:
             theme === "dark" ? "var(--outfitly-bg-tertiary)" : "var(--outfitly-bg-secondary)",

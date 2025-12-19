@@ -12,6 +12,7 @@ import type { ProfileHeaderProps } from "./profileHeader.types";
 import { getAvatarAlt } from "./profileHeader.utils";
 import type { User } from "../../profile.types";
 import { updateProfile } from "../../profile.service"; // make sure path is correct
+import { useTheme } from "next-themes";
 
 interface ExtendedProfileHeaderProps extends ProfileHeaderProps {
   isEditing: boolean;
@@ -31,12 +32,12 @@ export function ProfileHeader({
   onSaveEditing,
   onUpdateForm,
 }: ExtendedProfileHeaderProps) {
+  const { theme } = useTheme();
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [crop, setCrop] = useState<Crop>({ unit: "%", width: 80, height: 80, x: 10, y: 10 });
   const [completedCrop, setCompletedCrop] = useState<Crop | null>(null);
   const [isCropping, setIsCropping] = useState(false);
-
   const imgRef = useRef<HTMLImageElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -178,8 +179,14 @@ export function ProfileHeader({
   return (
     <>
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-        <Card className="p-8 mb-8 relative">
-          <div className="flex flex-col md:flex-row gap-6">
+        <Card className="p-8 border-2 shadow-xl transition-all duration-300 mb-8 relative overflow-hidden"
+         style={{
+          borderColor:
+            theme === "dark" ? "var(--outfitly-bg-tertiary)" : "var(--outfitly-bg-secondary)",
+             backgroundColor: "var(--card)",
+        }}
+        >
+          <div className="flex flex-col items-center md:flex-row gap-6">
             {/* AVATAR */}
             <div className="relative w-32 h-32 md:w-40 md:h-40 flex-shrink-0">
               <div className="w-full h-full rounded-full overflow-hidden border border-gray-300">
@@ -187,7 +194,14 @@ export function ProfileHeader({
               </div>
 
               {isEditing && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-full">
+                <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-full"
+                  style={{
+                          backgroundColor:
+                            theme === "dark"
+                              ? "var(--outfitly-bg-primary)"
+                              : "var(--outfitly-bg-secondary)",
+                        }}
+                >
                   <input
                     ref={fileInputRef}
                     type="file"
@@ -208,12 +222,21 @@ export function ProfileHeader({
             </div>
 
             {/* INFO */}
-            <div className="flex-1">
+            <div className="flex-1 items-center"
+            
+            >
               {isEditing ? (
                 <>
                   <Input
                     value={safeEditForm.name}
                     onChange={(e) => onUpdateForm("name", e.target.value)}
+                  />
+                  <Input
+                    value={safeEditForm.username}
+                    onChange={(e) => onUpdateForm("username", e.target.value)}
+                    className="text-sm mb-3 opacity-70 text-muted-foreground"
+                    placeholder="Username"
+                    disabled 
                   />
                   <Textarea
                     value={safeEditForm.bio}
@@ -222,8 +245,8 @@ export function ProfileHeader({
                 </>
               ) : (
                 <>
-                  <h2>{user.name}</h2>
-                  <p>{user.bio}</p>
+                  <h2 className="mb-1 text-primary">{user.name}</h2>
+                  <p className="mb-4 max-w-2xl text-muted-foreground">{user.bio}</p>
                 </>
               )}
 
@@ -236,7 +259,7 @@ export function ProfileHeader({
                       onChange={(e) => onUpdateForm("location", e.target.value)}
                     />
                   ) : (
-                    user.location
+                   <span className="text-muted-foreground">{user.location}</span>
                   )}
                 </div>
 
@@ -248,9 +271,9 @@ export function ProfileHeader({
                       onChange={(e) => onUpdateForm("website", e.target.value)}
                     />
                   ) : (
-                    <a href={websiteUrl} target="_blank">
-                      {user.website}
-                    </a>
+                  <a href={`https://${user.website}`} className="hover:underline transition-colors duration-300 text-primary">
+                    {user.website}
+                  </a>
                   )}
                 </div>
 
@@ -261,16 +284,18 @@ export function ProfileHeader({
               </div>
 
               {isEditing ? (
-                <div className="flex gap-2 mt-4">
+                <div className="flex gap-2 mt-4 justify-center">
                   <Button onClick={onSaveEditing}>Save</Button>
                   <Button variant="outline" onClick={onCancelEditing}>
                     Cancel
                   </Button>
                 </div>
               ) : (
+                  <div className="flex gap-2 mt-4">
                 <Button className="mt-4" onClick={onStartEditing}>
                   Edit Profile
                 </Button>
+                </div>
               )}
             </div>
           </div>
