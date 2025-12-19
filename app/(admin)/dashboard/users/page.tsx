@@ -1,5 +1,7 @@
-const UsersPage = () => {
-  return <div>UsersPage</div>;
+import UsersPage from "@/modules/dashboard/users/components/usersPage";
+
+const Users = () => {
+  return <UsersPage />;
 };
 
-export default UsersPage;
+export default Users;
