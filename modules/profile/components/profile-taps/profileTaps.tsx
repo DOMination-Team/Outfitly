@@ -78,11 +78,7 @@ export function ProfileTabs({ activeTab, onTabChange, counts }: ProfileTabsWithC
             >
               <Icon className="w-5 h-5" />
               <span className="hidden sm:inline">{tab.label}</span>
-              <Badge
-                className={`ml-1 `}
-              >
-                {count}
-              </Badge>
+              <Badge className={`ml-1 `}>{count}</Badge>
             </motion.button>
           );
         })}

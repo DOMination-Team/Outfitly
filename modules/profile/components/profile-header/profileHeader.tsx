@@ -41,7 +41,13 @@ export function ProfileHeader(props: ExtendedProfileHeaderProps) {
 
   const renderAvatar = () => {
     if (imagePreview || safeEditForm.avatarUrl) {
-      return <img src={imagePreview || safeEditForm.avatarUrl} alt={getAvatarAlt(user.name)} className="w-full h-full object-cover" />;
+      return (
+        <img
+          src={imagePreview || safeEditForm.avatarUrl}
+          alt={getAvatarAlt(user.name)}
+          className="w-full h-full object-cover"
+        />
+      );
     }
 
     const initials = user.name
@@ -70,17 +76,36 @@ export function ProfileHeader(props: ExtendedProfileHeaderProps) {
   return (
     <>
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-        <Card className="p-8 border-2 shadow-xl mb-8 relative overflow-hidden" style={{ borderColor: theme === "dark" ? "var(--outfitly-bg-tertiary)" : "var(--outfitly-bg-secondary)", backgroundColor: "var(--card)" }}>
+        <Card
+          className="p-8 border-2 shadow-xl mb-8 relative overflow-hidden"
+          style={{
+            borderColor:
+              theme === "dark" ? "var(--outfitly-bg-tertiary)" : "var(--outfitly-bg-secondary)",
+            backgroundColor: "var(--card)",
+          }}
+        >
           <div className="flex flex-col items-center md:flex-row gap-8">
             {/* AVATAR */}
             <div className="relative w-32 h-32 md:w-40 md:h-40 flex-shrink-0">
-              <div className="w-full h-full rounded-full overflow-hidden border-4 shadow-lg transition-all duration-300 hover:shadow-2xl" style={{ borderColor: theme === "dark" ? "var(--outfitly-primary)" : "var(--outfitly-bg-secondary)" }}>
+              <div
+                className="w-full h-full rounded-full overflow-hidden border-4 shadow-lg transition-all duration-300 hover:shadow-2xl"
+                style={{
+                  borderColor:
+                    theme === "dark" ? "var(--outfitly-primary)" : "var(--outfitly-bg-secondary)",
+                }}
+              >
                 {renderAvatar()}
               </div>
 
               {isEditing && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-full transition-opacity duration-300">
-                  <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handleFileChange}
+                  />
                   <div className="flex gap-2">
                     <Button size="sm" onClick={() => fileInputRef.current?.click()}>
                       <Upload className="w-4 h-4" />
@@ -97,25 +122,65 @@ export function ProfileHeader(props: ExtendedProfileHeaderProps) {
             <div className="flex-1 text-center md:text-left">
               {isEditing ? (
                 <div className="space-y-4">
-                  <Input placeholder="Enter your name" value={safeEditForm.name} onChange={(e) => onUpdateForm("name", e.target.value)} className="text-lg font-semibold" />
-                  <Textarea placeholder="Tell us about yourself..." value={safeEditForm.bio} onChange={(e) => onUpdateForm("bio", e.target.value)} className="resize-none" rows={3} />
+                  <Input
+                    placeholder="Enter your name"
+                    value={safeEditForm.name}
+                    onChange={(e) => onUpdateForm("name", e.target.value)}
+                    className="text-lg font-semibold"
+                  />
+                  <Textarea
+                    placeholder="Tell us about yourself..."
+                    value={safeEditForm.bio}
+                    onChange={(e) => onUpdateForm("bio", e.target.value)}
+                    className="resize-none"
+                    rows={3}
+                  />
                 </div>
               ) : (
                 <>
-                  <h2 className="mb-2 text-3xl font-extrabold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent animate-gradient">{user.name}</h2>
-                  <p className="mb-6 max-w-2xl text-muted-foreground text-lg leading-relaxed">{user.bio}</p>
+                  <h2 className="mb-2 text-3xl font-extrabold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent animate-gradient">
+                    {user.name}
+                  </h2>
+                  <p className="mb-6 max-w-2xl text-muted-foreground text-lg leading-relaxed">
+                    {user.bio}
+                  </p>
                 </>
               )}
 
               <div className="flex flex-wrap gap-6 text-sm mt-6 justify-center md:justify-start">
                 <div className="flex gap-2 items-center hover:text-primary transition-colors duration-300">
                   <MapPin size={16} className="text-muted-foreground" />
-                  {isEditing ? <Input placeholder="Your location" value={safeEditForm.location} onChange={(e) => onUpdateForm("location", e.target.value)} className="w-32" /> : <span className="text-muted-foreground font-medium">{user.location}</span>}
+                  {isEditing ? (
+                    <Input
+                      placeholder="Your location"
+                      value={safeEditForm.location}
+                      onChange={(e) => onUpdateForm("location", e.target.value)}
+                      className="w-32"
+                    />
+                  ) : (
+                    <span className="text-muted-foreground font-medium">{user.location}</span>
+                  )}
                 </div>
 
                 <div className="flex gap-2 items-center hover:text-primary transition-colors duration-300">
                   <LinkIcon size={16} className="text-muted-foreground" />
-                  {isEditing ? <Input placeholder="Your website" value={safeEditForm.website} onChange={(e) => onUpdateForm("website", e.target.value)} onBlur={handleWebsiteBlur} /> : <a href={websiteUrl} className="hover:underline transition-colors duration-300 text-primary font-medium" target="_blank" rel="noopener noreferrer">{user.website}</a>}
+                  {isEditing ? (
+                    <Input
+                      placeholder="Your website"
+                      value={safeEditForm.website}
+                      onChange={(e) => onUpdateForm("website", e.target.value)}
+                      onBlur={handleWebsiteBlur}
+                    />
+                  ) : (
+                    <a
+                      href={websiteUrl}
+                      className="hover:underline transition-colors duration-300 text-primary font-medium"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {user.website}
+                    </a>
+                  )}
                   {websiteError && <p className="text-xs text-red-500 mt-1">{websiteError}</p>}
                 </div>
 
@@ -127,11 +192,17 @@ export function ProfileHeader(props: ExtendedProfileHeaderProps) {
 
               {isEditing ? (
                 <div className="flex gap-4 mt-6 justify-center md:justify-start">
-                  <Button onClick={onSaveEditing} className="px-6">Save Changes</Button>
-                  <Button variant="outline" onClick={onCancelEditing} className="px-6">Cancel</Button>
+                  <Button onClick={onSaveEditing} className="px-6">
+                    Save Changes
+                  </Button>
+                  <Button variant="outline" onClick={onCancelEditing} className="px-6">
+                    Cancel
+                  </Button>
                 </div>
               ) : (
-                <Button className="mt-6 px-8" onClick={onStartEditing}>Edit Profile</Button>
+                <Button className="mt-6 px-8" onClick={onStartEditing}>
+                  Edit Profile
+                </Button>
               )}
             </div>
           </div>
@@ -158,7 +229,9 @@ export function ProfileHeader(props: ExtendedProfileHeaderProps) {
 
           <div className="flex gap-4 mt-6 justify-center">
             <Button onClick={applyCrop}>Apply Crop</Button>
-            <Button variant="outline" onClick={() => setIsCropping(false)}>Cancel</Button>
+            <Button variant="outline" onClick={() => setIsCropping(false)}>
+              Cancel
+            </Button>
           </div>
         </DialogContent>
       </Dialog>

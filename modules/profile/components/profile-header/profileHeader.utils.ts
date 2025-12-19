@@ -22,7 +22,6 @@ export const isValidWebsiteFinal = (value: string): boolean => {
   }
 };
 
-
 export const getCroppedImg = async (image: HTMLImageElement, crop: Crop): Promise<File> => {
   const canvas = document.createElement("canvas");
   const scaleX = image.naturalWidth / image.width;
@@ -39,7 +38,7 @@ export const getCroppedImg = async (image: HTMLImageElement, crop: Crop): Promis
     0,
     0,
     crop.width!,
-    crop.height!
+    crop.height!,
   );
 
   return new Promise((resolve) => {
@@ -48,7 +47,7 @@ export const getCroppedImg = async (image: HTMLImageElement, crop: Crop): Promis
         resolve(new File([blob!], "avatar.jpg", { type: "image/jpeg" }));
       },
       "image/jpeg",
-      0.9
+      0.9,
     );
   });
 };
