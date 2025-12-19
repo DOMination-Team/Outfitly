@@ -27,15 +27,18 @@ export class WeatherService {
 
             // Transform API data to WeatherData
             const weatherData: WeatherData = {
-              location: data.timezone.split("/")[1] || "Unknown",
+              location: data.timezone.split("/")[1] || "Unknown", // "timezone": "Asia/Gaza",
               temperature: Math.round(current.temperature * 1.8 + 32), // Convert to °F
               temperatureCelsius: Math.round(current.temperature),
-              condition: "Cloudy", // Fallback; could map from weathercode if expanded
+              time:current.time,
               feelsLike: Math.round(current.temperature * 1.8 + 32), // Approx
-              humidity: 50, // Fallback
               windSpeed: Math.round(current.windspeed * 0.621371), // Convert km/h to mph
-              uvIndex: 5, // Fallback
-              icon: "cloudy", // Fallback
+              // Fallback; could map from weathercode if expanded
+              humidity: 50, 
+              uvIndex: 5, 
+              icon: "cloudy",
+              condition: "Cloudy", 
+              
             };
 
             resolve(weatherData);

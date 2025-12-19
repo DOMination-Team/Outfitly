@@ -11,6 +11,7 @@ export const mockWeather: WeatherData = {
   windSpeed: 10,
   uvIndex: 7,
   icon: "sunny",
+  time:"27-12-2025"
 };
 
 export const timeBasedOutfits: Outfit[] = [

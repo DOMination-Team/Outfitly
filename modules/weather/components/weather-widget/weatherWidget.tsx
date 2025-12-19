@@ -22,9 +22,9 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ weather }) => {
 
   const weatherDetails: WeatherDetail[] = [
     { icon: Wind, label: "Feels Like", value: `${weather.feelsLike}°F` },
-    { icon: Droplets, label: "Humidity", value: `${weather.humidity}%` },
+    { icon: Droplets, label: "Time", value: `${weather.time}` },
     { icon: Wind, label: "Wind Speed", value: `${weather.windSpeed} mph` },
-    { icon: Eye, label: "UV Index", value: `${weather.uvIndex}` },
+    { icon: Eye, label: "Temperature Celsius", value: `${weather.temperatureCelsius}` },
   ];
 
   return (
@@ -56,7 +56,7 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ weather }) => {
                   <MapPin className="w-5 h-5" style={{ color: "var(--outfitly-text-light)" }} />
                 </div>
                 <span
-                  className="text-xl transition-colors duration-300"
+                  className="text-xl transition-colors duration-300 "
                   style={{
                     color:
                       theme === "dark"
@@ -147,7 +147,7 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ weather }) => {
                         </span>
                       </div>
                       <div
-                        className="transition-colors duration-300"
+                        className="transition-colors duration-300 pl-10"
                         style={{
                           color:
                             theme === "dark"
