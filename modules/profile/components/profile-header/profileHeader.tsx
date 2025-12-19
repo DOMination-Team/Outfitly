@@ -13,6 +13,8 @@ import { getAvatarAlt } from "./profileHeader.utils";
 import type { User } from "../../profile.types";
 import { updateProfile } from "../../profile.service"; // make sure path is correct
 import { useTheme } from "next-themes";
+import React from "react";
+import { isValidWebsiteFinal, normalizeWebsite } from "./profileHeader.utils";
 
 interface ExtendedProfileHeaderProps extends ProfileHeaderProps {
   isEditing: boolean;
@@ -38,6 +40,8 @@ export function ProfileHeader({
   const [crop, setCrop] = useState<Crop>({ unit: "%", width: 80, height: 80, x: 10, y: 10 });
   const [completedCrop, setCompletedCrop] = useState<Crop | null>(null);
   const [isCropping, setIsCropping] = useState(false);
+  const [websiteError, setWebsiteError] = useState<string | null>(null);
+
   const imgRef = useRef<HTMLImageElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -179,22 +183,28 @@ export function ProfileHeader({
   return (
     <>
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-        <Card className="p-8 border-2 shadow-xl transition-all duration-300 mb-8 relative overflow-hidden"
-         style={{
-          borderColor:
-            theme === "dark" ? "var(--outfitly-bg-tertiary)" : "var(--outfitly-bg-secondary)",
-             backgroundColor: "var(--card)",
-        }}
+        <Card
+          className="p-8 border-2 shadow-xl transition-all duration-300 mb-8 relative overflow-hidden"
+          style={{
+            borderColor:
+              theme === "dark" ? "var(--outfitly-bg-tertiary)" : "var(--outfitly-bg-secondary)",
+            backgroundColor: "var(--card)",
+          }}
         >
-          <div className="flex flex-col items-center md:flex-row gap-6">
+          <div className="flex flex-col items-center md:flex-row gap-8"> {/* Increased gap for better spacing */}
             {/* AVATAR */}
             <div className="relative w-32 h-32 md:w-40 md:h-40 flex-shrink-0">
-              <div className="w-full h-full rounded-full overflow-hidden border border-gray-300">
+              <div
+                className="w-full h-full rounded-full overflow-hidden border-4 shadow-lg transition-all duration-300 hover:shadow-2xl"
+                style={{
+                  borderColor: theme === "dark" ? "var(--outfitly-primary)" : "var(--outfitly-bg-secondary)",
+                }}
+              >
                 {renderAvatar()}
               </div>
 
               {isEditing && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-full">
+                <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-full transition-opacity duration-300">
                   <input
                     ref={fileInputRef}
                     type="file"
@@ -203,10 +213,19 @@ export function ProfileHeader({
                     onChange={handleFileChange}
                   />
                   <div className="flex gap-2">
-                    <Button size="sm" onClick={() => fileInputRef.current?.click()}>
+                    <Button
+                      size="sm"
+                      className="hover:scale-105 transition-transform duration-200"
+                      onClick={() => fileInputRef.current?.click()}
+                    >
                       <Upload className="w-4 h-4" />
                     </Button>
-                    <Button size="sm" onClick={deleteAvatar}>
+                    <Button
+                      size="sm"
+                      variant="destructive"
+                      className="hover:scale-105 transition-transform duration-200"
+                      onClick={deleteAvatar}
+                    >
                       <Trash2 className="w-4 h-4" />
                     </Button>
                   </div>
@@ -215,69 +234,123 @@ export function ProfileHeader({
             </div>
 
             {/* INFO */}
-            <div className="flex-1 items-center"
-            
-            >
+            <div className="flex-1 text-center md:text-left"> {/* Centered on mobile, left-aligned on desktop */}
               {isEditing ? (
-                <>
+                <div className="space-y-4">
                   <Input
+                    placeholder="Enter your name"
                     value={safeEditForm.name}
                     onChange={(e) => onUpdateForm("name", e.target.value)}
+                    className="text-lg font-semibold"
                   />
                   <Textarea
+                    placeholder="Tell us about yourself..."
                     value={safeEditForm.bio}
                     onChange={(e) => onUpdateForm("bio", e.target.value)}
+                    className="resize-none"
+                    rows={3}
                   />
-                </>
+                </div>
               ) : (
                 <>
-                  <h2 className="mb-1 text-primary">{user.name}</h2>
-                  <p className="mb-4 max-w-2xl text-muted-foreground">{user.bio}</p>
+                  <h2
+                    className="mb-2 text-3xl font-extrabold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent animate-gradient"
+                    style={{
+                      background: `linear-gradient(to right, var(--outfitly-gradient-start), var(--outfitly-gradient-mid), var(--outfitly-gradient-end))`,
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                    }}
+                  >
+                    {user.name}
+                  </h2>
+                  <p className="mb-6 max-w-2xl text-muted-foreground text-lg leading-relaxed">{user.bio}</p>
                 </>
               )}
 
-              <div className="flex gap-4 text-sm mt-4">
-                <div className="flex gap-1 items-center">
-                  <MapPin size={14} />
+              <div className="flex flex-wrap gap-6 text-sm mt-6 justify-center md:justify-start"> {/* Flex-wrap for mobile */}
+                <div className="flex gap-2 items-center hover:text-primary transition-colors duration-300">
+                  <MapPin size={16} className="text-muted-foreground" />
                   {isEditing ? (
                     <Input
+                      placeholder="Your location"
                       value={safeEditForm.location}
                       onChange={(e) => onUpdateForm("location", e.target.value)}
+                      className="w-32"
                     />
                   ) : (
-                   <span className="text-muted-foreground">{user.location}</span>
+                    <span className="text-muted-foreground font-medium">{user.location}</span>
                   )}
                 </div>
 
-                <div className="flex gap-1 items-center">
-                  <LinkIcon size={14} />
+                <div className="flex gap-2 items-center hover:text-primary transition-colors duration-300">
+                  <LinkIcon size={16} className="text-muted-foreground" />
                   {isEditing ? (
                     <Input
+                      placeholder="Your website"
                       value={safeEditForm.website}
-                      onChange={(e) => onUpdateForm("website", e.target.value)}
+                      onChange={(e) => {
+                        // JUST STORE WHAT USER TYPES
+                        onUpdateForm("website", e.target.value);
+                        setWebsiteError(null);
+                      }}
+                      onBlur={(e) => {
+                        const value = e.target.value;
+
+                        if (!isValidWebsiteFinal(value)) {
+                          setWebsiteError("Please enter a valid website (example.com)");
+                          return;
+                        }
+
+                        // normalize ONLY after user is done
+                        onUpdateForm("website", normalizeWebsite(value));
+                      }}
                     />
+
+
                   ) : (
-                  <a href={`https://${user.website}`} className="hover:underline transition-colors duration-300 text-primary">
-                    {user.website}
-                  </a>
+                    <a
+                      href={websiteUrl}
+                      className="hover:underline transition-colors duration-300 text-primary font-medium"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {user.website}
+                    </a>
+                    
+                  )}
+                  {websiteError && (
+                    <p className="text-xs text-red-500 mt-1">{websiteError}</p>
                   )}
                 </div>
 
-                <div className="flex gap-1 items-center">
-                  <Calendar size={14} />
-                  {user.joinDate}
+                <div className="flex gap-2 items-center">
+                  <Calendar size={16} className="text-muted-foreground" />
+                  <span className="text-muted-foreground font-medium">{user.joinDate}</span>
                 </div>
               </div>
 
               {isEditing ? (
-                <div className="flex gap-2 mt-4 justify-center">
-                  <Button onClick={onSaveEditing}>Save</Button>
-                  <Button variant="outline" onClick={onCancelEditing}>
+                <div className="flex gap-4 mt-6 justify-center md:justify-start">
+                  <Button
+                    onClick={onSaveEditing}
+                    className="hover:scale-105 transition-transform duration-200 px-6"
+                  >
+                    Save Changes
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={onCancelEditing}
+                    className="hover:scale-105 transition-transform duration-200 px-6"
+                  >
                     Cancel
                   </Button>
                 </div>
               ) : (
-                <Button className="mt-4" onClick={onStartEditing}>
+                <Button
+                  className="mt-6 hover:scale-105 transition-transform duration-200 px-8"
+                  onClick={onStartEditing}
+                >
                   Edit Profile
                 </Button>
               )}
@@ -288,9 +361,9 @@ export function ProfileHeader({
 
       {/* CROP MODAL */}
       <Dialog open={isCropping} onOpenChange={setIsCropping}>
-        <DialogContent>
+        <DialogContent className="max-w-md">
           <DialogHeader>
-            <DialogTitle>Crop Avatar</DialogTitle>
+            <DialogTitle className="text-center">Crop Your Avatar</DialogTitle>
           </DialogHeader>
 
           {imagePreview && (
@@ -300,13 +373,22 @@ export function ProfileHeader({
               onComplete={(c) => setCompletedCrop(c)}
               aspect={1}
             >
-              <img ref={imgRef} src={imagePreview} />
+              <img ref={imgRef} src={imagePreview} className="max-w-full h-auto" />
             </ReactCrop>
           )}
 
-          <div className="flex gap-2 mt-4">
-            <Button onClick={applyCrop}>Apply</Button>
-            <Button variant="outline" onClick={() => setIsCropping(false)}>
+          <div className="flex gap-4 mt-6 justify-center">
+            <Button
+              onClick={applyCrop}
+              className="hover:scale-105 transition-transform duration-200"
+            >
+              Apply Crop
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => setIsCropping(false)}
+              className="hover:scale-105 transition-transform duration-200"
+            >
               Cancel
             </Button>
           </div>
