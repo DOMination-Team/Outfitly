@@ -48,7 +48,7 @@ export function About() {
         </div>
 
         {/* Main Content Grid */}
-        <div className="max-w-7xl mx-auto px-6 py-16 lg:py-0">
+        <div className="hidden lg:block max-w-7xl mx-auto px-6 py-16 lg:py-0">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-screen">
             {/* Left: Feature Content */}
             <div className="relative lg:h-[60vh] flex items-center">
