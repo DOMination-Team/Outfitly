@@ -23,7 +23,7 @@ import {
   getItemsForGeneratorAction,
   getOccasionsForAIAction,
 } from "../generator.actions";
-import { ALL_OCCASIONS_DUMMY, ITEMS_FOR_AI_DUMMY } from "@/app/(main)/AI-generator/page";
+import { ALL_OCCASIONS_DUMMY, ITEMS_FOR_AI_DUMMY } from "@/app/(main)/ai-generator/page";
 import { useAuth } from "@/providers/auth/auth.provider";
 import { toast } from "sonner";
 import { useTheme } from "next-themes";
