@@ -1,5 +1,4 @@
 import { ApiResponseError, ApiResponseSuccess } from "@/@types/response.type";
-import { ApiError } from "@google/genai";
 import CustomError from "../utils/CustomError";
 import z, { ZodError } from "zod";
 import { HttpStatusError } from "@/@types/status-code.type";
