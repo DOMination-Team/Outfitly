@@ -26,7 +26,7 @@ import {
 import { useAuth } from "@/providers/auth/auth.provider";
 import { toast } from "sonner";
 import { useTheme } from "next-themes";
-import { ALL_OCCASIONS_DUMMY, ITEMS_FOR_AI_DUMMY } from "@/app/(main)/ai-generator/page";
+import { ALL_OCCASIONS_DUMMY, ITEMS_FOR_AI_DUMMY } from "../constants";
 
 export function useAIGenerator() {
   const { user } = useAuth();
@@ -144,7 +144,7 @@ export function useAIGenerator() {
     },
     [],
   );
-
+ 
   return {
     formData,
     filteredFromDB,
