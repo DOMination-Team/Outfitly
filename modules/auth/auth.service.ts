@@ -36,7 +36,7 @@ export async function signIn(
     sub: user.id,
     email: user.email,
     fullName: user.fullName,
-    role: user.role
+    role: user.role,
   };
 
   const token = await generateToken(tokenPayload);

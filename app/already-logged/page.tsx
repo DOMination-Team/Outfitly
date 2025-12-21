@@ -19,7 +19,6 @@ export function AlreadyLoggedPage() {
         relative overflow-hidden
       "
     >
-
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="
@@ -50,7 +49,6 @@ export function AlreadyLoggedPage() {
         />
       </div>
 
-
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -58,7 +56,6 @@ export function AlreadyLoggedPage() {
           transition={{ duration: 0.6 }}
           className="w-full max-w-md"
         >
-
           <div className="text-center mb-8">
             <Logo size="xl" animated linkTo="/" />
           </div>
@@ -73,7 +70,6 @@ export function AlreadyLoggedPage() {
               dark:bg-[var(--outfitly-bg-secondary)]
             "
           >
-
             <div
               className="
                 absolute top-0 left-0 right-0 h-1

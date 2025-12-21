@@ -1,3 +1,3 @@
 export const getPathWithoutSlash = (path: string) => {
-    return path.replaceAll("/", "");
-}
+  return path.replaceAll("/", "");
+};

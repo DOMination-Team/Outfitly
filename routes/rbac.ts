@@ -1,5 +1,5 @@
 import { UserRole } from "@/app/generated/prisma/enums";
-import { TProtectedRoutes} from "./types";
+import { TProtectedRoutes } from "./types";
 
 export const ROUTE_ROLES_MAP = new Map<TProtectedRoutes, readonly UserRole[]>([
   ["/ai-generator", ["USER", "ADMIN"]],
@@ -10,5 +10,3 @@ export const ROUTE_ROLES_MAP = new Map<TProtectedRoutes, readonly UserRole[]>([
 
   ["/dashboard", ["ADMIN"]],
 ] as const);
-
-
