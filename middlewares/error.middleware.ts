@@ -117,14 +117,14 @@ export function errorMiddleware<Args extends unknown[], Return>(
       // 🔥 CustomError
       // ---------------------------
 
-        if (err instanceof Error && err.message.includes('GROQ_API_KEY')) {
-          console.log("hhhhhhh")
-          return {
-            success: false,
-            statusCode: 500,
-            message: "AI service configuration error. Please contact support.",
-          };
-        }
+      if (err instanceof Error && err.message.includes("GROQ_API_KEY")) {
+        console.log("hhhhhhh");
+        return {
+          success: false,
+          statusCode: 500,
+          message: "AI service configuration error. Please contact support.",
+        };
+      }
       if (err instanceof Groq.APIConnectionError) {
         return {
           success: false,
