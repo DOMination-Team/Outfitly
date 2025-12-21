@@ -1,4 +1,6 @@
 export type TabType = "outfits" | "liked-products" | "liked-outfits";
+import { LucideIcon } from "lucide-react";
+
 
 export interface User {
   id: string;
@@ -12,11 +14,17 @@ export interface User {
   stats: { outfits: number; followers: number; following: number };
 }
 
+
 export interface Outfit {
   id: number;
+  time?: string;
+  timeRang?: string;
+  name: string;
   image: string;
-  likes: number;
-  title: string;
+  description?: string;
+  temperature?: string;
+  icon?: LucideIcon;
+  season?: string;  // New: e.g., "summer", "winter", "autumn", "spring"
 }
 
 export interface LikedProduct {

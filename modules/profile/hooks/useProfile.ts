@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import type { TabType, User, Outfit, LikedProduct } from "../profile.types";
+import type { TabType, User, Outfit, LikedProduct, WardrobeItem } from "../profile.types";
 import { useAuth } from "@/providers/auth/auth.provider"; // Your auth store
 import {
   getUserProfile,
@@ -7,6 +7,7 @@ import {
   getLikedOutfitsPaginated,
   getLikedProductsPaginated,
   updateProfile,
+  getUserWardrobeItemsPaginated
 } from "../profile.service";
 import type { IPaginationQuery } from "@/@types/database.type";
 
@@ -18,6 +19,7 @@ export function useProfile() {
   const [editForm, setEditForm] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [outfits, setOutfits] = useState<Outfit[]>([]);
+  const [items, setItems] = useState<WardrobeItem[]>([]);
   const [likedOutfits, setLikedOutfits] = useState<Outfit[]>([]);
   const [likedProducts, setLikedProducts] = useState<LikedProduct[]>([]);
 
@@ -54,6 +56,15 @@ export function useProfile() {
       setOutfits(result.data); // Repo already returns Outfit[], no mapping needed
     } catch (error) {
       console.error("Failed to fetch outfits:", error);
+    }
+  };
+
+  const fetchWardrobeItems = async (query: IPaginationQuery = { page: 1, limit: 10 }) => {
+    try {
+      const result = await getUserWardrobeItemsPaginated(authUser!.id, query);
+      setItems(result.data); 
+    } catch (error) {
+      console.error("Failed to fetch wardrobe items:", error);
     }
   };
 
@@ -119,6 +130,7 @@ export function useProfile() {
     editForm,
     loading,
     outfits,
+    items,
     likedOutfits,
     likedProducts,
     startEditing,
@@ -128,5 +140,6 @@ export function useProfile() {
     fetchOutfits,
     fetchLikedOutfits,
     fetchLikedProducts,
+    fetchWardrobeItems,
   };
 }

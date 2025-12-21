@@ -37,6 +37,7 @@ export function ProfilePage() {
     editForm,
     loading,
     outfits,
+    items,
     likedProducts,
     likedOutfits,
     startEditing,

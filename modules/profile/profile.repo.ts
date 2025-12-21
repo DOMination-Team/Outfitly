@@ -57,6 +57,9 @@ export const findUserOutfits = async (
     image: outfit.imageUrl || "",
     likes: outfit.likedBy.length,
     title: outfit.name,
+    description:outfit.description || "",
+    season:outfit.season || "", 
+    name:outfit.name
   }));
 
   return { data: mappedData, meta };
@@ -85,6 +88,9 @@ export const findLikedOutfits = async (
     image: outfit.imageUrl || "",
     likes: outfit.likedBy.length,
     title: outfit.name,
+    description:outfit.description || "",
+    season:outfit.season || "", 
+    name:outfit.name
   }));
 
   return { data: mappedData, meta };
