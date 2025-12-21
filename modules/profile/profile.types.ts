@@ -19,12 +19,14 @@ export interface Outfit {
   id: number;
   time?: string;
   timeRang?: string;
-  name: string;
+  name?: string;
   image: string;
   description?: string;
   temperature?: string;
   icon?: LucideIcon;
   season?: string;  // New: e.g., "summer", "winter", "autumn", "spring"
+  likes?:number;
+  title?:string
 }
 
 export interface LikedProduct {
@@ -38,9 +40,9 @@ export interface WardrobeItem {
   id: string;
   name: string;
   image: string;
-  category: string; // Added for completeness
+  category?: string; // Added for completeness
   season: string;
-  style: string;
+  style?: string;
   createdAt?: string;
 }
 

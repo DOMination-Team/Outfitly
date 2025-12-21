@@ -13,22 +13,27 @@ export interface WeatherData {
   time: string;
 }
 
+
 export interface Outfit {
   id: number;
-  time: string;
-  timeRange: string;
-  name: string;
+  time?: string;
+  timeRang?: string;
+  name?: string;
   image: string;
-  description: string;
-  temperature: string;
-  icon: LucideIcon;
-  season: string; // New: e.g., "summer", "winter", "autumn", "spring"
+  description?: string;
+  temperature?: string;
+  icon?: LucideIcon;
+  season?: string;  // New: e.g., "summer", "winter", "autumn", "spring"
+  likes?:number;
+  title?:string
 }
 
 export interface WardrobeItem {
-  id: number;
+  id: string;
   name: string;
   image: string;
-  category: string;
-  season: string; // New: e.g., "summer", "winter", "autumn", "spring"
+  category?: string; // Added for completeness
+  season: string;
+  style?: string;
+  createdAt?: string;
 }
