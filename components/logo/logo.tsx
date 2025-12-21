@@ -1,17 +1,25 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { SIZE_CONFIG } from "./constants";
+import { useTheme } from "next-themes";
 interface IProps {
   size?: "sm" | "md" | "lg" | "xl";
   animated?: boolean;
   linkTo?: string;
   className?: string;
+  color?: string; // optional: override color
 }
 
-export function Logo({ size = "md", animated = true, linkTo = "/", className = "" }: IProps) {
+export function Logo({
+  size = "md",
+  animated = true,
+  linkTo = "/",
+  className = "",
+  color = "currentColor", // defaults to current text color
+}: IProps) {
+  const { theme } = useTheme();
   const logo = (
     <motion.div
       className={className}
@@ -22,15 +30,16 @@ export function Logo({ size = "md", animated = true, linkTo = "/", className = "
       <Image
         src="/logo.png"
         alt="Outfitly Logo"
-        width={SIZE_CONFIG[size] * 1.2} // keeps high resolution
+        width={SIZE_CONFIG[size] * 1.2}
         height={SIZE_CONFIG[size]}
-        className="object-contain w-auto"
-        priority
+        className="object-contain w-auto filter transition duration-300"
+        style={{
+          filter: theme === "dark" ? "brightness(0) invert(1)" : "none",
+        }}
       />
     </motion.div>
   );
 
-  // With Link
   if (linkTo) {
     return (
       <Link href={linkTo}>
@@ -45,6 +54,5 @@ export function Logo({ size = "md", animated = true, linkTo = "/", className = "
     );
   }
 
-  // Without Link
   return logo;
 }
