@@ -13,7 +13,6 @@ export interface WeatherData {
   time: string;
 }
 
-
 export interface Outfit {
   id: number;
   time?: string;
@@ -23,9 +22,9 @@ export interface Outfit {
   description?: string;
   temperature?: string;
   icon?: LucideIcon;
-  season?: string;  // New: e.g., "summer", "winter", "autumn", "spring"
-  likes?:number;
-  title?:string
+  season?: string; // New: e.g., "summer", "winter", "autumn", "spring"
+  likes?: number;
+  title?: string;
 }
 
 export interface WardrobeItem {

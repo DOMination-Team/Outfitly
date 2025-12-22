@@ -18,7 +18,7 @@ export const getSeasonFromWeather = (weather: WeatherData): string => {
 
   // Validate temperature
   if (typeof temp !== "number" || isNaN(temp)) {
-    return "fall";  // <-- Changed from "autumn" to "fall" to match data types (e.g., Prisma enum "FALL")
+    return "fall"; // <-- Changed from "autumn" to "fall" to match data types (e.g., Prisma enum "FALL")
   }
 
   // Temperature-based mapping
@@ -26,10 +26,10 @@ export const getSeasonFromWeather = (weather: WeatherData): string => {
     return "summer"; // Hot
   } else if (temp >= 60) {
     // Mild range: Use condition to distinguish fall vs. summer edge
-    return condition === "sunny" ? "summer" : "fall";  // <-- Changed "autumn" to "fall"
+    return condition === "sunny" ? "summer" : "fall"; // <-- Changed "autumn" to "fall"
   } else if (temp >= 45) {
     // Cooler range: Use condition for spring vs. fall edge
-    return condition === "rainy" || condition === "drizzle" ? "spring" : "fall";  // <-- Changed "autumn" to "fall"
+    return condition === "rainy" || condition === "drizzle" ? "spring" : "fall"; // <-- Changed "autumn" to "fall"
   } else {
     // Cold: Winter, but check for snowy
     return condition === "snowy" ? "winter" : "spring";
@@ -73,7 +73,6 @@ export const useWeather = (): UseWeatherReturn => {
   }, []);
 
   // Filter outfits and items based on weather season
-
 
   return { weather, handleScroll };
 };

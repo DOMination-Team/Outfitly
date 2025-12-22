@@ -3,7 +3,13 @@ import { Outfit, User } from "@/app/generated/prisma/client";
 import { SortOrder } from "@/app/generated/prisma/internal/prismaNamespace";
 import { createPaginationForPrisma, createPaginationMetaData } from "@/lib/database.util";
 import prisma from "@/lib/prisma";
-import type { User as UIUser, Outfit as UIOutfit, LikedProduct, WardrobeItem as UIWardrobeItem, WardrobeItem } from "./profile.types";
+import type {
+  User as UIUser,
+  Outfit as UIOutfit,
+  LikedProduct,
+  WardrobeItem as UIWardrobeItem,
+  WardrobeItem,
+} from "./profile.types";
 
 // Find user profile
 export const findUserProfile = async (userId: string): Promise<UIUser | null> => {
@@ -56,9 +62,9 @@ export const findUserOutfits = async (
     image: outfit.imageUrl || "",
     likes: outfit.likedBy.length,
     title: outfit.name,
-    description:outfit.description || "",
-    season:outfit.season || "", 
-    name:outfit.name
+    description: outfit.description || "",
+    season: outfit.season || "",
+    name: outfit.name,
   }));
 
   return { data: mappedData, meta };
@@ -87,9 +93,9 @@ export const findLikedOutfits = async (
     image: outfit.imageUrl || "",
     likes: outfit.likedBy.length,
     title: outfit.name,
-    description:outfit.description || "",
-    season:outfit.season || "", 
-    name:outfit.name
+    description: outfit.description || "",
+    season: outfit.season || "",
+    name: outfit.name,
   }));
 
   return { data: mappedData, meta };
@@ -156,7 +162,10 @@ export const findUserWardrobeItems = async (
   const pagination = createPaginationForPrisma({ page, limit });
 
   // Construct orderBy: Use type assertion to allow dynamic keys (Prisma's typing is strict)
-  const orderBy = (field && order ? { [field]: order } : { addedAt: "desc" }) as Record<string, SortOrder>;
+  const orderBy = (field && order ? { [field]: order } : { addedAt: "desc" }) as Record<
+    string,
+    SortOrder
+  >;
 
   const allItems = await prisma.wardrobeItem.findMany({
     where: { userId },

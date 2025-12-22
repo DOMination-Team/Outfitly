@@ -73,7 +73,7 @@ export const suitableItems: WardrobeItem[] = [
     season: "summer",
   },
   {
-    id: "3", 
+    id: "3",
     name: "Denim Jeans",
     image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&q=80",
     category: "Bottoms",

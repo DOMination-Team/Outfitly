@@ -7,10 +7,10 @@ import {
   getLikedOutfitsPaginated,
   getLikedProductsPaginated,
   updateProfile,
-  getUserWardrobeItemsPaginated
+  getUserWardrobeItemsPaginated,
 } from "../profile.service";
 import type { IPaginationQuery } from "@/@types/database.type";
-import {timeBasedOutfits, suitableItems} from "../../weather/weather.constants"
+import { timeBasedOutfits, suitableItems } from "../../weather/weather.constants";
 export function useProfile() {
   const { user: authUser } = useAuth(); // Get current user ID
   const [activeTab, setActiveTab] = useState<TabType>("outfits");
@@ -27,7 +27,7 @@ export function useProfile() {
     if (authUser?.id) {
       fetchProfile();
       fetchOutfits();
-      fetchWardrobeItems(); 
+      fetchWardrobeItems();
       fetchLikedOutfits();
       fetchLikedProducts();
     }
@@ -63,7 +63,7 @@ export function useProfile() {
   const fetchWardrobeItems = async (query: IPaginationQuery = { page: 1, limit: 10 }) => {
     try {
       const result = await getUserWardrobeItemsPaginated(authUser!.id, query);
-      setItems(result.data); 
+      setItems(result.data);
     } catch (error) {
       console.error("Failed to fetch wardrobe items:", error);
     }
