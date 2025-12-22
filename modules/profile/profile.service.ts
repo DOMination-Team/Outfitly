@@ -27,10 +27,7 @@ export const getUserOutfitsPaginated = async (userId: string, query: IPagination
 
 // Get liked outfits paginated
 export const getLikedOutfitsPaginated = async (userId: string, query: IPaginationQuery) => {
-  const {
-    page,
-    limit,
-  } = zodValidation(profileListQuerySchema, query);
+  const { page, limit } = zodValidation(profileListQuerySchema, query);
   return findLikedOutfits(userId, { page, limit });
 };
 
@@ -54,9 +51,6 @@ export const updateProfile = async (
 };
 
 export const getUserWardrobeItemsPaginated = async (userId: string, query: IPaginationQuery) => {
-  const {
-    page,
-    limit,
-  } = zodValidation(profileListQuerySchema, query);
+  const { page, limit } = zodValidation(profileListQuerySchema, query);
   return findUserWardrobeItems(userId, { page, limit });
 };
