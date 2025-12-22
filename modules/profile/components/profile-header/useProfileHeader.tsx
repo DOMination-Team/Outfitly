@@ -1,5 +1,4 @@
 import { useState, useRef } from "react";
-import type { User } from "../../profile.types";
 import type { ExtendedProfileHeaderProps } from "./profileHeader.types";
 import {
   getCroppedImg,

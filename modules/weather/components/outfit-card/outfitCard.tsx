@@ -12,7 +12,6 @@ interface OutfitCardProps {
 
 export const OutfitCard: React.FC<OutfitCardProps> = ({ outfit, index }) => {
   const { theme } = useTheme();
-  const TimeIcon = outfit.icon; // Dynamically assign the icon component
 
   return (
     <motion.div

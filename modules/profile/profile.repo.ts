@@ -1,5 +1,5 @@
 import { IPaginationQuery, IPaginationResult } from "@/@types/database.type";
-import { Outfit, User } from "@/app/generated/prisma/client";
+import { Outfit } from "@/app/generated/prisma/client";
 import { SortOrder } from "@/app/generated/prisma/internal/prismaNamespace";
 import { createPaginationForPrisma, createPaginationMetaData } from "@/lib/database.util";
 import prisma from "@/lib/prisma";
@@ -8,7 +8,6 @@ import type {
   Outfit as UIOutfit,
   LikedProduct,
   WardrobeItem as UIWardrobeItem,
-  WardrobeItem,
 } from "./profile.types";
 
 // Find user profile

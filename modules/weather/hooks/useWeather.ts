@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { WeatherData, Outfit, WardrobeItem } from "../weather.types";
-import { mockWeather, timeBasedOutfits, suitableItems } from "../weather.constants";
+import { WeatherData } from "../weather.types";
+import { mockWeather} from "../weather.constants";
 import { WeatherService } from "../weather.service";
 import { validateWeatherData } from "../weather.validation";
 

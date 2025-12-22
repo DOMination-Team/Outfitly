@@ -11,10 +11,7 @@ import { WeatherWidget } from "./components/weather-widget/weatherWidget";
 import { OutfitCard } from "./components/outfit-card/outfitCard";
 import { WardrobeItemCard } from "./components/wardrobe-item-card/wardrobeItemCard";
 import { useProfile } from "../profile/hooks/useProfile";
-import { LikedProduct } from "../profile/profile.types";
-import type { Outfit, WardrobeItem } from "../profile/profile.types";
-import { timeBasedOutfits, suitableItems } from "./weather.constants";
-import { useState, useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { getSeasonFromWeather } from "./hooks/useWeather";
 
 export default function WeatherPage() {
