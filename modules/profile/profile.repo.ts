@@ -106,7 +106,6 @@ export const findUserWardrobeItems = async (
 export const findLikedOutfits = async (
   userId: string,
   query: IPaginationQuery,
-
 ): Promise<IPaginationResult<UIOutfit>> => {
   const pagination = createPaginationForPrisma(query);
   const allOutfits = await prisma.outfit.findMany({
@@ -182,5 +181,3 @@ export const updateUserProfile = async (
     },
   });
 };
-
-

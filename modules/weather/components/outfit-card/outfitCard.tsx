@@ -44,14 +44,19 @@ export const OutfitCard: React.FC<OutfitCardProps> = ({ outfit, index }) => {
                     "linear-gradient(135deg, var(--outfitly-gradient-start) 0%, var(--outfitly-gradient-mid) 100%)",
                 }}
               >
-                {outfit.icon ? <outfit.icon  className="w-5 h-5"
-                  style={{
-                    color:
-                      theme === "dark"
-                        ? "var(--outfitly-text-primary)"
-                        : "var(--outfitly-text-light)",
-                  }} /> : <Sun />}  
-                
+                {outfit.icon ? (
+                  <outfit.icon
+                    className="w-5 h-5"
+                    style={{
+                      color:
+                        theme === "dark"
+                          ? "var(--outfitly-text-primary)"
+                          : "var(--outfitly-text-light)",
+                    }}
+                  />
+                ) : (
+                  <Sun />
+                )}
               </div>
               <div>
                 <div

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { WeatherData } from "../weather.types";
-import { mockWeather} from "../weather.constants";
+import { mockWeather } from "../weather.constants";
 import { WeatherService } from "../weather.service";
 import { validateWeatherData } from "../weather.validation";
 
