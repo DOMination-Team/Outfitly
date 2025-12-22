@@ -17,7 +17,6 @@ export function Logo({
   animated = true,
   linkTo = "/",
   className = "",
-  color = "currentColor", // defaults to current text color
 }: IProps) {
   const { theme } = useTheme();
   const logo = (

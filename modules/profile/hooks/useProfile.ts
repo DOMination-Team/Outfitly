@@ -30,7 +30,7 @@ export function useProfile() {
       fetchLikedOutfits();
       fetchLikedProducts();
     }
-  }, [authUser?.id]);
+  }, []);
 
   const fetchProfile = async () => {
     try {

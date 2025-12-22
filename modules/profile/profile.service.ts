@@ -1,5 +1,4 @@
 "use server";
-
 import { IPaginationQuery } from "@/@types/database.type";
 import {
   findUserProfile,
@@ -31,8 +30,6 @@ export const getLikedOutfitsPaginated = async (userId: string, query: IPaginatio
   const {
     page,
     limit,
-    order = "desc",
-    field = "createdAt",
   } = zodValidation(profileListQuerySchema, query);
   return findLikedOutfits(userId, { page, limit });
 };
@@ -51,7 +48,7 @@ export const updateProfile = async (
   const validData = zodValidation(profileUpdateSchema, data);
   try {
     return await updateUserProfile(userId, validData);
-  } catch (error) {
+  } catch {
     throw new CustomError({ message: "Failed to update profile", statusCode: 500 });
   }
 };
@@ -60,8 +57,6 @@ export const getUserWardrobeItemsPaginated = async (userId: string, query: IPagi
   const {
     page,
     limit,
-    order = "desc",
-    field = "createdAt",
   } = zodValidation(profileListQuerySchema, query);
   return findUserWardrobeItems(userId, { page, limit });
 };

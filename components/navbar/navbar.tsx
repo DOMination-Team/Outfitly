@@ -10,8 +10,6 @@ import { useNavbar } from "./useNavbar";
 import CustomButton from "../custom-button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { MiniLoader } from "./miniLoader";
-import { logOutAction } from "@/modules/auth/auth.actions";
-import { toast } from "sonner";
 
 export function Navbar() {
   const {

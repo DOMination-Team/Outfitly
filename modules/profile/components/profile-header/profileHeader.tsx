@@ -23,7 +23,6 @@ export function ProfileHeader(props: ExtendedProfileHeaderProps) {
     imagePreview,
     crop,
     setCrop,
-    completedCrop,
     setCompletedCrop,
     isCropping,
     setIsCropping,
@@ -223,7 +222,7 @@ export function ProfileHeader(props: ExtendedProfileHeaderProps) {
               onComplete={(c: Crop) => setCompletedCrop(c)}
               aspect={1}
             >
-              <img ref={imgRef} src={imagePreview} className="max-w-full h-auto" />
+              <img ref={imgRef} src={imagePreview} className="max-w-full h-auto" alt="image" />
             </ReactCrop>
           )}
 

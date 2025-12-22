@@ -6,7 +6,6 @@ import type { IItemsForAI } from "../types/generator.types";
 import { useAIGenerator } from "../hook/useAIGenerator";
 import { PageHeader } from "@/components/page-header";
 import AIGeneratorConfigCard from "./configCards";
-import { ResultsReadyIndicator } from "./resultsIndicator";
 import { AIGeneratorLoading } from "./resultsLoader";
 
 export interface IGeneratedOutfit {
@@ -45,7 +44,6 @@ export default function AIGenerator() {
     handleGenerate,
     onSelectOutfit,
     setViewingOutfit,
-    scrollToResults,
   } = useAIGenerator();
 
   return (
