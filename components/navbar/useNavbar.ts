@@ -8,17 +8,16 @@ import { useTheme } from "next-themes";
 
 export function useNavbar() {
   const pathname = usePathname();
-  const { user, authStatus } = useAuth(); 
-  console.log(user)
-  const {theme, setTheme} = useTheme();
+  const { user, authStatus } = useAuth();
+  console.log(user);
+  const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  
+
   const toggleMenu = useCallback(() => setIsOpen((prev) => !prev), []);
   const closeMenu = useCallback(() => setIsOpen(false), []);
   const isActive = useCallback((href: string) => pathname === href, [pathname]);
 
-  
   const isLoggedIn = Boolean(user);
   const role = user?.role ?? "USER";
   const isAdmin = role === "ADMIN";
@@ -34,7 +33,7 @@ export function useNavbar() {
       .map((w) => w[0]?.toUpperCase())
       .join("");
   }, [user]);
-  
+
   const finalLinks = useMemo(() => {
     const base = [...NAV_LINKS];
     if (isAdmin && !base.some((l) => l.href === "/dashboard")) {
@@ -43,7 +42,7 @@ export function useNavbar() {
     return base;
   }, [isAdmin]);
 
-    const onToggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+  const onToggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
   return {
     isOpen,
     NAV_LINKS,

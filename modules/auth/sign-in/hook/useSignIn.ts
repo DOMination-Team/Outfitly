@@ -9,7 +9,7 @@ import { useRouter } from "nextjs-toploader/app";
 import { useAuth } from "@/providers/auth/auth.provider";
 const useSignIn = () => {
   const navigate = useRouter();
-  const {applySignedIn} = useAuth();
+  const { applySignedIn } = useAuth();
   const handleSignIn = async (
     values: TFormValues,
     resetForm: () => void,

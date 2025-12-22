@@ -110,7 +110,11 @@ export function Navbar() {
               ) : !isLoggedIn ? (
                 <>
                   <Link href="/sign-in">
-                    <Button variant="ghost" className="hover:bg-transparent" style={{ color: iconColor }}>
+                    <Button
+                      variant="ghost"
+                      className="hover:bg-transparent"
+                      style={{ color: iconColor }}
+                    >
                       Sign In
                     </Button>
                   </Link>
@@ -135,12 +139,12 @@ export function Navbar() {
                     onClick={() => setIsUserMenuOpen((v) => !v)}
                     className="flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
                     style={{
-                      backgroundColor: "color-mix(in srgb, var(--outfitly-primary) 6%, transparent)",
+                      backgroundColor:
+                        "color-mix(in srgb, var(--outfitly-primary) 6%, transparent)",
                       border: `1px solid ${NAVBAR_COLORS.borderMedium}`,
                     }}
                   >
                     <Avatar className="w-8 h-8">
-                      
                       <AvatarFallback
                         style={{
                           backgroundColor: NAVBAR_COLORS.primary,
@@ -155,7 +159,10 @@ export function Navbar() {
                       {user?.fullName || user?.email}
                     </span>
 
-                    <ChevronDown className="w-4 h-4 opacity-80" style={{ color: NAVBAR_COLORS.link }} />
+                    <ChevronDown
+                      className="w-4 h-4 opacity-80"
+                      style={{ color: NAVBAR_COLORS.link }}
+                    />
                   </button>
 
                   <AnimatePresence>
@@ -175,12 +182,18 @@ export function Navbar() {
                           <p className="text-sm font-medium" style={{ color: NAVBAR_COLORS.link }}>
                             {user?.fullName || "User"}
                           </p>
-                          <p className="text-xs opacity-70 truncate" style={{ color: NAVBAR_COLORS.link }}>
+                          <p
+                            className="text-xs opacity-70 truncate"
+                            style={{ color: NAVBAR_COLORS.link }}
+                          >
                             {user?.email}
                           </p>
                         </div>
 
-                        <div className="h-px" style={{ backgroundColor: NAVBAR_COLORS.borderMedium }} />
+                        <div
+                          className="h-px"
+                          style={{ backgroundColor: NAVBAR_COLORS.borderMedium }}
+                        />
 
                         <div className="p-2">
                           <Link
@@ -267,7 +280,8 @@ export function Navbar() {
                     className="p-3 rounded-2xl"
                     style={{
                       border: `1px solid ${NAVBAR_COLORS.borderMedium}`,
-                      backgroundColor: "color-mix(in srgb, var(--outfitly-primary) 5%, transparent)",
+                      backgroundColor:
+                        "color-mix(in srgb, var(--outfitly-primary) 5%, transparent)",
                     }}
                   >
                     <MiniLoader color={NAVBAR_COLORS.link} />
@@ -275,7 +289,11 @@ export function Navbar() {
                 ) : !isLoggedIn ? (
                   <>
                     <Link href="/sign-in" onClick={closeMenu}>
-                      <Button variant="ghost" className="w-full" style={{ color: NAVBAR_COLORS.primary }}>
+                      <Button
+                        variant="ghost"
+                        className="w-full"
+                        style={{ color: NAVBAR_COLORS.primary }}
+                      >
                         Sign In
                       </Button>
                     </Link>
@@ -297,7 +315,8 @@ export function Navbar() {
                     className="p-3 rounded-2xl space-y-3"
                     style={{
                       border: `1px solid ${NAVBAR_COLORS.borderMedium}`,
-                      backgroundColor: "color-mix(in srgb, var(--outfitly-primary) 5%, transparent)",
+                      backgroundColor:
+                        "color-mix(in srgb, var(--outfitly-primary) 5%, transparent)",
                     }}
                   >
                     <div className="flex items-center gap-3">
@@ -314,10 +333,16 @@ export function Navbar() {
                       </Avatar>
 
                       <div className="min-w-0 flex-1">
-                        <p className="truncate text-sm font-medium" style={{ color: NAVBAR_COLORS.link }}>
+                        <p
+                          className="truncate text-sm font-medium"
+                          style={{ color: NAVBAR_COLORS.link }}
+                        >
                           {user?.fullName || "User"}
                         </p>
-                        <p className="truncate text-xs opacity-70" style={{ color: NAVBAR_COLORS.link }}>
+                        <p
+                          className="truncate text-xs opacity-70"
+                          style={{ color: NAVBAR_COLORS.link }}
+                        >
                           {user?.email}
                         </p>
                       </div>
@@ -325,14 +350,22 @@ export function Navbar() {
 
                     <div className="space-y-2">
                       <Link href="/profile" onClick={closeMenu}>
-                        <Button variant="ghost" className="w-full justify-start" style={{ color: NAVBAR_COLORS.link }}>
+                        <Button
+                          variant="ghost"
+                          className="w-full justify-start"
+                          style={{ color: NAVBAR_COLORS.link }}
+                        >
                           Profile
                         </Button>
                       </Link>
 
                       {isAdmin && (
                         <Link href="/dashboard" onClick={closeMenu}>
-                          <Button variant="ghost" className="w-full justify-start" style={{ color: NAVBAR_COLORS.link }}>
+                          <Button
+                            variant="ghost"
+                            className="w-full justify-start"
+                            style={{ color: NAVBAR_COLORS.link }}
+                          >
                             Dashboard
                           </Button>
                         </Link>
