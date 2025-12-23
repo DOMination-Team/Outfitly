@@ -98,3 +98,7 @@ export const getAllOccasions = () => {
     },
   });
 };
+
+export const getCount = () => {
+    return prisma.outfit.count();
+}

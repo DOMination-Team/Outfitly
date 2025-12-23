@@ -5,7 +5,7 @@ import {
   PrismaClientKnownRequestError,
   SortOrder,
 } from "@/app/generated/prisma/internal/prismaNamespace";
-import { createOutfit, findAll, likeOutfit, unlikeOutfit } from "./outfit.repo";
+import { createOutfit, findAll, getCount, likeOutfit, unlikeOutfit } from "./outfit.repo";
 import { zodValidation } from "@/utils/zod.utils";
 import { outfitListQuerySchema } from "./validation/outfit.validation";
 import CustomError from "@/utils/CustomError";
@@ -39,3 +39,7 @@ export const removeLike = async (userId: string, outfitId: string) => {
 export const createOutfitService = async (data: CreateOutfitDTO) => {
   return await createOutfit(data);
 };
+
+export const getOutfitsCount = async () => {
+  return await getCount();
+} 

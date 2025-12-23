@@ -23,6 +23,18 @@ class UserRepo {
       },
     });
   }
+
+  async getCount() {
+    return await prisma.user.count();
+  }
+
+  async getActivesCount() {
+    return prisma.user.count({
+      where: {
+        isActive: true,
+      }
+    })
+  } 
 }
 const userRepo = new UserRepo();
 export default userRepo;
