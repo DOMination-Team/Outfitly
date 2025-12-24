@@ -5,7 +5,8 @@ import userService from "../user/user.service";
 import { formatCount, formatEngagementRate } from "./utils/number.utils";
 import { getOutfitsCount } from "../outfit/outfit.service";
 import { toChartData } from "./utils/charts.utils";
-import { getCatsByIdsService, getCatsCountService } from "../wardrobe/wardrobe.service";
+import { findItemsInLastWeekService, getCatsByIdsService, getCatsCountService } from "../wardrobe/wardrobe.service";
+import { dayNames } from "./home/constants";
 
 export const getUsersForStats = async () => {
   const numberOfUsers = await userService.getUsersCount();
@@ -77,3 +78,31 @@ export const getCatsChartData = async () => {
   }));
   return chartData;
 };
+
+export const getWardrobChartData = async() => {
+  const items = await findItemsInLastWeekService();
+
+  const from = new Date();
+    from.setHours(0, 0, 0, 0);
+    from.setDate(from.getDate() - 6);
+  const counts = new Map<string, number>();
+
+  for (const it of items) {
+    const day = dayNames[new Date(it.addedAt).getDay()];
+    counts.set(day, (counts.get(day) ?? 0) + 1);
+  }
+
+  
+  const days: string[] = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(from);
+    d.setDate(from.getDate() + i);
+    days.push(dayNames[d.getDay()]);
+  }
+
+  const chartData = days.map((day) => ({
+    day,
+    items: counts.get(day) ?? 0,
+  }));
+  return chartData;
+}
