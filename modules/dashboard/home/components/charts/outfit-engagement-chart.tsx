@@ -25,11 +25,11 @@ const chartData = [
 const chartConfig = {
   likes: {
     label: "Likes",
-    color: "#671425", // Dark burgundy
+    color: "#671425",
   },
   shares: {
     label: "Shares",
-    color: "#9e2a4b", // Lighter burgundy/rose
+    color: "#9e2a4b",
   },
 } satisfies ChartConfig;
 
