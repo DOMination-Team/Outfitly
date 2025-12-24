@@ -10,7 +10,9 @@ import {
 import {
   createWardrobeItemRepo,
   deleteWardrobeItemRepo,
+  findManyByIds,
   findWardrobeItemById,
+  getCatsCount,
   getUserWardrobeItemRepo,
   getWardrobeItemDetailsRepo,
   getWardrobeItemsFiltered,
@@ -132,3 +134,11 @@ export const getFilteredItemsForGenerator = async (filters: IGeneratorFilters, u
   const items = await getWardrobeItemsFiltered(filters, userId);
   return items;
 };
+
+export const getCatsCountService = async() => {
+  return await getCatsCount();
+}
+
+export const getCatsByIdsService = async (ids: string[]) => {
+  return await findManyByIds(ids);
+}
