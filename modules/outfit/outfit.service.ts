@@ -5,7 +5,14 @@ import {
   PrismaClientKnownRequestError,
   SortOrder,
 } from "@/app/generated/prisma/internal/prismaNamespace";
-import { createOutfit, findAll, getCount, getUniqueItemsFromOutfits, likeOutfit, unlikeOutfit } from "./outfit.repo";
+import {
+  createOutfit,
+  findAll,
+  getCount,
+  getUniqueItemsFromOutfits,
+  likeOutfit,
+  unlikeOutfit,
+} from "./outfit.repo";
 import { zodValidation } from "@/utils/zod.utils";
 import { outfitListQuerySchema } from "./validation/outfit.validation";
 import CustomError from "@/utils/CustomError";
@@ -46,4 +53,4 @@ export const getOutfitsCount = async () => {
 
 export const getUsedItemsService = async () => {
   return await getUniqueItemsFromOutfits();
-} 
+};

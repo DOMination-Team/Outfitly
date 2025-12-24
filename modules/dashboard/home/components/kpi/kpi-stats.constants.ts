@@ -4,7 +4,7 @@ import { Layers, TrendingUp } from "lucide-react";
 export const kpiStats = [
   {
     label: "Avgerege Items For Outfits",
-    value: "4.6 items", 
+    value: "4.6 items",
     icon: Layers,
     iconBg: "bg-blue-100 dark:bg-blue-900/20",
     iconColor: "text-blue-600 dark:text-blue-400",

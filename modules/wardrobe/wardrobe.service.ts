@@ -149,6 +149,6 @@ export const findItemsInLastWeekService = async () => {
   return await findAddedLastWeek();
 };
 
-export const getCountService = async() => {
+export const getCountService = async () => {
   return await getCount();
-}
+};

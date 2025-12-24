@@ -353,6 +353,4 @@ export const findAddedLastWeek = async () => {
 
 export const getCount = () => {
   return prisma.wardrobeItem.count();
-}
-
-
+};

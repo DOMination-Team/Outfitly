@@ -114,32 +114,32 @@ export const getWardrobChartData = async () => {
 export const getItemsKPI = async () => {
   const itemsCounts = await getCountService();
   const outfitsCount = await getOutfitsCount();
-  const value = String(Number(itemsCounts/outfitsCount).toFixed(1)) + " " + "items";
+  const value = String(Number(itemsCounts / outfitsCount).toFixed(1)) + " " + "items";
 
   return {
-      label: "Avgerege Items For Outfits",
-      value, 
-      icon: Layers,
-      iconBg: "bg-blue-100 dark:bg-blue-900/20",
-      iconColor: "text-blue-600 dark:text-blue-400",
-      progressColor: "bg-blue-100 dark:bg-blue-900/20 [&>*]:bg-blue-600 dark:[&>*]:bg-blue-400",
-  }
-}
+    label: "Avgerege Items For Outfits",
+    value,
+    icon: Layers,
+    iconBg: "bg-blue-100 dark:bg-blue-900/20",
+    iconColor: "text-blue-600 dark:text-blue-400",
+    progressColor: "bg-blue-100 dark:bg-blue-900/20 [&>*]:bg-blue-600 dark:[&>*]:bg-blue-400",
+  };
+};
 
 export const getOutfitKPI = async () => {
   const uniqueUsedItems = await getUsedItemsService();
   const itemsCount = await getCountService();
 
   const value = formatRate(uniqueUsedItems.length, itemsCount);
-  const progress = ((uniqueUsedItems.length/ itemsCount) * 100).toFixed(1);
-  
-  return   {
-      label: "Outfit Usage Rate",
-      value,
-      progress,
-      icon: TrendingUp,
-      iconBg: "bg-cyan-100 dark:bg-cyan-900/20",
-      iconColor: "text-cyan-600 dark:text-cyan-400",
-      progressColor: "bg-cyan-100 dark:bg-cyan-900/20 [&>*]:bg-cyan-600 dark:[&>*]:bg-cyan-400",
-    }
-}
+  const progress = ((uniqueUsedItems.length / itemsCount) * 100).toFixed(1);
+
+  return {
+    label: "Outfit Usage Rate",
+    value,
+    progress,
+    icon: TrendingUp,
+    iconBg: "bg-cyan-100 dark:bg-cyan-900/20",
+    iconColor: "text-cyan-600 dark:text-cyan-400",
+    progressColor: "bg-cyan-100 dark:bg-cyan-900/20 [&>*]:bg-cyan-600 dark:[&>*]:bg-cyan-400",
+  };
+};
