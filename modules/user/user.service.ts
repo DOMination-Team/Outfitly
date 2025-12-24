@@ -43,6 +43,10 @@ class UserService {
   async getActiveUsersCount() {
     return await userRepo.getActivesCount();
   }
+
+  async getUsersByMonth() {
+    return await userRepo.getMonthlyUsers();
+  }
 }
 
 const userService = new UserService();

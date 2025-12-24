@@ -4,6 +4,7 @@ import { Activity, Heart, ShoppingBag, Users } from "lucide-react";
 import userService from "../user/user.service";
 import { formatCount, formatEngagementRate } from "./utils/number.utils";
 import { getOutfitsCount } from "../outfit/outfit.service";
+import { toChartData } from "./utils/charts.utils";
 
 export const getUsersForStats = async () => {
   const numberOfUsers = await userService.getUsersCount();
@@ -56,4 +57,10 @@ export const getEngagmentPercentage = async () => {
   const totalActives = await userService.getActiveUsersCount();
   const percentage = formatEngagementRate(totalActives, totalUsers);
   return percentage;
+};
+
+export const getUsersForChart = async () => {
+  const usersByMonthFromDB = await userService.getUsersByMonth();
+  const chartData = toChartData(usersByMonthFromDB);
+  return chartData;
 };
