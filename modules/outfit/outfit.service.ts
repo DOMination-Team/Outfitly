@@ -57,5 +57,5 @@ export const getUsedItemsService = async () => {
 };
 
 export const getOutfitsForDashboardService = async () => {
-    return await getOutfitsForDashboard();
-} 
+  return await getOutfitsForDashboard();
+};

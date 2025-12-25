@@ -111,18 +111,18 @@ export const getUniqueItemsFromOutfits = () => {
 };
 
 export const getOutfitsForDashboard = () => {
-    const outfits = prisma.outfit.findMany({
-        select: {
-        id: true,
-        name: true,
-        createdAt: true,
-        visibility: true,
-        user: { select: { fullName: true } },
-        _count: {
-            select: { likedBy: true },
-        },
-        },
-        orderBy: { createdAt: "desc" },
-    });
-    return outfits;
-}
+  const outfits = prisma.outfit.findMany({
+    select: {
+      id: true,
+      name: true,
+      createdAt: true,
+      visibility: true,
+      user: { select: { fullName: true } },
+      _count: {
+        select: { likedBy: true },
+      },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+  return outfits;
+};
