@@ -54,7 +54,7 @@ export function useProfile() {
         console.error("Failed to fetch outfits:", error);
       }
     },
-    [authUser?.id]
+    [authUser?.id],
   );
 
   const fetchWardrobeItems = useCallback(
@@ -68,7 +68,7 @@ export function useProfile() {
         console.error("Failed to fetch wardrobe items:", error);
       }
     },
-    [authUser?.id]
+    [authUser?.id],
   );
 
   const fetchLikedOutfits = useCallback(
@@ -82,7 +82,7 @@ export function useProfile() {
         console.error("Failed to fetch liked outfits:", error);
       }
     },
-    [authUser?.id]
+    [authUser?.id],
   );
 
   const fetchLikedProducts = useCallback(
@@ -96,7 +96,7 @@ export function useProfile() {
         console.error("Failed to fetch liked products:", error);
       }
     },
-    [authUser?.id]
+    [authUser?.id],
   );
 
   /* ---------------- INITIAL LOAD ---------------- */
