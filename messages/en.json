@@ -345,5 +345,83 @@
     "message": "You are already signed in to your account.",
     "goToDashboard": "Go to Dashboard",
     "signOut": "Sign Out"
+  },
+  "Footer": {
+    "brand": {
+      "description": "Your smart wardrobe companion. Discover, create, and share amazing outfits with the power of AI and community."
+    },
+    "contact": {
+      "email": "hello@outfitly.com",
+      "phone": "+1 (555) 123-4567",
+      "location": "San Francisco, CA"
+    },
+    "links": {
+      "product": "Product",
+      "company": "Company",
+      "resources": "Resources",
+      "legal": "Legal",
+      "features": "Features",
+      "pricing": "Pricing",
+      "aiStyling": "AI Styling",
+      "wardrobeManager": "Wardrobe Manager",
+      "community": "Community",
+      "aboutUs": "About Us",
+      "careers": "Careers",
+      "press": "Press",
+      "partners": "Partners",
+      "blog": "Blog",
+      "helpCenter": "Help Center",
+      "tutorials": "Tutorials",
+      "apiDocs": "API Docs",
+      "styleGuide": "Style Guide",
+      "inspiration": "Inspiration",
+      "privacyPolicy": "Privacy Policy",
+      "termsOfService": "Terms of Service",
+      "cookiePolicy": "Cookie Policy",
+      "licenses": "Licenses"
+    },
+    "newsletter": {
+      "heading": "Stay in Style",
+      "subtitle": "Subscribe to our newsletter for the latest trends, tips, and exclusive offers",
+      "placeholder": "Enter your email",
+      "button": "Subscribe"
+    },
+    "copyright": "© 2024 Outfitly. All rights reserved.",
+    "accessibility": "Accessibility",
+    "sitemap": "Sitemap"
+  },
+  "Admin": {
+    "badge": "Admin",
+    "searchPlaceholder": "Search...",
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "users": "Users",
+      "outfits": "Outfits",
+      "settings": "Settings"
+    },
+    "proCard": {
+      "title": "Pro Admin",
+      "description": "Access advanced analytics"
+    }
+  },
+  "Uploader": {
+    "dropHint": "Drop the files here ...",
+    "dragHint": "Drag 'n' drop some files here, or click to select files",
+    "selectFiles": "Select Files",
+    "existingImage": "Existing image",
+    "image": "Image",
+    "errors": {
+      "tooManyFiles": "Too many files selected, max is 5",
+      "fileTooLarge": "File size exceeds 5mb limit",
+      "maxFilesExceeded": "Cannot add {count} file(s). Maximum is 5 files total (currently {current})",
+      "failedToRemove": "Failed to remove file from storage.",
+      "failedToGetUrl": "Failed to get presigned URL",
+      "somethingWentWrong": "Something went wrong",
+      "error": "Error"
+    },
+    "success": {
+      "removed": "File removed successfully",
+      "uploaded": "File uploaded successfully"
+    }
   }
 }

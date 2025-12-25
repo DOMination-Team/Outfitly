@@ -9,6 +9,7 @@ import { Logo } from "../logo/logo";
 import { useTheme } from "next-themes";
 import CustomButton from "../custom-button";
 import { NAVBAR_COLORS } from "../navbar/navbar.constants";
+import { useTranslations } from "next-intl";
 
 export function AdminNavbar({
   isSidebarOpen,
@@ -18,6 +19,7 @@ export function AdminNavbar({
   onMenuClick: () => void;
 }) {
   const { theme, setTheme } = useTheme();
+  const t = useTranslations("Admin");
 
   return (
     <motion.nav
@@ -49,7 +51,7 @@ export function AdminNavbar({
               <div className="flex items-center gap-3">
                 <Logo size="md" animated={false} linkTo="/dashboard" />
                 <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary uppercase tracking-wider border border-primary/20">
-                  Admin
+                  {t("badge")}
                 </span>
               </div>
             </div>
@@ -66,7 +68,7 @@ export function AdminNavbar({
                 </div>
                 <input
                   type="text"
-                  placeholder="Search..."
+                  placeholder={t("searchPlaceholder")}
                   className="w-full bg-transparent pl-10 pr-4 py-2 text-sm rounded-xl focus:outline-none transition-all placeholder:text-muted-foreground/50"
                   style={{
                     border: `1px solid ${NAVBAR_COLORS.borderMedium}`,

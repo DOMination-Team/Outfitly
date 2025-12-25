@@ -345,5 +345,83 @@
     "message": "أنت مسجل الدخول إلى حسابك بالفعل.",
     "goToDashboard": "الذهاب للوحة التحكم",
     "signOut": "تسجيل الخروج"
+  },
+  "Footer": {
+    "brand": {
+      "description": "رفيقك الذكي لإدارة الخزانة. اكتشف وأنشئ وشارك أزياء مذهلة بقوة الذكاء الاصطناعي والمجتمع."
+    },
+    "contact": {
+      "email": "hello@outfitly.com",
+      "phone": "+1 (555) 123-4567",
+      "location": "سان فرانسيسكو، كاليفورنيا"
+    },
+    "links": {
+      "product": "المنتج",
+      "company": "الشركة",
+      "resources": "الموارد",
+      "legal": "قانوني",
+      "features": "المميزات",
+      "pricing": "الأسعار",
+      "aiStyling": "تنسيق الذكاء الاصطناعي",
+      "wardrobeManager": "مدير الخزانة",
+      "community": "المجتمع",
+      "aboutUs": "من نحن",
+      "careers": "الوظائف",
+      "press": "الصحافة",
+      "partners": "الشركاء",
+      "blog": "المدونة",
+      "helpCenter": "مركز المساعدة",
+      "tutorials": "الدروس",
+      "apiDocs": "توثيق API",
+      "styleGuide": "دليل الأناقة",
+      "inspiration": "إلهام",
+      "privacyPolicy": "سياسة الخصوصية",
+      "termsOfService": "شروط الخدمة",
+      "cookiePolicy": "سياسة ملفات تعريف الارتباط",
+      "licenses": "التراخيص"
+    },
+    "newsletter": {
+      "heading": "ابقَ أنيقاً",
+      "subtitle": "اشترك في نشرتنا الإخبارية للحصول على أحدث الصيحات والنصائح والعروض الحصرية",
+      "placeholder": "أدخل بريدك الإلكتروني",
+      "button": "اشتراك"
+    },
+    "copyright": "© 2024 Outfitly. جميع الحقوق محفوظة.",
+    "accessibility": "إمكانية الوصول",
+    "sitemap": "خريطة الموقع"
+  },
+  "Admin": {
+    "badge": "مسؤول",
+    "searchPlaceholder": "بحث...",
+    "sidebar": {
+      "dashboard": "لوحة التحكم",
+      "users": "المستخدمون",
+      "outfits": "الأزياء",
+      "settings": "الإعدادات"
+    },
+    "proCard": {
+      "title": "مسؤول برو",
+      "description": "الوصول إلى التحليلات المتقدمة"
+    }
+  },
+  "Uploader": {
+    "dropHint": "أفلت الملفات هنا ...",
+    "dragHint": "اسحب وأفلت الملفات هنا، أو انقر لاختيار الملفات",
+    "selectFiles": "اختر الملفات",
+    "existingImage": "صورة موجودة",
+    "image": "صورة",
+    "errors": {
+      "tooManyFiles": "عدد كبير جداً من الملفات، الحد الأقصى 5",
+      "fileTooLarge": "حجم الملف يتجاوز حد 5 ميجابايت",
+      "maxFilesExceeded": "لا يمكن إضافة {count} ملف(ات). الحد الأقصى 5 ملفات (حالياً {current})",
+      "failedToRemove": "فشل في إزالة الملف من التخزين.",
+      "failedToGetUrl": "فشل في الحصول على رابط الرفع",
+      "somethingWentWrong": "حدث خطأ ما",
+      "error": "خطأ"
+    },
+    "success": {
+      "removed": "تم إزالة الملف بنجاح",
+      "uploaded": "تم رفع الملف بنجاح"
+    }
   }
 }
