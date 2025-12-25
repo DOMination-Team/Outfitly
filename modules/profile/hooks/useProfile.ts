@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import type { TabType, User, Outfit, LikedProduct, WardrobeItem } from "../profile.types";
-import { useAuth } from "@/providers/auth/auth.provider"; // Your auth store
+import { useAuth } from "@/providers/auth/auth.provider";
 import {
   getUserProfile,
   getUserOutfitsPaginated,
@@ -10,8 +10,10 @@ import {
   getUserWardrobeItemsPaginated,
 } from "../profile.service";
 import type { IPaginationQuery } from "@/@types/database.type";
+
 export function useProfile() {
-  const { user: authUser } = useAuth(); // Get current user ID
+  const { user: authUser } = useAuth();
+
   const [activeTab, setActiveTab] = useState<TabType>("outfits");
   const [user, setUser] = useState<User | null>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -22,69 +24,101 @@ export function useProfile() {
   const [likedOutfits, setLikedOutfits] = useState<Outfit[]>([]);
   const [likedProducts, setLikedProducts] = useState<LikedProduct[]>([]);
 
-  useEffect(() => {
-    if (authUser?.id) {
-      fetchProfile();
-      fetchOutfits();
-      fetchWardrobeItems();
-      fetchLikedOutfits();
-      fetchLikedProducts();
-    }
-  });
+  /* ---------------- FETCH FUNCTIONS ---------------- */
 
-  const fetchProfile = async () => {
+  const fetchProfile = useCallback(async () => {
+    if (!authUser?.id) return;
+
     try {
-      console.log("Fetching profile for user:", authUser?.id);
-      const profile = await getUserProfile(authUser!.id);
+      setLoading(true);
+      const profile = await getUserProfile(authUser.id);
       if (profile) {
-        setUser(profile); // Repo already returns User type, no mapping needed
+        setUser(profile);
         setEditForm(profile);
-        console.log("Profile fetched and set:", profile);
-      } else {
-        console.error("No profile data returned");
       }
     } catch (error) {
       console.error("Failed to fetch profile:", error);
     } finally {
       setLoading(false);
     }
-  };
+  }, [authUser?.id]);
 
-  const fetchOutfits = async (query: IPaginationQuery = { page: 1, limit: 10 }) => {
-    try {
-      const result = await getUserOutfitsPaginated(authUser!.id, query);
-      setOutfits(result.data); // Repo already returns Outfit[], no mapping needed
-    } catch (error) {
-      console.error("Failed to fetch outfits:", error);
-    }
-  };
+  const fetchOutfits = useCallback(
+    async (query: IPaginationQuery = { page: 1, limit: 10 }) => {
+      if (!authUser?.id) return;
 
-  const fetchWardrobeItems = async (query: IPaginationQuery = { page: 1, limit: 10 }) => {
-    try {
-      const result = await getUserWardrobeItemsPaginated(authUser!.id, query);
-      setItems(result.data);
-    } catch (error) {
-      console.error("Failed to fetch wardrobe items:", error);
-    }
-  };
+      try {
+        const result = await getUserOutfitsPaginated(authUser.id, query);
+        setOutfits(result.data);
+      } catch (error) {
+        console.error("Failed to fetch outfits:", error);
+      }
+    },
+    [authUser?.id]
+  );
 
-  const fetchLikedOutfits = async (query: IPaginationQuery = { page: 1, limit: 10 }) => {
-    try {
-      const result = await getLikedOutfitsPaginated(authUser!.id, query);
-      setLikedOutfits(result.data); // Repo already returns Outfit[], no mapping needed
-    } catch (error) {
-      console.error("Failed to fetch liked outfits:", error);
-    }
-  };
+  const fetchWardrobeItems = useCallback(
+    async (query: IPaginationQuery = { page: 1, limit: 10 }) => {
+      if (!authUser?.id) return;
 
-  const fetchLikedProducts = async (query: IPaginationQuery = { page: 1, limit: 10 }) => {
-    try {
-      const result = await getLikedProductsPaginated(authUser!.id, query);
-      setLikedProducts(result.data); // Repo already returns LikedProduct[], no mapping needed
-    } catch (error) {
-      console.error("Failed to fetch liked products:", error);
-    }
-  };
+      try {
+        const result = await getUserWardrobeItemsPaginated(authUser.id, query);
+        setItems(result.data);
+      } catch (error) {
+        console.error("Failed to fetch wardrobe items:", error);
+      }
+    },
+    [authUser?.id]
+  );
+
+  const fetchLikedOutfits = useCallback(
+    async (query: IPaginationQuery = { page: 1, limit: 10 }) => {
+      if (!authUser?.id) return;
+
+      try {
+        const result = await getLikedOutfitsPaginated(authUser.id, query);
+        setLikedOutfits(result.data);
+      } catch (error) {
+        console.error("Failed to fetch liked outfits:", error);
+      }
+    },
+    [authUser?.id]
+  );
+
+  const fetchLikedProducts = useCallback(
+    async (query: IPaginationQuery = { page: 1, limit: 10 }) => {
+      if (!authUser?.id) return;
+
+      try {
+        const result = await getLikedProductsPaginated(authUser.id, query);
+        setLikedProducts(result.data);
+      } catch (error) {
+        console.error("Failed to fetch liked products:", error);
+      }
+    },
+    [authUser?.id]
+  );
+
+  /* ---------------- INITIAL LOAD ---------------- */
+
+  useEffect(() => {
+    if (!authUser?.id) return;
+
+    fetchProfile();
+    fetchOutfits();
+    fetchWardrobeItems();
+    fetchLikedOutfits();
+    fetchLikedProducts();
+  }, [
+    authUser?.id,
+    fetchProfile,
+    fetchOutfits,
+    fetchWardrobeItems,
+    fetchLikedOutfits,
+    fetchLikedProducts,
+  ]);
+
+  /* ---------------- EDITING ---------------- */
 
   const startEditing = () => {
     if (user) {
@@ -121,6 +155,8 @@ export function useProfile() {
   const updateEditForm = (field: keyof User, value: string) => {
     setEditForm((prev) => (prev ? { ...prev, [field]: value } : null));
   };
+
+  /* ---------------- RETURN ---------------- */
 
   return {
     activeTab,
