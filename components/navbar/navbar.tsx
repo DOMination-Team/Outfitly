@@ -259,19 +259,20 @@ export function Navbar() {
           >
             <div className="pt-6 pb-2 space-y-4">
               {/* Mobile navigation links - only show when logged in */}
-              {isLoggedIn && finalLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  onClick={closeMenu}
-                  className={`block py-2 transition-opacity duration-300 ${
-                    isActive(link.href) ? "opacity-100" : "opacity-80 hover:opacity-100"
-                  }`}
-                  style={{ color: NAVBAR_COLORS.link }}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {isLoggedIn &&
+                finalLinks.map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    onClick={closeMenu}
+                    className={`block py-2 transition-opacity duration-300 ${
+                      isActive(link.href) ? "opacity-100" : "opacity-80 hover:opacity-100"
+                    }`}
+                    style={{ color: NAVBAR_COLORS.link }}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
 
               <div className="pt-4 space-y-3">
                 {isAuthLoading ? (

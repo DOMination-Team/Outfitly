@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { useRouter } from "nextjs-toploader/app";
 
 const useSignUp = () => {
-  const router = useRouter()
+  const router = useRouter();
   const handleSignUp = async (
     values: TFormValues,
     resetForm: () => void,
@@ -22,7 +22,7 @@ const useSignUp = () => {
     const data = await signUpAction(userData);
     if (data.success) {
       toast.success("User created successfully");
-      router.push('sign-in')
+      router.push("sign-in");
     }
     resetForm();
     setSubmitting(false);
