@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { WeatherData } from "../weather.types";
 import { mockWeather } from "../weather.constants";
 import { WeatherService } from "../weather.service";
-import { validateWeatherData } from "../weather.validation";
 
 interface UseWeatherReturn {
   weather: WeatherData;
@@ -57,11 +56,11 @@ export const useWeather = (): UseWeatherReturn => {
     const fetchWeather = async () => {
       try {
         const fetchedWeather = await WeatherService.fetchCurrentWeather();
-        if (validateWeatherData(fetchedWeather)) {
+        if (fetchedWeather) {
           setWeather(fetchedWeather);
         } else {
           console.warn("Invalid weather data, using mock");
-          setWeather(mockWeather);
+          setWeather(mockWeather)
         }
       } catch (error) {
         console.error("Weather fetch failed, using mock", error);
@@ -72,7 +71,6 @@ export const useWeather = (): UseWeatherReturn => {
     fetchWeather();
   }, []);
 
-  // Filter outfits and items based on weather season
 
   return { weather, handleScroll };
 };
