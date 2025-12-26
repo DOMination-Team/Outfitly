@@ -293,29 +293,17 @@ export function Navbar() {
                     <MiniLoader color={NAVBAR_COLORS.link} />
                   </div>
                 ) : !isLoggedIn ? (
-                  <>
+                  <div className="flex flex-col gap-2">
                     <Link href="/sign-in" onClick={closeMenu}>
-                      <Button
-                        variant="ghost"
-                        className="w-full cursor-pointer"
-                        style={{ color: NAVBAR_COLORS.primary }}
-                      >
+                      <Button variant="ghost" className="w-full cursor-pointer">
                         {t("signIn")}
                       </Button>
                     </Link>
 
                     <Link href="/sign-up" onClick={closeMenu}>
-                      <Button
-                        className="w-full cursor-pointer"
-                        style={{
-                          backgroundColor: NAVBAR_COLORS.primary,
-                          color: NAVBAR_COLORS.textLight,
-                        }}
-                      >
-                        {t("signUp")}
-                      </Button>
+                      <Button className="w-full cursor-pointer">{t("signUp")}</Button>
                     </Link>
-                  </>
+                  </div>
                 ) : (
                   <div
                     className="p-3 rounded-2xl space-y-3"
