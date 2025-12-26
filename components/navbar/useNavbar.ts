@@ -43,7 +43,7 @@ export function useNavbar() {
     const navLinks = [
       { label: t("home"), href: "/" },
       { label: t("wardrobe"), href: "/my-wardrobe" },
-      { label: t("aiGenerator"), href: "/ai-generator" },
+      { label: t("aiGenerator"), href: "/AI-generator" },
       { label: t("weather"), href: "/weather" },
       { label: t("explore"), href: "/explore" },
       { label: t("profile"), href: "/profile" },
