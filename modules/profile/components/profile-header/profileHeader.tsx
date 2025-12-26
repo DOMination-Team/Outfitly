@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { motion } from "framer-motion";
 import { MapPin, Link as LinkIcon, Calendar, Upload, Trash2 } from "lucide-react";
@@ -13,11 +14,10 @@ import Image from "next/image";
 
 import type { ExtendedProfileHeaderProps } from "./profileHeader.types";
 import { getAvatarAlt } from "./profileHeader.utils";
-import { useTheme } from "next-themes";
 import { useProfileHeader } from "./useProfileHeader";
 
 export function ProfileHeader(props: ExtendedProfileHeaderProps) {
-  const { theme } = useTheme();
+
 
   const {
     imagePreview,
@@ -57,14 +57,7 @@ export function ProfileHeader(props: ExtendedProfileHeaderProps) {
       .toUpperCase();
 
     return (
-      <div
-        className="w-full h-full flex items-center justify-center rounded-full text-white text-2xl font-extrabold shadow-lg animate-gradient animate-float"
-        style={{
-          background: `linear-gradient( var(--outfitly-gradient-start), var(--outfitly-gradient-mid), var(--outfitly-gradient-end))`,
-          backgroundSize: "200% 200%",
-          textShadow: "1px 1px 3px rgba(0,0,0,0.4)",
-        }}
-      >
+      <div className="w-full h-full flex items-center justify-center rounded-full text-white text-2xl font-extrabold shadow-lg animate-gradient animate-float bg-gradient-to-r from-gradient-start via-gradient-mid to-gradient-end">
         {initials}
       </div>
     );
@@ -75,24 +68,11 @@ export function ProfileHeader(props: ExtendedProfileHeaderProps) {
   return (
     <>
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-        <Card
-          className="p-8 border-2 shadow-xl mb-8 relative overflow-hidden"
-          style={{
-            borderColor:
-              theme === "dark" ? "var(--outfitly-bg-tertiary)" : "var(--outfitly-bg-secondary)",
-            backgroundColor: "var(--card)",
-          }}
-        >
+        <Card className="p-8 border-2 shadow-xl mb-8 relative overflow-hidden border-[var(--outfitly-bg-secondary)] dark:border-[var(--outfitly-bg-tertiary)] bg-card">
           <div className="flex flex-col items-center md:flex-row gap-8">
             {/* AVATAR */}
             <div className="relative w-32 h-32 md:w-40 md:h-40 flex-shrink-0">
-              <div
-                className="w-full h-full rounded-full overflow-hidden border-4 shadow-lg transition-all duration-300 hover:shadow-2xl"
-                style={{
-                  borderColor:
-                    theme === "dark" ? "var(--outfitly-primary)" : "var(--outfitly-bg-secondary)",
-                }}
-              >
+              <div className="w-full h-full rounded-full overflow-hidden border-4 shadow-lg transition-all duration-300 hover:shadow-2xl border-[var(--outfitly-bg-secondary)] dark:border-[var(--outfitly-primary)]">
                 {renderAvatar()}
               </div>
 
