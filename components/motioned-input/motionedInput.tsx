@@ -56,7 +56,7 @@ const checkboxLabelClasses =
   "text-sm text-foreground cursor-pointer hover:text-primary transition-colors duration-200";
 
 const passwordToggleButtonClasses = [
-  "absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full",
+  "absolute end-2 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full",
   "text-muted-foreground hover:text-primary",
   "hover:bg-secondary",
   "transition-all duration-200",
