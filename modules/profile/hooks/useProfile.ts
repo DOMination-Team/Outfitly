@@ -28,6 +28,7 @@ export function useProfile() {
       fetchLikedOutfits();
       fetchLikedProducts();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authUser?.id]);
 
   const fetchProfile = async () => {

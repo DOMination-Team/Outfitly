@@ -1,7 +1,6 @@
 "use server";
 
 import { IPaginationQuery } from "@/@types/database.type";
-import { Outfit } from "@/app/generated/prisma/client";
 import {
   findUserProfile,
   findUserOutfits,
@@ -12,7 +11,6 @@ import {
 import { zodValidation } from "@/utils/zod.utils";
 import { profileListQuerySchema, profileUpdateSchema } from "./profile.validation";
 import CustomError from "@/utils/CustomError";
-import { SortOrder } from "@/app/generated/prisma/internal/prismaNamespace";
 
 // Get user profile
 export const getUserProfile = async (userId: string) => {
@@ -57,7 +55,7 @@ export const updateProfile = async (
   const validData = zodValidation(profileUpdateSchema, data);
   try {
     return await updateUserProfile(userId, validData);
-  } catch (error) {
+  } catch {
     throw new CustomError({ message: "Failed to update profile", statusCode: 500 });
   }
 };
