@@ -4,7 +4,7 @@ import { Pagination, PaginationContent, PaginationItem } from "@/components/ui/p
 import { parseAsInteger, useQueryState } from "nuqs";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { GetUserWardrobeItemResponse } from "@/modules/wardrobe/types/dto.types";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const WardrobePagination = ({
   paginationDetails: { totalPages },
@@ -12,6 +12,7 @@ const WardrobePagination = ({
   paginationDetails: Omit<GetUserWardrobeItemResponse, "items">;
 }) => {
   const t = useTranslations("Wardrobe.pagination");
+  const local = useLocale();
   const [page, setPage] = useQueryState(
     "page",
     parseAsInteger.withDefault(1).withOptions({ shallow: false }),
@@ -23,14 +24,25 @@ const WardrobePagination = ({
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <Button
-            variant="outline"
-            onClick={() => handlePageChange(page - 1)}
-            disabled={page === 1}
-          >
-            <ChevronLeft className="h-4 w-4 rtl-flip" />
-            {t("previous")}
-          </Button>
+          {local == "en" ? (
+            <Button
+              variant="outline"
+              onClick={() => handlePageChange(page - 1)}
+              disabled={page === 1}
+            >
+              <ChevronLeft className="h-4 w-4 me-2 rtl:rotate-180" />
+              {t("previous")}
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              onClick={() => handlePageChange(page + 1)}
+              disabled={page >= totalPages}
+            >
+              {t("next")}
+              <ChevronLeft className="h-4 w-4 ms-2 rtl:rotate-180" />
+            </Button>
+          )}
         </PaginationItem>
         <PaginationItem>
           <Button variant="outline" disabled>
@@ -38,14 +50,25 @@ const WardrobePagination = ({
           </Button>
         </PaginationItem>
         <PaginationItem>
-          <Button
-            variant="outline"
-            onClick={() => handlePageChange(page + 1)}
-            disabled={page >= totalPages}
-          >
-            {t("next")}
-            <ChevronRight className="h-4 w-4 rtl-flip" />
-          </Button>
+          {local == "en" ? (
+            <Button
+              variant="outline"
+              onClick={() => handlePageChange(page + 1)}
+              disabled={page >= totalPages}
+            >
+              {t("next")}
+              <ChevronRight className="h-4 w-4 ms-2 rtl:rotate-180" />
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              onClick={() => handlePageChange(page - 1)}
+              disabled={page === 1}
+            >
+              <ChevronRight className="h-4 w-4 me-2 rtl:rotate-180" />
+              {t("previous")}
+            </Button>
+          )}
         </PaginationItem>
       </PaginationContent>
     </Pagination>
