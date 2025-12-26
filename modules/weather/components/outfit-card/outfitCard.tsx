@@ -4,12 +4,7 @@ import { motion } from "framer-motion";
 import { ChevronRight, Sun } from "lucide-react";
 import { Card } from "../../../../components/ui/card";
 import { Badge } from "../../../../components/ui/badge";
-import type { Outfit } from "../../weather.types";
-
-interface OutfitCardProps {
-  outfit: Outfit;
-  index: number;
-}
+import {OutfitCardProps} from './outfitCard.types'
 
 export const OutfitCard: React.FC<OutfitCardProps> = ({ outfit, index }) => {
   return (

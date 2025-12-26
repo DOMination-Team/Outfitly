@@ -2,12 +2,7 @@
 import { motion } from "framer-motion";
 import { Card } from "../../../../components/ui/card";
 import { Badge } from "../../../../components/ui/badge";
-import { WardrobeItem } from "../../../profile/profile.types";
-
-interface WardrobeItemCardProps {
-  item: WardrobeItem;
-  index: number;
-}
+import {WardrobeItemCardProps} from './wardrobeItemCard.types'
 
 export const WardrobeItemCard: React.FC<WardrobeItemCardProps> = ({ item, index }) => {
   return (
