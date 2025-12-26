@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { MapPin, Droplets, Wind, Eye, Thermometer, Clock } from "lucide-react";
 import { Card } from "../../../../components/ui/card";
 import type { WeatherData } from "../../weather.types";
-import type { WeatherWidgetProps } from "./weatherWidget.types";
+import type { WeatherWidgetProps, WeatherDetailItem } from "./weatherWidget.types";
 
 const getWeatherIconEl = (condition?: string) => {
   const c = (condition || "").toLowerCase();
@@ -19,12 +19,7 @@ const getWeatherIconEl = (condition?: string) => {
   return <Eye className="w-32 h-32" />;
 };
 
-type WeatherDetailItem = {
-  key: "feelsLike" | "time" | "windSpeed" | "tempC";
-  label: string;
-  value: string;
-  iconEl: React.ReactNode;
-};
+
 
 const buildWeatherDetails = (weather: WeatherData): WeatherDetailItem[] => [
   {
