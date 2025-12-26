@@ -30,7 +30,12 @@ const SignUpForm = () => {
   return (
     <FormikProvider value={formik}>
       <Form className="space-y-5">
-        <MotionField name="fullName" label={t("fullName")} placeholder={t("fullNamePlaceholder")} type="text" />
+        <MotionField
+          name="fullName"
+          label={t("fullName")}
+          placeholder={t("fullNamePlaceholder")}
+          type="text"
+        />
 
         <MotionField
           name="email"

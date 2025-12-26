@@ -33,9 +33,7 @@ const SignInCard = () => {
       {/* Welcome Text */}
       <div className="mb-8">
         <h2 className="mb-2 text-[var(--outfitly-heading)]">{t("heading")}</h2>
-        <p className="text-sm text-[var(--outfitly-muted-foreground)]">
-          {t("subtitle")}
-        </p>
+        <p className="text-sm text-[var(--outfitly-muted-foreground)]">{t("subtitle")}</p>
       </div>
 
       {/* Login Form */}

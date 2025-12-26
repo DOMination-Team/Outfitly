@@ -23,9 +23,7 @@ export default function Unauthorized() {
         <div className="space-y-3">
           <h1 className="text-6xl font-bold tracking-tight">{t("code")}</h1>
           <h2 className="text-xl font-semibold text-muted-foreground">{t("heading")}</h2>
-          <p className="text-sm text-muted-foreground/80">
-            {t("message")}
-          </p>
+          <p className="text-sm text-muted-foreground/80">{t("message")}</p>
         </div>
 
         <div className="flex gap-3">

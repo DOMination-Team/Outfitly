@@ -112,7 +112,9 @@ export function AdminSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                 </div>
 
                 <div className="space-y-1">
-                  <h3 className="text-white font-bold text-lg tracking-tight">{t("proCard.title")}</h3>
+                  <h3 className="text-white font-bold text-lg tracking-tight">
+                    {t("proCard.title")}
+                  </h3>
                   <p className="text-indigo-100 text-xs font-medium leading-relaxed">
                     {t("proCard.description")}
                   </p>

@@ -4,11 +4,7 @@ import { Sparkles, Wand2, Users, ArrowRight, Play } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { useHero } from "./hooks/useHero";
-import {
-  HERO_BACKGROUND_IMAGE,
-  GRADIENT_COLORS,
-  PARALLAX_LAYERS,
-} from "./hero.constants";
+import { HERO_BACKGROUND_IMAGE, GRADIENT_COLORS, PARALLAX_LAYERS } from "./hero.constants";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 

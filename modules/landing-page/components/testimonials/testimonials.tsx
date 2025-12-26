@@ -3,10 +3,7 @@
 import { Star, Quote, Sparkles } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useTestimonials } from "./hooks/useTestimonials";
-import {
-  TESTIMONIALS,
-  TESTIMONIALS_GRADIENTS,
-} from "./testimonials.constants";
+import { TESTIMONIALS, TESTIMONIALS_GRADIENTS } from "./testimonials.constants";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 

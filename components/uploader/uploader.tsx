@@ -218,25 +218,28 @@ export default function Uploader({
     }
   };
 
-  const rejectedFiles = useCallback((fileRejection: FileRejection[]) => {
-    if (fileRejection.length) {
-      const toomanyFiles = fileRejection.find(
-        (rejection) => rejection.errors[0].code === "too-many-files",
-      );
+  const rejectedFiles = useCallback(
+    (fileRejection: FileRejection[]) => {
+      if (fileRejection.length) {
+        const toomanyFiles = fileRejection.find(
+          (rejection) => rejection.errors[0].code === "too-many-files",
+        );
 
-      const fileSizetoBig = fileRejection.find(
-        (rejection) => rejection.errors[0].code === "file-too-large",
-      );
+        const fileSizetoBig = fileRejection.find(
+          (rejection) => rejection.errors[0].code === "file-too-large",
+        );
 
-      if (toomanyFiles) {
-        toast.error(t("errors.tooManyFiles"));
+        if (toomanyFiles) {
+          toast.error(t("errors.tooManyFiles"));
+        }
+
+        if (fileSizetoBig) {
+          toast.error(t("errors.fileTooLarge"));
+        }
       }
-
-      if (fileSizetoBig) {
-        toast.error(t("errors.fileTooLarge"));
-      }
-    }
-  }, [t]);
+    },
+    [t],
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,

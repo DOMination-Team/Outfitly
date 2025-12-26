@@ -19,9 +19,7 @@ const WardrobeListErrorFallback = ({ error, resetErrorBoundary }: FallbackProps)
         </CardHeader>
 
         <CardContent className="space-y-4">
-          <p className="text-center text-gray-700 dark:text-gray-300">
-            {t("couldNotLoad")}
-          </p>
+          <p className="text-center text-gray-700 dark:text-gray-300">{t("couldNotLoad")}</p>
 
           <div className="bg-red-50 dark:bg-red-900/20 p-3 rounded-lg border border-red-200 dark:border-red-900 overflow-auto max-h-32">
             <h4 className="text-sm font-semibold text-red-700 dark:text-red-300 mb-1">

@@ -78,13 +78,28 @@ const ItemDetailsForm: React.FC<ItemDetailsFormProps> = ({
         />
 
         {/* Color */}
-        <MotionField name="color" label={t("form.color")} type="text" placeholder={t("form.colorPlaceholder")} />
+        <MotionField
+          name="color"
+          label={t("form.color")}
+          type="text"
+          placeholder={t("form.colorPlaceholder")}
+        />
 
         {/* Size */}
-        <MotionField name="size" label={t("form.size")} type="text" placeholder={t("form.sizePlaceholder")} />
+        <MotionField
+          name="size"
+          label={t("form.size")}
+          type="text"
+          placeholder={t("form.sizePlaceholder")}
+        />
 
         {/* Season */}
-        <MotionField name="season" label={t("form.season")} type="text" placeholder={t("form.seasonPlaceholder")} />
+        <MotionField
+          name="season"
+          label={t("form.season")}
+          type="text"
+          placeholder={t("form.seasonPlaceholder")}
+        />
 
         {/* Style */}
         <MotionSelect

@@ -24,21 +24,9 @@ const Filters = ({ styleFilter, seasonFilter, setStyleFilter, setSeasonFilter }:
   const t = useTranslations("Explore.filters");
   const tCommon = useTranslations("Common");
 
-  const STYLES = [
-    t("allStyles"),
-    t("casual"),
-    t("elegant"),
-    t("street"),
-    t("boho"),
-  ];
+  const STYLES = [t("allStyles"), t("casual"), t("elegant"), t("street"), t("boho")];
 
-  const SEASONS = [
-    t("allSeasons"),
-    t("spring"),
-    t("summer"),
-    t("autumn"),
-    t("winter"),
-  ];
+  const SEASONS = [t("allSeasons"), t("spring"), t("summer"), t("autumn"), t("winter")];
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
