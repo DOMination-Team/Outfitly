@@ -58,7 +58,7 @@ export function ProfileHeader(props: ExtendedProfileHeaderProps) {
       .toUpperCase();
 
     return (
-      <div className="w-full h-full flex items-center justify-center rounded-full text-white text-2xl font-extrabold shadow-lg animate-gradient animate-float bg-gradient-to-r from-gradient-start via-gradient-mid to-gradient-end">
+      <div className="w-full h-full flex items-center justify-center rounded-full text-primary text-2xl font-extrabold shadow-lg animate-gradient animate-float bg-gradient-to-r from-gradient-start via-gradient-mid to-gradient-end">
         {initials}
       </div>
     );
@@ -73,7 +73,7 @@ export function ProfileHeader(props: ExtendedProfileHeaderProps) {
           <div className="flex flex-col items-center md:flex-row gap-8">
             {/* AVATAR */}
             <div className="relative w-32 h-32 md:w-40 md:h-40 flex-shrink-0">
-              <div className="w-full h-full rounded-full overflow-hidden border-4 shadow-lg transition-all duration-300 hover:shadow-2xl border-[var(--outfitly-bg-secondary)] dark:border-[var(--outfitly-primary)]">
+              <div className="w-full h-full rounded-full overflow-hidden border-4 shadow-lg transition-all duration-300 hover:shadow-2xl border-[var(--outfitly-bg-secondary)] dark:border-[var(--outfitly-primary)]  ">
                 {renderAvatar()}
               </div>
 
