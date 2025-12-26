@@ -16,11 +16,15 @@ import { getSeasonFromWeather } from "./hooks/useWeather";
 
 export default function WeatherPage() {
   const { theme } = useTheme();
-  const { weather, handleScroll } = useWeather();
+  const { weather, loading: weatherLoading} = useWeather();
   const { outfits: userOutfits, items: userItems, loading: profileLoading } = useProfile();
-  console.log("User Outfits:", userOutfits);
-  console.log("User Items:", userItems);
-  const season = useMemo(() => getSeasonFromWeather(weather), [weather]);
+
+
+  const season = useMemo(
+    () => (weather ? getSeasonFromWeather(weather) : "fall"),
+    [weather]
+  );
+
   const filteredOutfits = useMemo(() => {
     if (!userOutfits) return [];
     return userOutfits.filter((outfit) => outfit.season === season);
@@ -38,18 +42,32 @@ export default function WeatherPage() {
       );
     });
   }, [userItems, season]);
+  
+  const handleScroll = (direction: "left" | "right") => {
+  const container = document.getElementById("items-scroll");
+  if (!container) return;
 
+  const scrollAmount = 300;
+  container.scrollBy({
+    left: direction === "right" ? scrollAmount : -scrollAmount,
+    behavior: "smooth",
+  });
+  };
   return (
     <div style={{ backgroundColor: "var(--outfitly-bg-primary)" }}>
-      <Navbar />
       <main className="pt-20 pb-16">
         <PageHeader
           title="Today's Weather Outfits"
           subtitle="Dress perfectly for the weather conditions"
         />
         <div className="container mx-auto px-4 max-w-7xl mt-12">
-          <WeatherWidget weather={weather} />
-
+          {
+            weatherLoading?(
+              <p>...loading weather</p>  
+            ):  
+          <WeatherWidget weather={weather} loading={weatherLoading} />
+          }
+        
           {/* Outfits Section */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -157,7 +175,6 @@ export default function WeatherPage() {
           </motion.div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

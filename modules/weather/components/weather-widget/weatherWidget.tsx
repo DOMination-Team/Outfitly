@@ -7,10 +7,7 @@ import { Card } from "../../../../components/ui/card";
 import { useTheme } from "next-themes";
 import type { WeatherData } from "../../weather.types";
 
-/**
- * ✅ Return ICON ELEMENTS (JSX), not component types.
- * This avoids: "Cannot create components during render".
- */
+
 const getWeatherIconEl = (condition?: string) => {
   const c = (condition || "").toLowerCase();
 
@@ -58,9 +55,17 @@ const buildWeatherDetails = (weather: WeatherData): WeatherDetailItem[] => [
   },
 ];
 
-export const WeatherWidget: React.FC<{ weather: WeatherData }> = ({ weather }) => {
+export const WeatherWidget: React.FC<{ weather: WeatherData | null, loading :boolean}> = ({ weather , loading}) => {
   const { theme } = useTheme();
   const isDark = theme === "dark";
+  if(!weather){
+    return 'no weather to be renderd'
+  }
+
+  if (loading) {
+  return <div className="p-8">Loading weather...</div>;
+}
+
 
   const details = buildWeatherDetails(weather);
 

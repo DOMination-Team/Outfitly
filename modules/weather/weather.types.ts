@@ -22,7 +22,7 @@ export interface Outfit {
   description?: string;
   temperature?: string;
   icon?: LucideIcon;
-  season?: string; // New: e.g., "summer", "winter", "autumn", "spring"
+  season?: string; 
   likes?: number;
   title?: string;
 }
@@ -31,7 +31,7 @@ export interface WardrobeItem {
   id: string;
   name: string;
   image: string;
-  category?: string; // Added for completeness
+  category?: string; 
   season: string;
   style?: string;
   createdAt?: string;

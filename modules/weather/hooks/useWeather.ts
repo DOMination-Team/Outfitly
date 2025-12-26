@@ -2,13 +2,43 @@
 
 import { useState, useEffect } from "react";
 import { WeatherData } from "../weather.types";
-import { mockWeather } from "../weather.constants";
 import { WeatherService } from "../weather.service";
 
 interface UseWeatherReturn {
-  weather: WeatherData;
-  handleScroll: (direction: "left" | "right") => void;
+  weather: WeatherData | null;
+  loading:boolean;
 }
+
+export const useWeather = (): UseWeatherReturn => {
+  const [weather, setWeather] = useState<WeatherData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+
+  // Fetch weather using the service and validate response
+useEffect(() => {
+    let isMounted = true;
+
+    const fetchWeather = async () => {
+      try {
+        const data = await WeatherService.fetchCurrentWeather();
+        if (!data) throw new Error("Invalid weather response");
+        if (isMounted) setWeather(data);
+      } catch (err) {
+        console.error("Weather fetch failed", err);
+        if (isMounted) setWeather(null);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    };
+
+    fetchWeather();
+    return () => {
+      isMounted = false; //clean up function to prevent update data when noe called. 
+    };
+  }, []);
+
+  return { weather,loading};
+};
 
 // Enhanced: Map weather to season primarily based on temperature (°F), with condition as tiebreaker
 export const getSeasonFromWeather = (weather: WeatherData): string => {
@@ -33,44 +63,4 @@ export const getSeasonFromWeather = (weather: WeatherData): string => {
     // Cold: Winter, but check for snowy
     return condition === "snowy" ? "winter" : "spring";
   }
-};
-
-export const useWeather = (): UseWeatherReturn => {
-  const [weather, setWeather] = useState<WeatherData>(mockWeather);
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  // Scroll handler for wardrobe items (unchanged)
-  const handleScroll = (direction: "left" | "right") => {
-    const container = document.getElementById("items-scroll");
-    if (container) {
-      const scrollAmount = 300;
-      const newPosition =
-        direction === "right" ? scrollPosition + scrollAmount : scrollPosition - scrollAmount;
-      container.scrollTo({ left: newPosition, behavior: "smooth" });
-      setScrollPosition(newPosition);
-    }
-  };
-
-  // Fetch weather using the service and validate response
-  useEffect(() => {
-    const fetchWeather = async () => {
-      try {
-        const fetchedWeather = await WeatherService.fetchCurrentWeather();
-        if (fetchedWeather) {
-          setWeather(fetchedWeather);
-        } else {
-          console.warn("Invalid weather data, using mock");
-          setWeather(mockWeather)
-        }
-      } catch (error) {
-        console.error("Weather fetch failed, using mock", error);
-        setWeather(mockWeather);
-      }
-    };
-
-    fetchWeather();
-  }, []);
-
-
-  return { weather, handleScroll };
 };
