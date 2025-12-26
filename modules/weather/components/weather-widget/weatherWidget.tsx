@@ -1,4 +1,4 @@
-"use client";
+"use client";  // Still needed for Framer Motion
 
 import React from "react";
 import { motion } from "framer-motion";
@@ -6,20 +6,7 @@ import { MapPin, Droplets, Wind, Eye, Thermometer, Clock } from "lucide-react";
 import { Card } from "../../../../components/ui/card";
 import type { WeatherData } from "../../weather.types";
 import type { WeatherWidgetProps, WeatherDetailItem } from "./weatherWidget.types";
-
-const getWeatherIconEl = (condition?: string) => {
-  const c = (condition || "").toLowerCase();
-
-  if (c.includes("thunder")) return <Wind className="w-32 h-32" />;
-  if (c.includes("rain") || c.includes("drizzle")) return <Droplets className="w-32 h-32" />;
-  if (c.includes("snow")) return <Eye className="w-32 h-32" />;
-  if (c.includes("cloud")) return <Wind className="w-32 h-32" />;
-  if (c.includes("clear") || c.includes("sun")) return <Eye className="w-32 h-32" />;
-
-  return <Eye className="w-32 h-32" />;
-};
-
-
+import { WeatherIcon } from "../weather-icon/weatherIcon";  
 
 const buildWeatherDetails = (weather: WeatherData): WeatherDetailItem[] => [
   {
@@ -119,7 +106,9 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               className="w-64 h-64 rounded-full flex items-center justify-center relative bg-gradient-to-br from-[var(--outfitly-gradient-start)] via-[var(--outfitly-gradient-mid)] to-[var(--outfitly-gradient-end)] shadow-[0_20px_60px_rgba(103,20,37,0.3)]"
             >
-              <div className="text-[var(--outfitly-text-light)]">{getWeatherIconEl(weather.condition)}</div>
+              <div className="text-[var(--outfitly-text-light)]">
+                <WeatherIcon condition={weather.condition} />
+              </div>
             </motion.div>
           </div>
         </div>
