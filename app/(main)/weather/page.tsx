@@ -1,4 +1,4 @@
-import WeatherPage from "@/modules/weather";
+import WeatherPage from "@/modules/weather/weather";
 
 const Weather = () => {
   return <WeatherPage />;
