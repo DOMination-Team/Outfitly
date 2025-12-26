@@ -2,9 +2,6 @@
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import CustomButton from "../../components/custom-button";
-import { useTheme } from "next-themes";
-import { Navbar } from "../../components/navbar";
-import { Footer } from "../../components/footer";
 import { PageHeader } from "../../components/page-header";
 import { useWeather } from "./hooks/useWeather";
 import { WeatherWidget } from "./components/weather-widget/weatherWidget";
@@ -15,10 +12,8 @@ import { useMemo } from "react";
 import { getSeasonFromWeather } from "./hooks/useWeather";
 
 export default function WeatherPage() {
-  const { theme } = useTheme();
   const { weather, loading: weatherLoading} = useWeather();
   const { outfits: userOutfits, items: userItems, loading: profileLoading } = useProfile();
-
 
   const season = useMemo(
     () => (weather ? getSeasonFromWeather(weather) : "fall"),
@@ -54,7 +49,7 @@ export default function WeatherPage() {
   });
   };
   return (
-    <div style={{ backgroundColor: "var(--outfitly-bg-primary)" }}>
+    <div className="bg-background">
       <main className="pt-20 pb-16">
         <PageHeader
           title="Today's Weather Outfits"
@@ -77,19 +72,8 @@ export default function WeatherPage() {
             }}
           >
             <div className="flex items-center justify-between mt-12 mb-6">
-              <h2
-                className="mb-8"
-                style={{
-                  fontSize: "2rem",
-                  fontWeight: "900",
-                  letterSpacing: "0.02em",
-                  background:
-                    "linear-gradient(to right, var(--outfitly-gradient-start), var(--outfitly-gradient-mid), var(--outfitly-gradient-end))",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
+              <h2 className="mb-8 text-2xl font-extrabold tracking-wide bg-gradient-to-r from-[var(--outfitly-gradient-start)] via-[var(--outfitly-gradient-mid)] to-[var(--outfitly-gradient-end)] bg-clip-text text-transparent">
+
                 Perfect outfits for today ({season} weather):
               </h2>
             </div>
@@ -113,18 +97,7 @@ export default function WeatherPage() {
             animate={{ opacity: 1, transition: { duration: 0.6, delay: 0.5 } }}
           >
             <div className="flex items-center justify-between mt-12 mb-6">
-              <h2
-                style={{
-                  fontSize: "2rem",
-                  fontWeight: "900",
-                  letterSpacing: "0.02em",
-                  background:
-                    "linear-gradient(to right, var(--outfitly-gradient-start), var(--outfitly-gradient-mid), var(--outfitly-gradient-end))",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
+              <h2 className="text-2xl font-extrabold tracking-wide bg-gradient-to-r from-[var(--outfitly-gradient-start)] via-[var(--outfitly-gradient-mid)] to-[var(--outfitly-gradient-end)] bg-clip-text text-transparent">
                 Your wardrobe items for this weather:
               </h2>
               <CustomButton variant="link" className="flex items-center gap-2">
@@ -144,30 +117,38 @@ export default function WeatherPage() {
                     <WardrobeItemCard key={item.id || index} item={item} index={index} />
                   ))}
                 </div>
-                <button
-                  onClick={() => handleScroll("left")}
-                  className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 p-2 rounded-full shadow-md"
-                  style={{
-                    backgroundColor: theme === "dark" ? "var(--card)" : "var(--card)",
-                    opacity: 0.7,
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}
-                >
-                  &#8592;
-                </button>
-                <button
-                  onClick={() => handleScroll("right")}
-                  className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 p-2 rounded-full shadow-md"
-                  style={{
-                    backgroundColor: theme === "dark" ? "var(--card)" : "var(--card)",
-                    opacity: 0.7,
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}
-                >
-                  &#8594;
-                </button>
+              <button
+                onClick={() => handleScroll("left")}
+                className="
+                  absolute left-0 top-1/2 -translate-y-1/2
+                  rounded-full border
+                  bg-card
+                  p-2
+                  shadow-md
+                  opacity-70
+                  transition-opacity
+                  hover:opacity-100
+                "
+              >
+                ←
+              </button>
+
+              <button
+                onClick={() => handleScroll("right")}
+                className="
+                  absolute right-0 top-1/2 -translate-y-1/2
+                  rounded-full border
+                  bg-card
+                  p-2
+                  shadow-md
+                  opacity-70
+                  transition-opacity
+                  hover:opacity-100
+                "
+              >
+                →
+              </button>
+
               </div>
             ) : (
               <p>No wardrobe items match this weather. Add more in your profile!</p> // <-- Fallback
