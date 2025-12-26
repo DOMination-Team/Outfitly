@@ -28,7 +28,7 @@ type CustomTextFieldProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "n
 const baseLabelClasses = "text-sm font-medium text-foreground tracking-wide";
 
 const baseInputClasses = [
-  "w-full pr-4 py-4 rounded-xl h-auto",
+  "w-full pe-4 py-4 rounded-xl h-auto",
   "bg-[#FAF1ED] dark:bg-[#1C1C20]",
   "border-2 border-[#F2E8E3] dark:border-[#35353D]",
   "text-[#4C1420] dark:text-white",
@@ -97,7 +97,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
 
       <div className="relative">
         {icon && !isCheckbox && (
-          <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#4C1420]/50 dark:text-white/60">
+          <span className="pointer-events-none absolute start-4 top-1/2 -translate-y-1/2 text-[#4C1420]/50 dark:text-white/60">
             {icon}
           </span>
         )}
@@ -128,7 +128,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
             aria-invalid={hasError || undefined}
             className={clsx(
               baseInputClasses,
-              icon ? "pl-12" : "pl-4", // 👈 padding حسب وجود الأيقونة
+              icon ? "ps-12" : "ps-4", // 👈 padding حسب وجود الأيقونة
               invalidInputClasses,
               inputVariantClasses[variant],
               style?.input,
