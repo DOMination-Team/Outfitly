@@ -15,6 +15,7 @@ import type { ExtendedProfileHeaderProps } from "./profileHeader.types";
 import { getAvatarAlt } from "./profileHeader.utils";
 import { useTheme } from "next-themes";
 import { useProfileHeader } from "./useProfileHeader";
+import Image from "next/image";
 
 export function ProfileHeader(props: ExtendedProfileHeaderProps) {
   const { theme } = useTheme();
@@ -23,7 +24,6 @@ export function ProfileHeader(props: ExtendedProfileHeaderProps) {
     imagePreview,
     crop,
     setCrop,
-    completedCrop,
     setCompletedCrop,
     isCropping,
     setIsCropping,
@@ -42,10 +42,11 @@ export function ProfileHeader(props: ExtendedProfileHeaderProps) {
   const renderAvatar = () => {
     if (imagePreview || safeEditForm.avatarUrl) {
       return (
-        <img
+        <Image
           src={imagePreview || safeEditForm.avatarUrl}
           alt={getAvatarAlt(user.name)}
           className="w-full h-full object-cover"
+          fill
         />
       );
     }
@@ -223,7 +224,13 @@ export function ProfileHeader(props: ExtendedProfileHeaderProps) {
               onComplete={(c: Crop) => setCompletedCrop(c)}
               aspect={1}
             >
-              <img ref={imgRef} src={imagePreview} className="max-w-full h-auto" />
+              <Image
+                ref={imgRef}
+                src={imagePreview}
+                alt="Avatar"
+                fill
+                className="max-w-full h-auto"
+              />
             </ReactCrop>
           )}
 

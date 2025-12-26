@@ -9,8 +9,6 @@ import { useNavbar } from "./useNavbar";
 import CustomButton from "../custom-button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { MiniLoader } from "./miniLoader";
-import { logOutAction } from "@/modules/auth/auth.actions";
-import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { LanguageSwitcher } from "./language-switcher";
 

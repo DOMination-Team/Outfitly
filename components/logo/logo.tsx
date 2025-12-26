@@ -12,13 +12,7 @@ interface IProps {
   color?: string; // optional: override color
 }
 
-export function Logo({
-  size = "md",
-  animated = true,
-  linkTo = "/",
-  className = "",
-  color = "currentColor", // defaults to current text color
-}: IProps) {
+export function Logo({ size = "md", animated = true, linkTo = "/", className = "" }: IProps) {
   const { theme } = useTheme();
   const logo = (
     <motion.div
