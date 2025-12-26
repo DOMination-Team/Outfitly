@@ -114,7 +114,7 @@ export function Navbar() {
                   <Link href="/sign-in">
                     <Button
                       variant="ghost"
-                      className="hover:bg-transparent"
+                      className="hover:bg-transparent cursor-pointer"
                       style={{ color: iconColor }}
                     >
                       {t("signIn")}
@@ -123,7 +123,7 @@ export function Navbar() {
 
                   <Link href="/sign-up">
                     <Button
-                      className="hover:scale-105 hover:shadow-lg transition-all"
+                      className="hover:scale-105 hover:shadow-lg transition-all cursor-pointer"
                       style={{
                         backgroundColor: NAVBAR_COLORS.primary,
                         color: NAVBAR_COLORS.textLight,
@@ -297,7 +297,7 @@ export function Navbar() {
                     <Link href="/sign-in" onClick={closeMenu}>
                       <Button
                         variant="ghost"
-                        className="w-full"
+                        className="w-full cursor-pointer"
                         style={{ color: NAVBAR_COLORS.primary }}
                       >
                         {t("signIn")}
@@ -306,7 +306,7 @@ export function Navbar() {
 
                     <Link href="/sign-up" onClick={closeMenu}>
                       <Button
-                        className="w-full"
+                        className="w-full cursor-pointer"
                         style={{
                           backgroundColor: NAVBAR_COLORS.primary,
                           color: NAVBAR_COLORS.textLight,
