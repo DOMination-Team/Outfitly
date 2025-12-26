@@ -61,7 +61,7 @@ export function About() {
         style={{ background: gradients.section }}
       >
         {/* Progress Indicator - Desktop only */}
-        <div className="hidden lg:block fixed left-8 top-1/2 -translate-y-1/2 z-50">
+        <div className="hidden lg:block fixed ltr:left-8 rtl:right-8 top-1/2 -translate-y-1/2 z-50">
           <div className="relative h-32 w-1 bg-white/20 rounded-full overflow-hidden">
             <div
               ref={progressRef}
@@ -127,7 +127,7 @@ export function About() {
 
                         {/* Feature number */}
                         <div
-                          className="text-8xl sm:text-9xl font-bold absolute -right-4 -top-8 opacity-10 pointer-events-none select-none hidden lg:block"
+                          className="text-8xl sm:text-9xl font-bold absolute ltr:-right-4 rtl:-left-4 -top-8 opacity-10 pointer-events-none select-none hidden lg:block"
                           style={{ color: "#FAF1ED" }}
                         >
                           0{index + 1}
