@@ -224,7 +224,12 @@
     },
     "form": {
       "occasionLabel": "What's the occasion?",
-      "customOccasionPlaceholder": "Please specify your occasion..."
+      "weatherLabel": "What's the weather?",
+      "styleLabel": "Preferred style?",
+      "requirementsLabel": "Any specific requirements?",
+      "requirementsOptional": "(Optional)",
+      "customOccasionPlaceholder": "Please specify your occasion...",
+      "requirementsPlaceholder": "E.g., prefer darker colors, need comfortable shoes..."
     },
     "occasions": {
       "workMeeting": "Work Meeting",
@@ -251,6 +256,15 @@
       "streetwear": "Streetwear",
       "loungewear": "Loungewear",
       "party": "Party"
+    },
+    "button": {
+      "generate": "Generate Outfits with AI",
+      "generating": "AI is Matching Your Wardrobe..."
+    },
+    "results": {
+      "title": "AI Matched Outfits",
+      "noImage": "No image",
+      "match": "Match"
     }
   },
   "Weather": {

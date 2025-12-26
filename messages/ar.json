@@ -224,7 +224,12 @@
     },
     "form": {
       "occasionLabel": "ما هي المناسبة؟",
-      "customOccasionPlaceholder": "حدد مناسبتك..."
+      "weatherLabel": "كيف حال الطقس؟",
+      "styleLabel": "النمط المفضل؟",
+      "requirementsLabel": "أي متطلبات محددة؟",
+      "requirementsOptional": "(اختياري)",
+      "customOccasionPlaceholder": "حدد مناسبتك...",
+      "requirementsPlaceholder": "مثال: أفضل الألوان الداكنة، أحتاج أحذية مريحة..."
     },
     "occasions": {
       "workMeeting": "اجتماع عمل",
@@ -251,6 +256,15 @@
       "streetwear": "ستريت وير",
       "loungewear": "ملابس منزلية",
       "party": "حفلات"
+    },
+    "button": {
+      "generate": "إنشاء أزياء بالذكاء الاصطناعي",
+      "generating": "الذكاء الاصطناعي يطابق خزانتك..."
+    },
+    "results": {
+      "title": "الأزياء المطابقة بالذكاء الاصطناعي",
+      "noImage": "لا توجد صورة",
+      "match": "تطابق"
     }
   },
   "Weather": {
