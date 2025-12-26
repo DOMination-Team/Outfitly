@@ -4,12 +4,14 @@ import { Pagination, PaginationContent, PaginationItem } from "@/components/ui/p
 import { parseAsInteger, useQueryState } from "nuqs";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { GetUserWardrobeItemResponse } from "@/modules/wardrobe/types/dto.types";
+import { useTranslations } from "next-intl";
 
 const WardrobePagination = ({
   paginationDetails: { totalPages },
 }: {
   paginationDetails: Omit<GetUserWardrobeItemResponse, "items">;
 }) => {
+  const t = useTranslations("Wardrobe.pagination");
   const [page, setPage] = useQueryState(
     "page",
     parseAsInteger.withDefault(1).withOptions({ shallow: false }),
@@ -26,8 +28,8 @@ const WardrobePagination = ({
             onClick={() => handlePageChange(page - 1)}
             disabled={page === 1}
           >
-            <ChevronLeft className="mr-2 h-4 w-4" />
-            Previous
+            <ChevronLeft className="h-4 w-4 rtl-flip" />
+            {t("previous")}
           </Button>
         </PaginationItem>
         <PaginationItem>
@@ -41,8 +43,8 @@ const WardrobePagination = ({
             onClick={() => handlePageChange(page + 1)}
             disabled={page >= totalPages}
           >
-            Next
-            <ChevronRight className="mr-2 h-4 w-4" />
+            {t("next")}
+            <ChevronRight className="h-4 w-4 rtl-flip" />
           </Button>
         </PaginationItem>
       </PaginationContent>

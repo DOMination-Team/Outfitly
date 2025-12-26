@@ -192,6 +192,29 @@
     "deleteDialog": {
       "title": "Delete {itemName}?",
       "description": "This action cannot be undone. This will permanently delete your wardrobe item."
+    },
+    "stats": {
+      "totalItems": "Total Items",
+      "tops": "Tops",
+      "bottoms": "Bottoms",
+      "shoes": "Shoes"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "errors": {
+      "somethingWentWrong": "Something Went Wrong",
+      "couldNotLoad": "We couldn't load your wardrobe items. This might be a temporary issue.",
+      "errorDetails": "Error Details:",
+      "tryReloadingWardrobe": "Try Reloading Wardrobe",
+      "retry": "Retry",
+      "failed": "Failed",
+      "tryAgain": "Try again"
+    },
+    "listCard": {
+      "addNewItem": "Add New Item",
+      "uploadDescription": "Upload a new piece to your wardrobe"
     }
   },
   "Explore": {

@@ -192,6 +192,29 @@
     "deleteDialog": {
       "title": "حذف {itemName}؟",
       "description": "لا يمكن التراجع عن هذا الإجراء. سيتم حذف قطعة الخزانة نهائياً."
+    },
+    "stats": {
+      "totalItems": "إجمالي القطع",
+      "tops": "قمصان",
+      "bottoms": "بناطيل",
+      "shoes": "أحذية"
+    },
+    "pagination": {
+      "previous": "السابق",
+      "next": "التالي"
+    },
+    "errors": {
+      "somethingWentWrong": "حدث خطأ ما",
+      "couldNotLoad": "لم نتمكن من تحميل قطع خزانتك. قد تكون هذه مشكلة مؤقتة.",
+      "errorDetails": "تفاصيل الخطأ:",
+      "tryReloadingWardrobe": "حاول إعادة تحميل الخزانة",
+      "retry": "إعادة المحاولة",
+      "failed": "فشل",
+      "tryAgain": "حاول مرة أخرى"
+    },
+    "listCard": {
+      "addNewItem": "إضافة قطعة جديدة",
+      "uploadDescription": "حمّل قطعة جديدة لخزانتك"
     }
   },
   "Explore": {
