@@ -36,17 +36,13 @@ export default function Weather() {
 
         <div className="container mx-auto px-4 max-w-7xl mt-12">
           {/* Weather Widget */}
-            {weatherLoading ? (
-              <WeatherWidgetLoadingFallback />
-            ) : weatherError ? (
-              <WeatherErrorFallback
-                error={weatherError}
-                onRetry={() => window.location.reload()}
-              />
-            ) : (
-              <WeatherWidget weather={weather} loading={false} />
-            )}
-
+          {weatherLoading ? (
+            <WeatherWidgetLoadingFallback />
+          ) : weatherError ? (
+            <WeatherErrorFallback error={weatherError} onRetry={() => window.location.reload()} />
+          ) : (
+            <WeatherWidget weather={weather} loading={false} />
+          )}
 
           {/* Outfits Section */}
           <section>
@@ -55,23 +51,22 @@ export default function Weather() {
               animate={{ opacity: 1, transition: { duration: 0.6, delay: 0.3 } }}
             >
               <div className="flex flex-col justify-between mt-12 mb-6">
+                <h2 className="mb-8 text-2xl font-extrabold tracking-wide bg-gradient-to-r from-[var(--outfitly-gradient-start)] via-[var(--outfitly-gradient-mid)] to-[var(--outfitly-gradient-end)] bg-clip-text text-transparent">
+                  Perfect outfits for today ({season} weather):
+                </h2>
 
-              <h2 className="mb-8 text-2xl font-extrabold tracking-wide bg-gradient-to-r from-[var(--outfitly-gradient-start)] via-[var(--outfitly-gradient-mid)] to-[var(--outfitly-gradient-end)] bg-clip-text text-transparent">
-                Perfect outfits for today ({season} weather):
-              </h2>
-
-              {profileLoading ? (
-                 <OutfitGridLoadingFallback />
-              ) : filteredOutfits.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
-                  {filteredOutfits.map((outfit, index) => (
-                    <OutfitCard key={outfit.id || index} outfit={outfit} index={index} />
-                  ))}
-                </div>
-              ) : (
-                <p>No outfits match this weather. Try adding more to your profile!</p>
-              )}
-            </div>
+                {profileLoading ? (
+                  <OutfitGridLoadingFallback />
+                ) : filteredOutfits.length > 0 ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
+                    {filteredOutfits.map((outfit, index) => (
+                      <OutfitCard key={outfit.id || index} outfit={outfit} index={index} />
+                    ))}
+                  </div>
+                ) : (
+                  <p>No outfits match this weather. Try adding more to your profile!</p>
+                )}
+              </div>
             </motion.div>
           </section>
 

@@ -10,30 +10,30 @@ export const useWeather = () => {
   const [weatherError, setWeatherError] = useState<Error | null>(null);
 
   const itemsContainerRef = useRef<HTMLDivElement>(null);
-  const { outfits: userOutfits, items: userItems, profileLoading:profileLoading} = useProfile();
+  const { outfits: userOutfits, items: userItems, profileLoading: profileLoading } = useProfile();
 
   useEffect(() => {
-      let isMounted = true;
+    let isMounted = true;
 
-      const loadWeather = async () => {
-        try {
-          const data = await fetchCurrentWeather();
-          if (isMounted) setWeather(data);
-        } catch (error) {
-          if (isMounted) {
-            setWeatherError(error as Error);
-            setWeather(null);
-          }
-        } finally {
-          if (isMounted) setWeatherLoading(false);
+    const loadWeather = async () => {
+      try {
+        const data = await fetchCurrentWeather();
+        if (isMounted) setWeather(data);
+      } catch (error) {
+        if (isMounted) {
+          setWeatherError(error as Error);
+          setWeather(null);
         }
-      };
+      } finally {
+        if (isMounted) setWeatherLoading(false);
+      }
+    };
 
-      loadWeather();
-      return () => {
-        isMounted = false;
-      };
-    }, []);
+    loadWeather();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
   const season = useMemo(() => (weather ? getSeasonFromWeather(weather) : "fall"), [weather]);
 
   const filteredOutfits = useMemo(
@@ -66,7 +66,7 @@ export const useWeather = () => {
 
   return {
     weather,
-    weatherLoading,  
+    weatherLoading,
     weatherError,
     profileLoading,
     season,

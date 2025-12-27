@@ -23,11 +23,7 @@ function renderContent(
   likedOutfitsLoading: boolean,
 ) {
   if (activeTab === "outfits") {
-    return outfitsLoading ? (
-      <ProfileOutfitsSkeleton />
-    ) : (
-      <ProfileOutfitsGrid outfits={outfits} />
-    );
+    return outfitsLoading ? <ProfileOutfitsSkeleton /> : <ProfileOutfitsGrid outfits={outfits} />;
   }
 
   if (activeTab === "liked-outfits") {
@@ -76,10 +72,7 @@ export function ProfilePage() {
       <Navbar />
 
       <main className="pt-20 pb-16">
-        <PageHeader
-          title="Profile"
-          subtitle="Your personal style collection"
-        />
+        <PageHeader title="Profile" subtitle="Your personal style collection" />
 
         <div className="container mx-auto px-4 max-w-6xl mt-12">
           {/* 🔹 Profile Header */}
@@ -116,13 +109,7 @@ export function ProfilePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
           >
-            {renderContent(
-              activeTab,
-              outfits,
-              likedOutfits,
-              outfitsLoading,
-              likedOutfitsLoading,
-            )}
+            {renderContent(activeTab, outfits, likedOutfits, outfitsLoading, likedOutfitsLoading)}
           </motion.div>
         </div>
       </main>

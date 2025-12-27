@@ -23,9 +23,7 @@ const WeatherErrorFallback = ({ error, onRetry }: Props) => {
             We couldn’t fetch your local weather data.
           </p>
 
-          <pre className="text-xs text-red-500 bg-red-50 p-2 rounded">
-            {error.message}
-          </pre>
+          <pre className="text-xs text-red-500 bg-red-50 p-2 rounded">{error.message}</pre>
 
           <Button onClick={onRetry} className="bg-red-600 hover:bg-red-700 text-white">
             <RotateCw className="w-4 h-4 mr-2" />
