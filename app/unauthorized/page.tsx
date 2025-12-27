@@ -2,14 +2,9 @@
 
 import { Button } from "@/components/ui/button";
 import { LockKeyhole, LogIn, Home } from "lucide-react";
-import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 export default function Unauthorized() {
-  const t = useTranslations("Errors.unauthorized");
-  const tCommon = useTranslations("Common");
-  const tNav = useTranslations("Navigation");
-
   return (
     <div className="flex h-screen items-center justify-center bg-gradient-to-br from-background to-muted/20">
       <div className="mx-4 flex max-w-md flex-col items-center justify-center gap-6 text-center">
@@ -21,22 +16,24 @@ export default function Unauthorized() {
         </div>
 
         <div className="space-y-3">
-          <h1 className="text-6xl font-bold tracking-tight">{t("code")}</h1>
-          <h2 className="text-xl font-semibold text-muted-foreground">{t("heading")}</h2>
-          <p className="text-sm text-muted-foreground/80">{t("message")}</p>
+          <h1 className="text-6xl font-bold tracking-tight">401</h1>
+          <h2 className="text-xl font-semibold text-muted-foreground">Unauthorized Access</h2>
+          <p className="text-sm text-muted-foreground/80">
+            You need to be authenticated to access this resource. Please sign in to continue.
+          </p>
         </div>
 
         <div className="flex gap-3">
           <Button asChild size="lg" className="gap-2">
             <Link href="/sign-in">
               <LogIn className="h-4 w-4" />
-              {tNav("signIn")}
+              Sign in
             </Link>
           </Button>
           <Button asChild variant="outline" size="lg" className="gap-2">
             <Link href="/">
               <Home className="h-4 w-4" />
-              {tCommon("goHome")}
+              Go home
             </Link>
           </Button>
         </div>

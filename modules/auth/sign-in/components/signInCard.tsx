@@ -1,11 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
 import SignInForm from "./signInForm";
-import { useTranslations } from "next-intl";
 
 const SignInCard = () => {
-  const t = useTranslations("Auth.signIn");
-
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -32,8 +29,10 @@ const SignInCard = () => {
 
       {/* Welcome Text */}
       <div className="mb-8">
-        <h2 className="mb-2 text-[var(--outfitly-heading)]">{t("heading")}</h2>
-        <p className="text-sm text-[var(--outfitly-muted-foreground)]">{t("subtitle")}</p>
+        <h2 className="mb-2 text-[var(--outfitly-heading)]">Welcome Back!</h2>
+        <p className="text-sm text-[var(--outfitly-muted-foreground)]">
+          Sign in to continue to your wardrobe
+        </p>
       </div>
 
       {/* Login Form */}

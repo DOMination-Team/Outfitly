@@ -10,8 +10,7 @@ import { motion } from "framer-motion";
 import { ChevronDown, Filter } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Dispatch, SetStateAction } from "react";
-import { useTranslations } from "next-intl";
-
+import { SEASONS, STYLES } from "./constants";
 interface IProps {
   styleFilter: string;
   seasonFilter: string;
@@ -21,12 +20,6 @@ interface IProps {
 
 const Filters = ({ styleFilter, seasonFilter, setStyleFilter, setSeasonFilter }: IProps) => {
   const { theme } = useTheme();
-  const t = useTranslations("Explore.filters");
-  const tCommon = useTranslations("Common");
-
-  const STYLES = [t("allStyles"), t("casual"), t("elegant"), t("street"), t("boho")];
-
-  const SEASONS = [t("allSeasons"), t("spring"), t("summer"), t("autumn"), t("winter")];
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -57,7 +50,7 @@ const Filters = ({ styleFilter, seasonFilter, setStyleFilter, setSeasonFilter }:
                 color: theme === "dark" ? "var(--outfitly-text-light)" : "var(--outfitly-primary)",
               }}
             >
-              {tCommon("filterBy")}
+              Filter by:
             </span>
           </div>
 

@@ -6,17 +6,13 @@ import useSignIn from "../hook/useSignIn";
 import { Mail, Lock } from "lucide-react";
 import CustomButton from "@/components/custom-button";
 import { useMemo } from "react";
-import { useTranslations } from "next-intl";
 
 const SignInForm = () => {
   const { formik } = useSignIn();
-  const t = useTranslations("Auth.signIn");
-
   const disabled = useMemo(() => {
     const { email, password } = formik.values;
     return !email.trim() || !password.trim() || formik.isSubmitting;
   }, [formik]);
-
   return (
     <FormikProvider value={formik}>
       <Form className="space-y-6">
@@ -24,8 +20,8 @@ const SignInForm = () => {
         <MotionField
           name="email"
           isPassword={false}
-          label={t("email")}
-          placeholder={t("emailPlaceholder")}
+          label="Email"
+          placeholder="you@example.com"
           icon={<Mail size={18} />}
         />
 
@@ -33,8 +29,8 @@ const SignInForm = () => {
         <MotionField
           name="password"
           isPassword={true}
-          label={t("password")}
-          placeholder={t("passwordPlaceholder")}
+          label="Password"
+          placeholder="••••••••"
           icon={<Lock size={18} />}
         />
 
@@ -48,7 +44,7 @@ const SignInForm = () => {
             type="button"
             className="text-[#671425] dark:text-[#8B1D35] hover:text-[#8B1D35] dark:hover:text-[#A82444] transition-colors duration-300"
           >
-            {t("forgotPassword")}
+            Forgot Password?
           </button>
         </motion.div>
 
@@ -66,7 +62,7 @@ const SignInForm = () => {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <span className="relative z-10">{t("submitButton")}</span>
+          <span className="relative z-10">Sign In</span>
         </CustomButton>
       </Form>
     </FormikProvider>

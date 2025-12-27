@@ -7,7 +7,6 @@ import { useAIGenerator } from "../hook/useAIGenerator";
 import { PageHeader } from "@/components/page-header";
 import AIGeneratorConfigCard from "./configCards";
 import { AIGeneratorLoading } from "./resultsLoader";
-import { useTranslations } from "next-intl";
 
 export interface IGeneratedOutfit {
   name: string;
@@ -30,7 +29,6 @@ export type AIGeneratorFormData = {
 };
 
 export default function AIGenerator() {
-  const t = useTranslations("AIGenerator");
   const {
     formData,
     customOccasion,
@@ -59,7 +57,10 @@ export default function AIGenerator() {
       <AnimatedBg />
 
       <main className="relative z-10 pt-20 pb-16">
-        <PageHeader title={t("heading")} subtitle={t("subtitle")} />
+        <PageHeader
+          title="AI Style Assistant"
+          subtitle="Let artificial intelligence design your perfect outfit"
+        />
 
         <AIGeneratorConfigCard
           formData={formData}

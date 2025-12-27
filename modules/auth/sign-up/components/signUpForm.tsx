@@ -2,16 +2,14 @@
 import MotionField from "@/components/motioned-input/motionedInput";
 import { Form, FormikProvider } from "formik";
 import { motion } from "framer-motion";
-import { useRouter } from "@/i18n/navigation";
+import { useRouter } from "nextjs-toploader/app";
 import { useMemo } from "react";
 import useSignUp from "../hook/useSignUp";
 import CustomButton from "@/components/custom-button";
-import { useTranslations } from "next-intl";
 
 const SignUpForm = () => {
   const router = useRouter();
   const { formik } = useSignUp();
-  const t = useTranslations("Auth.signUp");
 
   const disabled = useMemo(() => {
     const { fullName, email, password, confirmPassword, terms } = formik.values;
@@ -30,37 +28,32 @@ const SignUpForm = () => {
   return (
     <FormikProvider value={formik}>
       <Form className="space-y-5">
-        <MotionField
-          name="fullName"
-          label={t("fullName")}
-          placeholder={t("fullNamePlaceholder")}
-          type="text"
-        />
+        <MotionField name="fullName" label="Full Name" placeholder="Mona Zaqout" type="text" />
 
         <MotionField
           name="email"
-          label={t("email")}
-          placeholder={t("emailPlaceholder")}
+          label="Email Address"
+          placeholder="mona@example.com"
           type="email"
         />
 
         <MotionField
           name="password"
-          label={t("password")}
-          placeholder={t("passwordPlaceholder")}
+          label="Password"
+          placeholder="••••••••"
           type="password"
           isPassword={true}
         />
 
         <MotionField
           name="confirmPassword"
-          label={t("confirmPassword")}
-          placeholder={t("passwordPlaceholder")}
+          label="Confirm Password"
+          placeholder="••••••••"
           type="password"
           isPassword={true}
         />
 
-        <MotionField type="checkbox" name="terms" label={t("agreeToTerms")} />
+        <MotionField type="checkbox" name="terms" label="Agree to Terms and Conditions" />
 
         <CustomButton
           type="submit"
@@ -76,7 +69,7 @@ const SignUpForm = () => {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <span className="relative z-10">{t("submitButton")}</span>
+          <span className="relative z-10">Sign Up</span>
         </CustomButton>
 
         <motion.div
@@ -86,14 +79,14 @@ const SignUpForm = () => {
           className="text-center pt-4"
         >
           <div className="flex items-center justify-center gap-2 text-sm">
-            <p className="text-[var(--outfitly-text-primary)]/60">{t("hasAccount")}</p>
+            <p className="text-[var(--outfitly-text-primary)]/60">Already have an account?</p>
             <CustomButton
               type="button"
               variant="link"
               onClick={() => router.push("/sign-in")}
               className="!p-0 m-0 cursor-pointer text-[var(--outfitly-primary)] hover:text-[var(--outfitly-primary-hover)] dark:hover:text-[var(--outfitly-primary-active)] transition-colors duration-300"
             >
-              {t("signInLink")}
+              Sign In
             </CustomButton>
           </div>
         </motion.div>

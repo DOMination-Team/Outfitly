@@ -2,13 +2,9 @@
 
 import { Button } from "@/components/ui/button";
 import { ShieldAlert, Home, ArrowLeft } from "lucide-react";
-import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 export default function Forbidden() {
-  const t = useTranslations("Errors.forbidden");
-  const tCommon = useTranslations("Common");
-
   return (
     <div className="flex h-screen items-center justify-center bg-gradient-to-br from-background to-muted/20">
       <div className="mx-4 flex max-w-md flex-col items-center justify-center gap-6 text-center">
@@ -20,16 +16,18 @@ export default function Forbidden() {
         </div>
 
         <div className="space-y-3">
-          <h1 className="text-6xl font-bold tracking-tight">{t("code")}</h1>
-          <h2 className="text-xl font-semibold text-muted-foreground">{t("heading")}</h2>
-          <p className="text-sm text-muted-foreground/80">{t("message")}</p>
+          <h1 className="text-6xl font-bold tracking-tight">403</h1>
+          <h2 className="text-xl font-semibold text-muted-foreground">Access Forbidden</h2>
+          <p className="text-sm text-muted-foreground/80">
+            You don&apos;t have permission to access this resource.
+          </p>
         </div>
 
         <div className="flex gap-3">
           <Button asChild size="lg" className="gap-2">
             <Link href="/">
               <Home className="h-4 w-4" />
-              {tCommon("goHome")}
+              Go home
             </Link>
           </Button>
           <Button
@@ -39,7 +37,7 @@ export default function Forbidden() {
             className="gap-2"
           >
             <ArrowLeft className="h-4 w-4" />
-            {tCommon("goBack")}
+            Go back
           </Button>
         </div>
       </div>

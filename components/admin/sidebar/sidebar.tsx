@@ -3,37 +3,13 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Users, Shirt, Settings, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NAVBAR_COLORS } from "../../navbar/navbar.constants";
-import { useTranslations } from "next-intl";
+import { SIDEBAR_ITEMS } from "./sidebar.constants";
 
 export function AdminSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const pathname = usePathname();
-  const t = useTranslations("Admin");
-
-  const sidebarItems = [
-    {
-      icon: LayoutDashboard,
-      label: t("sidebar.dashboard"),
-      href: "/dashboard",
-    },
-    {
-      icon: Users,
-      label: t("sidebar.users"),
-      href: "/dashboard/users",
-    },
-    {
-      icon: Shirt,
-      label: t("sidebar.outfits"),
-      href: "/dashboard/outfits",
-    },
-    // {
-    //   icon: Settings,
-    //   label: t("sidebar.settings"),
-    //   href: "/dashboard/settings",
-    // },
-  ];
 
   return (
     <>
@@ -67,7 +43,7 @@ export function AdminSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: ()
         >
           {/* Navigation Items */}
           <div className="p-4 flex flex-col gap-2">
-            {sidebarItems.map((item) => {
+            {SIDEBAR_ITEMS.map((item) => {
               const Icon = item.icon;
               const isActive = pathname.startsWith(item.href);
 
@@ -112,11 +88,9 @@ export function AdminSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: ()
                 </div>
 
                 <div className="space-y-1">
-                  <h3 className="text-white font-bold text-lg tracking-tight">
-                    {t("proCard.title")}
-                  </h3>
+                  <h3 className="text-white font-bold text-lg tracking-tight">Pro Admin</h3>
                   <p className="text-indigo-100 text-xs font-medium leading-relaxed">
-                    {t("proCard.description")}
+                    Access advanced analytics
                   </p>
                 </div>
               </div>

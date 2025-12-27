@@ -1,21 +1,9 @@
+"use client";
+
 import { Card } from "@/components/ui/card";
-import {
-  getUsersForStats,
-  getOutfitsForStats,
-  getEngagmentForStats,
-  getActivesForStats,
-} from "@/modules/dashboard/dashboard.service";
+import { stats } from "./dashboard-stats.constants";
 
-export async function DashboardStats() {
-  const [usersStats, outfitsStats, engagementStats, activesStats] = await Promise.all([
-    getUsersForStats(),
-    getOutfitsForStats(),
-    getEngagmentForStats(),
-    getActivesForStats(),
-  ]);
-
-  const stats = [usersStats, outfitsStats, engagementStats, activesStats];
-
+export function DashboardStats() {
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
       {stats.map((stat, index) => {

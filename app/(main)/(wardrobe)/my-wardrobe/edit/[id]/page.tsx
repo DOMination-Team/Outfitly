@@ -7,15 +7,11 @@ import { getWardrobeItemDetailsAction } from "@/modules/wardrobe/wardrobe.action
 import WardrobeFrom from "@/modules/wardrobe/wardrobe-form/wardrobeFrom";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { CreateWardrobeForm } from "@/modules/wardrobe/constant";
-import { getTranslations } from "next-intl/server";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("Wardrobe.editItem");
-  return {
-    title: t("pageTitle"),
-    description: t("pageDescription"),
-  };
-}
+export const metadata: Metadata = {
+  title: "Edit Item",
+  description: "Edit your wardrobe item details.",
+};
 
 // Server component to fetch categories
 async function CategoriesLoader() {
