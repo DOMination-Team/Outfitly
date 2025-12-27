@@ -60,8 +60,8 @@ export default function Weather() {
                 Perfect outfits for today ({season} weather):
               </h2>
 
-              {profileLoading ? (
-                 <OutfitGridLoadingFallback />
+              {weatherLoading || profileLoading  ? (
+                 <OutfitGridLoadingFallback count={4} />
               ) : filteredOutfits.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
                   {filteredOutfits.map((outfit, index) => (
@@ -91,8 +91,8 @@ export default function Weather() {
                 </CustomButton>
               </div>
 
-              {profileLoading ? (
-                <WardrobeCarouselLoadingFallback />
+              {weatherLoading || profileLoading ? (
+                <WardrobeCarouselLoadingFallback count={6}/>
               ) : filteredItems.length > 0 ? (
                 <div className="relative">
                   <div

@@ -22,25 +22,12 @@ export const getWeatherIcon = (condition: string): LucideIcon => {
 
 export type Season = "summer" | "fall" | "winter" | "spring";
 
-export const getSeasonFromWeather = (weather: WeatherData): Season => {
-  const { temperature, condition } = weather;
-  const normalizedCondition = condition.toLowerCase();
 
-  if (typeof temperature !== "number" || Number.isNaN(temperature)) {
-    return "fall";
-  }
+export const getSeasonFromWeather = (weather: WeatherData): string => {
+  const tempF = weather.temperature; // using Fahrenheit
 
-  if (temperature > 75) {
-    return "summer";
-  }
-
-  if (temperature >= 60) {
-    return normalizedCondition === "sunny" ? "summer" : "fall";
-  }
-
-  if (temperature >= 45) {
-    return normalizedCondition === "rainy" || normalizedCondition === "drizzle" ? "spring" : "fall";
-  }
-
-  return normalizedCondition === "snowy" ? "winter" : "spring";
+  if (tempF <= 50) return "winter";
+  if (tempF <= 65) return "fall";
+  if (tempF <= 85) return "spring";
+  return "summer";
 };

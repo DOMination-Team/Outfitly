@@ -10,51 +10,68 @@ export const useWeather = () => {
   const [weatherError, setWeatherError] = useState<Error | null>(null);
 
   const itemsContainerRef = useRef<HTMLDivElement>(null);
-  const { outfits: userOutfits, items: userItems, profileLoading:profileLoading} = useProfile();
+  const { outfits: userOutfits, items: userItems, profileLoading } = useProfile();
 
+  // Fetch weather on mount
   useEffect(() => {
-      let isMounted = true;
+    let isMounted = true;
 
-      const loadWeather = async () => {
-        try {
-          const data = await fetchCurrentWeather();
-          if (isMounted) setWeather(data);
-        } catch (error) {
-          if (isMounted) {
-            setWeatherError(error as Error);
-            setWeather(null);
-          }
-        } finally {
-          if (isMounted) setWeatherLoading(false);
+    const loadWeather = async () => {
+      try {
+        const data = await fetchCurrentWeather();
+        if (isMounted) setWeather(data);
+      } catch (error) {
+        if (isMounted) {
+          setWeatherError(error as Error);
+          setWeather(null);
         }
-      };
+      } finally {
+        if (isMounted) setWeatherLoading(false);
+      }
+    };
 
-      loadWeather();
-      return () => {
-        isMounted = false;
-      };
-    }, []);
-  const season = useMemo(() => (weather ? getSeasonFromWeather(weather) : "fall"), [weather]);
+    loadWeather();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
-  const filteredOutfits = useMemo(
-    () => userOutfits?.filter((outfit) => outfit.season === season) || [],
-    [userOutfits, season],
-  );
+  // Determine season based on fetched weather
+  const season = useMemo(() => (weather ? getSeasonFromWeather(weather) : null), [weather]);
 
+  // Filter outfits based on season
+  const filteredOutfits = useMemo(() => {
+    console.log(userOutfits)
+    if (!season) return [];
+    return (
+      userOutfits?.filter((outfit) => {
+        if (!outfit.season) return false;
+        const outfitSeasons = outfit.season
+          .toLowerCase()
+          .split(/[\/,]/)
+          .map((s) => s.trim());
+        console.log(outfitSeasons, '0sssss')  
+        return outfitSeasons.includes(season.toLowerCase()) || outfitSeasons.includes("all-year");
+      }) || []
+    );
+  }, [userOutfits, season]);
+
+  // Filter wardrobe items based on season
   const filteredItems = useMemo(() => {
-    const currentSeason = season.toLowerCase();
+    if (!season) return [];
     return (
       userItems?.filter((item) => {
-        const itemSeason = item.season?.toLowerCase();
-        return (
-          itemSeason === currentSeason ||
-          itemSeason === "all-year" ||
-          itemSeason?.includes(currentSeason)
-        );
+        if (!item.season) return false;
+        const itemSeasons = item.season
+          .toLowerCase()
+          .split(/[\/,]/)
+          .map((s) => s.trim());
+        return itemSeasons.includes(season.toLowerCase()) || itemSeasons.includes("all-year");
       }) || []
     );
   }, [userItems, season]);
 
+  // Scroll handler for wardrobe carousel
   const handleScroll = useCallback((direction: "left" | "right") => {
     if (!itemsContainerRef.current) return;
     const scrollAmount = 300;
@@ -66,7 +83,7 @@ export const useWeather = () => {
 
   return {
     weather,
-    weatherLoading,  
+    weatherLoading,
     weatherError,
     profileLoading,
     season,
