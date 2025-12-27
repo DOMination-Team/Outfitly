@@ -27,7 +27,6 @@ export interface Outfit {
   title?: string;
 }
 
-
 export interface WardrobeItem {
   id: string;
   name: string;
