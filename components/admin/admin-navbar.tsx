@@ -1,10 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { Bell, Sun, Moon, Menu, X, Search } from "lucide-react";
+import { Sun, Moon, Menu, X } from "lucide-react";
 
-import { Button } from "../ui/button";
 import { Logo } from "../logo/logo";
 import { useTheme } from "next-themes";
 import CustomButton from "../custom-button";
