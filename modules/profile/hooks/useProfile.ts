@@ -11,7 +11,7 @@ import {
 import type { IPaginationQuery } from "@/@types/database.type";
 
 export function useProfile() {
-  const { user: authUser } = useAuth();
+  const { user: authUser, setUser: setAuthUser } = useAuth();
 
   const [activeTab, setActiveTab] = useState<TabType>("outfits");
 
@@ -126,6 +126,16 @@ export function useProfile() {
       location: editForm.location || undefined,
       website: editForm.website || undefined,
       avatarUrl: editForm.avatarUrl || undefined,
+    });
+
+    // Update the global auth state with the new profile data
+    setAuthUser({
+      ...authUser,
+      fullName: editForm.name.trim(),
+      bio: editForm.bio || null,
+      location: editForm.location || null,
+      website: editForm.website || null,
+      avatarUrl: editForm.avatarUrl || null,
     });
 
     await fetchProfile();

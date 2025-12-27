@@ -141,6 +141,7 @@ export function Navbar() {
                     }}
                   >
                     <Avatar className="w-8 h-8">
+                      <AvatarImage src={user?.avatarUrl ?? ""} alt={user?.fullName ?? "User"} />
                       <AvatarFallback
                         style={{
                           backgroundColor: NAVBAR_COLORS.primary,
