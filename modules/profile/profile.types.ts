@@ -1,5 +1,5 @@
-export type TabType = "outfits" | "liked-outfits";
 import { LucideIcon } from "lucide-react";
+export type TabType = "outfits" | "liked-outfits";
 
 export interface User {
   id: string;
@@ -22,7 +22,7 @@ export interface Outfit {
   description?: string;
   temperature?: string;
   icon?: LucideIcon;
-  season?: string; // New: e.g., "summer", "winter", "autumn", "spring"
+  season?: string;
   likes?: number;
   title?: string;
 }

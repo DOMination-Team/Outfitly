@@ -18,18 +18,23 @@ export const getUserProfile = async (userId: string) => {
 };
 
 export const getUserOutfitsPaginated = async (userId: string, query: IPaginationQuery) => {
-  const { page, limit } = zodValidation(profileListQuerySchema, query);
-  return findUserOutfits(userId, { page, limit });
+  const validatedQuery = zodValidation(profileListQuerySchema, query);
+  return findUserOutfits(userId, validatedQuery);
 };
 
 export const getLikedOutfitsPaginated = async (userId: string, query: IPaginationQuery) => {
-  const { page, limit } = zodValidation(profileListQuerySchema, query);
-  return findLikedOutfits(userId, { page, limit });
+  const validatedQuery = zodValidation(profileListQuerySchema, query);
+  return findLikedOutfits(userId, validatedQuery);
+};
+
+export const getUserWardrobeItemsPaginated = async (userId: string, query: IPaginationQuery) => {
+  const validatedQuery = zodValidation(profileListQuerySchema, query);
+  return findUserWardrobeItems(userId, validatedQuery);
 };
 
 export const updateProfile = async (
   userId: string,
-  data: { name?: string; bio?: string; location?: string; website?: string; avatarUrl?: string },
+  data: { name?: string; bio?: string; location?: string; website?: string; avatarUrl?: string }
 ) => {
   const validData = zodValidation(profileUpdateSchema, data);
   try {
@@ -37,9 +42,4 @@ export const updateProfile = async (
   } catch {
     throw new CustomError({ message: "Failed to update profile", statusCode: 500 });
   }
-};
-
-export const getUserWardrobeItemsPaginated = async (userId: string, query: IPaginationQuery) => {
-  const { page, limit } = zodValidation(profileListQuerySchema, query);
-  return findUserWardrobeItems(userId, { page, limit });
 };
