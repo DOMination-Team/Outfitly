@@ -4,9 +4,7 @@ import { motion } from "framer-motion";
 import { Badge } from "../../../../components/ui/badge";
 import type { ProfileTabsWithCountsProps } from "./profileTaps.types";
 import { isTabActive } from "./profileTaps.utils";
-import {tabs} from "./profileTabs.constants"
-
-
+import { tabs } from "./profileTabs.constants";
 
 export function ProfileTabs({ activeTab, onTabChange, counts }: ProfileTabsWithCountsProps) {
   return (
@@ -32,7 +30,7 @@ export function ProfileTabs({ activeTab, onTabChange, counts }: ProfileTabsWithC
                 ${
                   isActive
                     ? "bg-primary text-primary-foreground border-outfitly-primary dark:border-outfitly-primary"
-                    : "bg-muted text-primary-foreground border-transparent dark:bg-outfitly-bg-primary dark:text-outfitly-text-light"
+                    : "bg-muted text-primary border-transparent dark:bg-outfitly-bg-primary dark:text-outfitly-text-light"
                 }`}
             >
               <Icon className="w-5 h-5" />
