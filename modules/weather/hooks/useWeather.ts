@@ -11,7 +11,6 @@ export const useWeather = () => {
   const itemsContainerRef = useRef<HTMLDivElement>(null);
   const { outfits: userOutfits, items: userItems } = useProfile();
 
-  
   // Fetch weather on mount
   useEffect(() => {
     let isMounted = true;
@@ -39,13 +38,13 @@ export const useWeather = () => {
   // Determine season based on fetched weather
   const season = useMemo(() => (weather ? getSeasonFromWeather(weather) : null), [weather]);
   const weatherStatus = useMemo<"loading" | "ready" | "error">(() => {
-    if (weatherLoading ) return "loading";
+    if (weatherLoading) return "loading";
     if (weatherError || !season) return "error";
     return "ready";
   }, [weatherLoading, weatherError, season]);
   // Filter outfits based on season
   const filteredOutfits = useMemo(() => {
-    console.log(userOutfits)
+    console.log(userOutfits);
     if (!season) return [];
     return (
       userOutfits?.filter((outfit) => {
@@ -54,7 +53,7 @@ export const useWeather = () => {
           .toLowerCase()
           .split(/[\/,]/)
           .map((s) => s.trim());
-        console.log(outfitSeasons, '0sssss')  
+        console.log(outfitSeasons, "0sssss");
         return outfitSeasons.includes(season.toLowerCase()) || outfitSeasons.includes("all-year");
       }) || []
     );

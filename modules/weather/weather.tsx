@@ -14,17 +14,16 @@ import OutfitGridLoadingFallback from "./components/outfit-card/outfitGridLoadin
 import WardrobeCarouselLoadingFallback from "./components/wardrobe-item-card/wardrobeCarouselLoadingFallback";
 
 export default function Weather() {
-const {
-  weather,
-  season,
-  weatherStatus,
-  weatherError,
-  filteredOutfits,
-  filteredItems,
-  handleScroll,
-  itemsContainerRef,
-} = useWeather();
-
+  const {
+    weather,
+    season,
+    weatherStatus,
+    weatherError,
+    filteredOutfits,
+    filteredItems,
+    handleScroll,
+    itemsContainerRef,
+  } = useWeather();
 
   return (
     <div className="bg-background">
@@ -46,10 +45,7 @@ const {
 
           {/* ================= ERROR STATE ================= */}
           {weatherStatus === "error" && (
-            <WeatherErrorFallback
-              error={weatherError}
-              onRetry={() => window.location.reload()}
-            />
+            <WeatherErrorFallback error={weatherError} onRetry={() => window.location.reload()} />
           )}
 
           {/* ================= READY STATE ================= */}
@@ -106,11 +102,7 @@ const {
                         className="flex overflow-x-auto space-x-4 scroll-smooth pb-4"
                       >
                         {filteredItems.map((item, index) => (
-                          <WardrobeItemCard
-                            key={item.id || index}
-                            item={item}
-                            index={index}
-                          />
+                          <WardrobeItemCard key={item.id || index} item={item} index={index} />
                         ))}
                       </div>
 

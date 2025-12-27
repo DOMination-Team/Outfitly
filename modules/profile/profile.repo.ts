@@ -38,7 +38,7 @@ export const findUserProfile = async (userId: string): Promise<UIUser | null> =>
 // Find user outfits paginated
 export const findUserOutfits = async (
   userId: string,
-  query: IPaginationQuery
+  query: IPaginationQuery,
 ): Promise<IPaginationResult<UIOutfit>> => {
   const { page = 1, limit = 10, order = "desc", field = "createdAt" } = query;
   const skip = (page - 1) * limit;
@@ -70,7 +70,7 @@ export const findUserOutfits = async (
 // Find liked outfits paginated
 export const findLikedOutfits = async (
   userId: string,
-  query: IPaginationQuery
+  query: IPaginationQuery,
 ): Promise<IPaginationResult<UIOutfit>> => {
   const { page = 1, limit = 10, order = "desc", field = "createdAt" } = query;
   const skip = (page - 1) * limit;
@@ -103,17 +103,19 @@ export const findLikedOutfits = async (
 
 export const findUserWardrobeItems = async (
   userId: string,
-  query: IPaginationQuery
+  query: IPaginationQuery,
 ): Promise<IPaginationResult<UIWardrobeItem>> => {
   const { page = 1, limit = 10, order = "desc", field = "addedAt" } = query;
   const skip = (page - 1) * limit;
 
   // Allowed fields mapping
-  type WardrobeItemOrderFields = 'addedAt' | 'name';
-  const allowedFields: WardrobeItemOrderFields[] = ['addedAt', 'name'];
-  const sortField: WardrobeItemOrderFields = allowedFields.includes(field as WardrobeItemOrderFields)
+  type WardrobeItemOrderFields = "addedAt" | "name";
+  const allowedFields: WardrobeItemOrderFields[] = ["addedAt", "name"];
+  const sortField: WardrobeItemOrderFields = allowedFields.includes(
+    field as WardrobeItemOrderFields,
+  )
     ? (field as WardrobeItemOrderFields)
-    : 'addedAt';
+    : "addedAt";
 
   const orderBy = { [sortField]: order } as const;
 
@@ -141,11 +143,10 @@ export const findUserWardrobeItems = async (
   return { data: mappedData, meta: { total, page, limit, totalPages } };
 };
 
-
 // Update user profile
 export const updateUserProfile = async (
   userId: string,
-  data: { name?: string; bio?: string; location?: string; website?: string; avatarUrl?: string }
+  data: { name?: string; bio?: string; location?: string; website?: string; avatarUrl?: string },
 ) => {
   return prisma.user.update({
     where: { id: userId },

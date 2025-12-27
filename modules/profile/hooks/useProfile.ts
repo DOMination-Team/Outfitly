@@ -27,7 +27,6 @@ export function useProfile() {
   const [items, setItems] = useState<WardrobeItem[]>([]);
   const [likedOutfits, setLikedOutfits] = useState<Outfit[]>([]);
 
-
   const fetchProfile = useCallback(async () => {
     if (!authUser?.id) return;
 
@@ -45,7 +44,6 @@ export function useProfile() {
     }
   }, [authUser?.id]);
 
-
   const fetchOutfits = useCallback(
     async (query: IPaginationQuery = { page: 1, limit: 10 }) => {
       if (!authUser?.id) return;
@@ -62,7 +60,6 @@ export function useProfile() {
     },
     [authUser?.id],
   );
-
 
   const fetchLikedOutfits = useCallback(
     async (query: IPaginationQuery = { page: 1, limit: 10 }) => {
@@ -102,14 +99,7 @@ export function useProfile() {
     fetchOutfits();
     fetchLikedOutfits();
     fetchWardrobeItems();
-  }, [
-    authUser?.id,
-    fetchProfile,
-    fetchOutfits,
-    fetchLikedOutfits,
-    fetchWardrobeItems,
-  ]);
-
+  }, [authUser?.id, fetchProfile, fetchOutfits, fetchLikedOutfits, fetchWardrobeItems]);
 
   const startEditing = () => {
     if (!user) return;

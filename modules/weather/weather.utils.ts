@@ -22,7 +22,6 @@ export const getWeatherIcon = (condition: string): LucideIcon => {
 
 export type Season = "summer" | "fall" | "winter" | "spring";
 
-
 export const getSeasonFromWeather = (weather: WeatherData): string => {
   const tempF = weather.temperature; // using Fahrenheit
 

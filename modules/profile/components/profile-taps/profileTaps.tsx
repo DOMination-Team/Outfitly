@@ -4,9 +4,7 @@ import { motion } from "framer-motion";
 import { Badge } from "../../../../components/ui/badge";
 import type { ProfileTabsWithCountsProps } from "./profileTaps.types";
 import { isTabActive } from "./profileTaps.utils";
-import {tabs} from "./profileTabs.constants"
-
-
+import { tabs } from "./profileTabs.constants";
 
 export function ProfileTabs({ activeTab, onTabChange, counts }: ProfileTabsWithCountsProps) {
   return (

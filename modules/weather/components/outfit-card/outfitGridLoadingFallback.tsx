@@ -11,10 +11,7 @@ const OutfitGridLoadingFallback = ({ count = 4 }: { count?: number }) => {
       className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
     >
       {Array.from({ length: count }).map((_, i) => (
-        <div
-          key={i}
-          className="rounded-2xl overflow-hidden border-2 bg-[var(--card)]"
-        >
+        <div key={i} className="rounded-2xl overflow-hidden border-2 bg-[var(--card)]">
           {/* Header */}
           <div className="p-4 border-b">
             <Skeleton className="h-5 w-24 mb-2" />
