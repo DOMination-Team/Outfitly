@@ -11,6 +11,7 @@ import { ProfileTabs } from "./components/profile-taps/profileTaps"; // Updated 
 import { ProfileOutfitsGrid } from "./components/profile-outfits/profileOutfits";
 import { ProfileLikedProductsGrid } from "./components/profile-liked-products/likedProducts";
 import { ProfileLikedOutfitsGrid } from "./components/profile-liked-outfits/likedOutfits";
+import Loading from "@/app/loading";
 
 function renderContent(
   activeTab: TabType,
@@ -46,11 +47,7 @@ export function ProfilePage() {
   } = useProfile();
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-background transition-colors duration-300 flex items-center justify-center">
-        <div>Loading profile...</div>
-      </div>
-    );
+    return <Loading />;
   }
 
   if (!user) {
