@@ -128,7 +128,6 @@ export const findLikedOutfits = async (
   return { data: mappedData, meta };
 };
 
-
 // Update user profile
 export const updateUserProfile = async (
   userId: string,
