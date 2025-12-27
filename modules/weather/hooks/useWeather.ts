@@ -9,7 +9,7 @@ export const useWeather = () => {
   const [weatherLoading, setWeatherLoading] = useState(true);
   const [weatherError, setWeatherError] = useState<Error>(new Error());
   const itemsContainerRef = useRef<HTMLDivElement>(null);
-  const { outfits: userOutfits, items: userItems, profileLoading } = useProfile();
+  const { outfits: userOutfits, items: userItems } = useProfile();
 
   
   // Fetch weather on mount
@@ -39,10 +39,10 @@ export const useWeather = () => {
   // Determine season based on fetched weather
   const season = useMemo(() => (weather ? getSeasonFromWeather(weather) : null), [weather]);
   const weatherStatus = useMemo<"loading" | "ready" | "error">(() => {
-    if (weatherLoading || profileLoading) return "loading";
+    if (weatherLoading ) return "loading";
     if (weatherError || !season) return "error";
     return "ready";
-  }, [weatherLoading, profileLoading, weatherError, season]);
+  }, [weatherLoading, weatherError, season]);
   // Filter outfits based on season
   const filteredOutfits = useMemo(() => {
     console.log(userOutfits)
@@ -91,7 +91,6 @@ export const useWeather = () => {
     weatherLoading,
     weatherError,
     weatherStatus,
-    profileLoading,
     filteredOutfits: weatherStatus === "ready" ? filteredOutfits : [],
     filteredItems: weatherStatus === "ready" ? filteredItems : [],
     handleScroll,
