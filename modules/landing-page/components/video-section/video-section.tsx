@@ -2,12 +2,10 @@
 
 import { useTheme } from "next-themes";
 import { useVideoSection } from "./hooks/useVideoSection";
-import { VIDEO_URL, VIDEO_GRADIENTS } from "./video-section.constants";
-import { useTranslations } from "next-intl";
+import { VIDEO_CONTENT, VIDEO_URL, VIDEO_GRADIENTS } from "./video-section.constants";
 
 export function VideoSection() {
   const { theme } = useTheme();
-  const t = useTranslations("HomePage.video");
   const {
     sectionRef,
     containerRef,
@@ -21,14 +19,6 @@ export function VideoSection() {
   const isDark = theme === "dark";
   const gradients = isDark ? VIDEO_GRADIENTS.dark : VIDEO_GRADIENTS.light;
 
-  const overlayTexts = [
-    { text: t("step1"), progress: 0.1 },
-    { text: t("step2"), progress: 0.3 },
-    { text: t("step3"), progress: 0.5 },
-    { text: t("step4"), progress: 0.7 },
-    { text: t("step5"), progress: 0.9 },
-  ];
-
   return (
     <section ref={sectionRef} className="relative" style={{ background: gradients.section }}>
       {/* Heading */}
@@ -37,7 +27,7 @@ export function VideoSection() {
           className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-clip-text text-transparent"
           style={{ backgroundImage: gradients.text }}
         >
-          {t("heading")}
+          {VIDEO_CONTENT.heading.title}
         </h2>
         <p
           className="text-lg sm:text-xl max-w-2xl mx-auto"
@@ -45,7 +35,7 @@ export function VideoSection() {
             color: isDark ? "rgba(250, 241, 237, 0.8)" : "rgba(103, 20, 37, 0.8)",
           }}
         >
-          {t("subtitle")}
+          {VIDEO_CONTENT.heading.subtitle}
         </p>
       </div>
 
@@ -77,7 +67,7 @@ export function VideoSection() {
             />
           </div>
           <div className="flex justify-between mt-3 text-xs text-white/60">
-            {overlayTexts.map((item, index) => (
+            {VIDEO_CONTENT.overlayTexts.map((item, index) => (
               <span
                 key={item.text}
                 className={`transition-all duration-300 ${
@@ -95,7 +85,7 @@ export function VideoSection() {
           ref={overlayTextRef}
           className="hidden lg:flex absolute inset-0 items-center justify-center pointer-events-none z-10"
         >
-          {overlayTexts.map((item) => (
+          {VIDEO_CONTENT.overlayTexts.map((item) => (
             <div
               key={item.text}
               className="absolute text-7xl sm:text-8xl lg:text-9xl font-bold text-white/90 tracking-tight"
@@ -117,9 +107,9 @@ export function VideoSection() {
               className="text-5xl sm:text-6xl font-bold text-white mb-4"
               style={{ textShadow: "0 4px 30px rgba(0, 0, 0, 0.5)" }}
             >
-              {overlayTexts[activeTextIndex]?.text || t("step3")}
+              {VIDEO_CONTENT.overlayTexts[activeTextIndex]?.text || "Style"}
             </div>
-            <p className="text-white/80 text-lg">{t("scrollHint")}</p>
+            <p className="text-white/80 text-lg">Scroll to explore the journey</p>
           </div>
         </div>
 

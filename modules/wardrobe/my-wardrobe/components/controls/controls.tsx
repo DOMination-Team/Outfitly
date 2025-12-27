@@ -7,10 +7,8 @@ import { WardrobeSortBy } from "@/modules/wardrobe/types/dto.types";
 import { useQueryState } from "nuqs";
 import { SortOrder } from "@/app/generated/prisma/internal/prismaNamespace";
 import { useViewMode } from "../../provider/viewMode.provider";
-import { useTranslations } from "next-intl";
 
 const Controls = () => {
-  const t = useTranslations("Wardrobe");
   const { viewMode, toggleMode } = useViewMode();
   const [sortBy, setSortBy] = useQueryState("sortBy", {
     defaultValue: "addedAt",
@@ -58,7 +56,7 @@ const Controls = () => {
                     : "text-[#4C1420] dark:text-white/60 hover:text-[#671425] dark:hover:text-white"
                 }
               `}
-              aria-label={t("gridView")}
+              aria-label="Grid view"
             >
               <Grid3x3 className="w-5 h-5" />
             </button>
@@ -72,7 +70,7 @@ const Controls = () => {
                     : "text-[#4C1420] dark:text-white/60 hover:text-[#671425] dark:hover:text-white"
                 }
               `}
-              aria-label={t("listView")}
+              aria-label="List view"
             >
               <List className="w-5 h-5" />
             </button>

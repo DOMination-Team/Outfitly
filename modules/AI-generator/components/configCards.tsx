@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { RefreshCw, Sparkles, Zap } from "lucide-react";
-import { useTranslations } from "next-intl";
 
 import { AIGeneratorFiltersForm } from "./aiForm";
 import type { IFormProps } from "./aiForm";
@@ -32,7 +31,6 @@ export const AIGeneratorConfigCard = ({
   onSelectOutfit,
   onGenerate,
 }: IProps) => {
-  const t = useTranslations("AIGenerator");
   const enabledGradient =
     "linear-gradient(135deg, var(--outfitly-gradient-start) 0%, var(--outfitly-gradient-mid) 50%, var(--outfitly-gradient-end) 100%)";
 
@@ -82,12 +80,12 @@ export const AIGeneratorConfigCard = ({
           </motion.div>
 
           <div>
-            <h2 style={{ color: "var(--outfitly-text-secondary)" }}>{t("config.heading")}</h2>
+            <h2 style={{ color: "var(--outfitly-text-secondary)" }}>Configure Your Perfect Look</h2>
             <p
               className="mt-1 text-sm opacity-70"
               style={{ color: "var(--outfitly-text-primary)" }}
             >
-              {t("config.subtitle")}
+              Select your preferences and let AI do the magic
             </p>
           </div>
         </div>
@@ -133,12 +131,12 @@ export const AIGeneratorConfigCard = ({
               {isGenerating ? (
                 <>
                   <RefreshCw className="w-6 h-6 animate-spin" />
-                  <span>{t("button.generating")}</span>
+                  <span>AI is Matching Your Wardrobe...</span>
                 </>
               ) : (
                 <>
                   <Zap className="w-6 h-6" />
-                  <span>{t("button.generate")}</span>
+                  <span>Generate Outfits with AI</span>
                   <Sparkles className="w-5 h-5" />
                 </>
               )}
@@ -152,7 +150,6 @@ export const AIGeneratorConfigCard = ({
         isGenerating={isGenerating}
         showResults={showResults}
         onSelectOutfit={onSelectOutfit}
-        title={t("results.title")}
       />
     </div>
   );

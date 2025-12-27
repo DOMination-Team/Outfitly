@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import MotionSelect from "@/components/motioned-select";
 import MotionCombobox from "@/components/motioned-combobox";
 import MotionTextarea from "@/components/motioned-textarea";
+import { STYLE_OPTIONS } from "../../wardrobeForm.constants";
 import type { Category } from "@/app/generated/prisma/browser";
 import type { SelectOption } from "@/components/motioned-select";
 import MotionField from "@/components/motioned-input/motionedInput";
-import { useTranslations } from "next-intl";
 
 interface ItemDetailsFormProps {
   categories: Category[];
@@ -22,24 +22,11 @@ const ItemDetailsForm: React.FC<ItemDetailsFormProps> = ({
   isLoadingCategories = false,
   isLoadingBrands = false,
 }) => {
-  const t = useTranslations("Wardrobe");
-
   // Transform categories to SelectOption format
   const categoryOptions: SelectOption[] = categories.map((cat) => ({
     label: cat.name,
     value: cat.name,
   }));
-
-  // Style options with translations
-  const styleOptions: SelectOption[] = [
-    { label: t("styles.casual"), value: "CASUAL" },
-    { label: t("styles.formal"), value: "FORMAL" },
-    { label: t("styles.work"), value: "WORK" },
-    { label: t("styles.sporty"), value: "SPORTY" },
-    { label: t("styles.streetwear"), value: "STREETWEAR" },
-    { label: t("styles.loungewear"), value: "LOUNGEWEAR" },
-    { label: t("styles.party"), value: "PARTY" },
-  ];
 
   return (
     <motion.div
@@ -48,77 +35,62 @@ const ItemDetailsForm: React.FC<ItemDetailsFormProps> = ({
       transition={{ duration: 0.5, delay: 0.2 }}
       className=" bg-white dark:bg-[#2A2A30] rounded-2xl p-6 md:p-8 shadow-lg"
     >
-      <h2 className="text-[#4C1420] dark:text-white mb-6">{t("form.sectionTitle")}</h2>
+      <h2 className="text-[#4C1420] dark:text-white mb-6">Item Details</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Name */}
         <MotionField
           name="name"
-          label={t("form.itemName")}
+          label="Item Name"
           type="text"
-          placeholder={t("form.itemNamePlaceholder")}
+          placeholder="e.g., Blue Denim Jacket"
         />
 
         {/* Category */}
         <MotionSelect
           name="categoryName"
-          label={t("form.category")}
+          label="Category"
           options={categoryOptions}
-          placeholder={t("form.categoryPlaceholder")}
+          placeholder="Select category..."
           disabled={isLoadingCategories}
         />
 
         {/* Brand */}
         <MotionCombobox
           name="brand"
-          label={t("form.brand")}
+          label="Brand"
           options={brands}
-          placeholder={t("form.brandPlaceholder")}
+          placeholder="Select or type brand..."
           disabled={isLoadingBrands}
         />
 
         {/* Color */}
-        <MotionField
-          name="color"
-          label={t("form.color")}
-          type="text"
-          placeholder={t("form.colorPlaceholder")}
-        />
+        <MotionField name="color" label="Color" type="text" placeholder="e.g., Navy Blue" />
 
         {/* Size */}
-        <MotionField
-          name="size"
-          label={t("form.size")}
-          type="text"
-          placeholder={t("form.sizePlaceholder")}
-        />
+        <MotionField name="size" label="Size" type="text" placeholder="e.g., M, L, XL" />
 
         {/* Season */}
-        <MotionField
-          name="season"
-          label={t("form.season")}
-          type="text"
-          placeholder={t("form.seasonPlaceholder")}
-        />
+        <MotionField name="season" label="Season" type="text" placeholder="e.g., Summer, Winter" />
 
         {/* Style */}
         <MotionSelect
           name="style"
-          label={t("form.style")}
-          options={styleOptions}
-          placeholder={t("form.stylePlaceholder")}
+          label="Style"
+          options={STYLE_OPTIONS}
+          placeholder="Select style..."
         />
 
         {/* Purchased Date */}
-        <MotionField name="purchasedDate" label={t("form.purchasedDate")} type="date" />
+        <MotionField name="purchasedDate" label="Purchased Date" type="date" />
       </div>
 
       {/* Notes - Full width */}
       <MotionTextarea
         name="notes"
-        label={t("form.notes")}
+        label="Notes (Optional)"
         rows={4}
-        placeholder={t("form.notesPlaceholder")}
+        placeholder="Add any additional notes about this item..."
       />
     </motion.div>
   );

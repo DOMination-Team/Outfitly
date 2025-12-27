@@ -3,25 +3,25 @@ import { Shirt, Puzzle, Footprints, ShoppingBag } from "lucide-react";
 
 export const stats = (data: GetWardrobeStatsResponse) => [
   {
-    labelKey: "totalItems",
+    label: "Total Items",
     value: data.total,
     icon: ShoppingBag,
     gradient: "from-[#671425] to-[#8B1D35]",
   },
   {
-    labelKey: "tops",
+    label: "Tops",
     value: data.byCategory["T-Shirts"],
     icon: Shirt,
     gradient: "from-[#8B1D35] to-[#A82444]",
   },
   {
-    labelKey: "bottoms",
+    label: "Bottoms",
     value: data.byCategory["Jeans"],
     icon: Puzzle,
     gradient: "from-[#A82444] to-[#671425]",
   },
   {
-    labelKey: "shoes",
+    label: "Shoes",
     value: data.byCategory["Boots"],
     icon: Footprints,
     gradient: "from-[#671425] to-[#4C1420]",

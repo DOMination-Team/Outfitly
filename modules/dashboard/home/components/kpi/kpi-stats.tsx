@@ -3,36 +3,14 @@
 
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Layers, TrendingUp } from "lucide-react";
+import { kpiStats } from "./kpi-stats.constants";
 
-const iconMap = {
-  Layers,
-  TrendingUp,
-} as const;
-
-type IconName = keyof typeof iconMap;
-
-interface KPIStat {
-  label: string;
-  value: string;
-  progress?: string;
-  iconName: IconName;
-  iconBg: string;
-  iconColor: string;
-  progressColor?: string;
-}
-
-interface DashboardKPICardsProps {
-  stats: KPIStat[];
-}
-
-export function DashboardKPICards({ stats }: DashboardKPICardsProps) {
+export function DashboardKPICards() {
   return (
     <div className="flex flex-col gap-2 h-full justify-start">
-      {stats.map((stat) => {
-        const Icon = iconMap[stat.iconName];
-        const showProgress = stat.progress !== undefined;
-        const progressValue = stat.progress ? parseFloat(stat.progress) : 0;
+      {kpiStats.map((stat) => {
+        const Icon = stat.icon;
+        const showProgress = typeof stat.progress === "number";
 
         return (
           <Card
@@ -55,7 +33,7 @@ export function DashboardKPICards({ stats }: DashboardKPICardsProps) {
             {showProgress && (
               <div className="w-full">
                 <Progress
-                  value={progressValue}
+                  value={stat.progress}
                   className={`h-2 w-full ${stat.progressColor ?? ""}`}
                 />
               </div>

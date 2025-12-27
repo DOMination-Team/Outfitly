@@ -11,7 +11,6 @@ import type { CreateWardrobeForm } from "../constant";
 import type { Category } from "@/app/generated/prisma/browser";
 import { useMemo } from "react";
 import { PageHeader } from "@/components/page-header";
-import { useTranslations } from "next-intl";
 
 interface WardrobeFormProps {
   initialData?: CreateWardrobeForm | null;
@@ -28,8 +27,6 @@ const WardrobeFrom: React.FC<WardrobeFormProps> = ({
 }) => {
   const navigate = useRouter();
   const { formik } = useWardrobeForm({ initialData, onSuccess, categories });
-  const t = useTranslations("Wardrobe");
-  const tCommon = useTranslations("Common");
 
   const handleImageUpload = (key?: string) => {
     const url = `https://${S3_BUCKET_NAME}.fly.storage.tigris.dev/${key}`;
@@ -68,8 +65,8 @@ const WardrobeFrom: React.FC<WardrobeFormProps> = ({
     <main className="pt-20 pb-16">
       {/* Page Header with Gradient */}
       <PageHeader
-        title={initialData ? t("editItem.heading") : t("addItem.heading")}
-        subtitle={initialData ? t("editItem.subtitle") : t("addItem.subtitle")}
+        title={`${Boolean(initialData) ? "Update" : "Add"} Item to Wardrobe`}
+        subtitle={`${Boolean(initialData) ? "edit" : ""} Upload${Boolean(initialData) ? "ed" : ""} photos and details of your ${Boolean(initialData) ? "" : "new"} item`}
         backTo="/my-wardrobe"
       />
       <div className="container mx-auto px-4 mt-12 max-w-4xl">
@@ -98,7 +95,7 @@ const WardrobeFrom: React.FC<WardrobeFormProps> = ({
                 variant="link"
                 className="px-8 py-4 rounded-xl bg-white dark:bg-[#2A2A30] text-[#4C1420] dark:text-white border-2 border-[#F2E8E3] dark:border-[#35353D] hover:border-[#671425] dark:hover:border-[#8B1D35] transition-all duration-300"
               >
-                {tCommon("cancel")}
+                Cancel
               </CustomButton>
               <CustomButton
                 type="submit"
@@ -108,11 +105,11 @@ const WardrobeFrom: React.FC<WardrobeFormProps> = ({
               >
                 {formik.isSubmitting
                   ? initialData
-                    ? t("form.updating")
-                    : t("form.saving")
+                    ? "Updating"
+                    : "Saving"
                   : initialData
-                    ? t("form.updateButton")
-                    : t("form.saveButton")}
+                    ? "Update Item"
+                    : "Save to Wardrobe"}
               </CustomButton>
             </motion.div>
           </Form>
