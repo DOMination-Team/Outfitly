@@ -5,7 +5,6 @@ import prisma from "@/lib/prisma";
 import type {
   User as UIUser,
   Outfit as UIOutfit,
-  LikedProduct,
   WardrobeItem as UIWardrobeItem,
 } from "./profile.types";
 
@@ -129,40 +128,6 @@ export const findLikedOutfits = async (
   return { data: mappedData, meta };
 };
 
-// Find liked products paginated
-export const findLikedProducts = async (
-  userId: string,
-  query: IPaginationQuery,
-): Promise<IPaginationResult<LikedProduct>> => {
-  const pagination = createPaginationForPrisma(query);
-  const allProducts = await prisma.productReview.findMany({
-    where: { userId, rating: { gte: 4 } },
-    include: {
-      product: {
-        select: {
-          id: true,
-          name: true,
-          images: { where: { isPrimary: true }, select: { imageUrl: true } },
-          variants: { select: { additionalPrice: true } },
-        },
-      },
-    },
-    orderBy: { createdAt: "desc" },
-    ...pagination,
-  });
-
-  const total = await prisma.productReview.count({ where: { userId, rating: { gte: 4 } } });
-  const meta = createPaginationMetaData(query.limit, query.page, total);
-
-  const mappedData: LikedProduct[] = allProducts.map((review) => ({
-    id: parseInt(review.product.id, 10),
-    image: review.product.images[0]?.imageUrl || "",
-    name: review.product.name,
-    price: `$${(review.product.variants[0]?.additionalPrice || 0).toFixed(2)}`,
-  }));
-
-  return { data: mappedData, meta };
-};
 
 // Update user profile
 export const updateUserProfile = async (

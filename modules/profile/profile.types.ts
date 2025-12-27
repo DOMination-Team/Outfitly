@@ -1,4 +1,4 @@
-export type TabType = "outfits" | "liked-products" | "liked-outfits";
+export type TabType = "outfits" | "liked-outfits";
 import { LucideIcon } from "lucide-react";
 
 export interface User {
@@ -27,12 +27,6 @@ export interface Outfit {
   title?: string;
 }
 
-export interface LikedProduct {
-  id: number;
-  image: string;
-  name: string;
-  price: string;
-}
 
 export interface WardrobeItem {
   id: string;

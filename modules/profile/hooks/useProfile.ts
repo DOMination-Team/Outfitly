@@ -1,11 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
-import type { TabType, User, Outfit, LikedProduct, WardrobeItem } from "../profile.types";
+import type { TabType, User, Outfit, WardrobeItem } from "../profile.types";
 import { useAuth } from "@/providers/auth/auth.provider";
 import {
   getUserProfile,
   getUserOutfitsPaginated,
   getLikedOutfitsPaginated,
-  getLikedProductsPaginated,
   updateProfile,
   getUserWardrobeItemsPaginated,
 } from "../profile.service";
@@ -13,7 +12,6 @@ import type { IPaginationQuery } from "@/@types/database.type";
 
 export function useProfile() {
   const { user: authUser } = useAuth();
-
   const [activeTab, setActiveTab] = useState<TabType>("outfits");
   const [user, setUser] = useState<User | null>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -22,9 +20,7 @@ export function useProfile() {
   const [outfits, setOutfits] = useState<Outfit[]>([]);
   const [items, setItems] = useState<WardrobeItem[]>([]);
   const [likedOutfits, setLikedOutfits] = useState<Outfit[]>([]);
-  const [likedProducts, setLikedProducts] = useState<LikedProduct[]>([]);
 
-  /* ---------------- FETCH FUNCTIONS ---------------- */
 
   const fetchProfile = useCallback(async () => {
     if (!authUser?.id) return;
@@ -85,21 +81,9 @@ export function useProfile() {
     [authUser?.id],
   );
 
-  const fetchLikedProducts = useCallback(
-    async (query: IPaginationQuery = { page: 1, limit: 10 }) => {
-      if (!authUser?.id) return;
 
-      try {
-        const result = await getLikedProductsPaginated(authUser.id, query);
-        setLikedProducts(result.data);
-      } catch (error) {
-        console.error("Failed to fetch liked products:", error);
-      }
-    },
-    [authUser?.id],
-  );
 
-  /* ---------------- INITIAL LOAD ---------------- */
+  /* initial load */
 
   useEffect(() => {
     if (!authUser?.id) return;
@@ -108,17 +92,15 @@ export function useProfile() {
     fetchOutfits();
     fetchWardrobeItems();
     fetchLikedOutfits();
-    fetchLikedProducts();
   }, [
     authUser?.id,
     fetchProfile,
     fetchOutfits,
     fetchWardrobeItems,
     fetchLikedOutfits,
-    fetchLikedProducts,
   ]);
 
-  /* ---------------- EDITING ---------------- */
+  /*  editing  */
 
   const startEditing = () => {
     if (user) {
@@ -156,7 +138,6 @@ export function useProfile() {
     setEditForm((prev) => (prev ? { ...prev, [field]: value } : null));
   };
 
-  /* ---------------- RETURN ---------------- */
 
   return {
     activeTab,
@@ -168,14 +149,12 @@ export function useProfile() {
     outfits,
     items,
     likedOutfits,
-    likedProducts,
     startEditing,
     cancelEditing,
     saveEditing,
     updateEditForm,
     fetchOutfits,
     fetchLikedOutfits,
-    fetchLikedProducts,
     fetchWardrobeItems,
   };
 }

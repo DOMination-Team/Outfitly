@@ -5,24 +5,21 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { PageHeader } from "@/components/page-header";
 import { useProfile } from "./hooks/useProfile";
-import type { TabType, Outfit, LikedProduct } from "./profile.types";
+import type { TabType, Outfit } from "./profile.types";
 import { ProfileHeader } from "./components/profile-header/profileHeader";
 import { ProfileTabs } from "./components/profile-taps/profileTaps"; // Updated import
 import { ProfileOutfitsGrid } from "./components/profile-outfits/profileOutfits";
-import { ProfileLikedProductsGrid } from "./components/profile-liked-products/likedProducts";
 import { ProfileLikedOutfitsGrid } from "./components/profile-liked-outfits/likedOutfits";
 
 function renderContent(
   activeTab: TabType,
   outfits: Outfit[],
-  likedProducts: LikedProduct[],
   likedOutfits: Outfit[],
 ) {
   switch (activeTab) {
     case "outfits":
       return <ProfileOutfitsGrid outfits={outfits} />;
-    case "liked-products":
-      return <ProfileLikedProductsGrid products={likedProducts} />;
+  
     case "liked-outfits":
       return <ProfileLikedOutfitsGrid outfits={likedOutfits} />;
   }
@@ -37,7 +34,6 @@ export function ProfilePage() {
     editForm,
     loading,
     outfits,
-    likedProducts,
     likedOutfits,
     startEditing,
     cancelEditing,
@@ -81,7 +77,6 @@ export function ProfilePage() {
             onTabChange={setActiveTab}
             counts={{
               outfits: outfits.length,
-              likedProducts: likedProducts.length,
               likedOutfits: likedOutfits.length,
             }}
           />
@@ -91,7 +86,7 @@ export function ProfilePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            {renderContent(activeTab, outfits, likedProducts, likedOutfits)}
+            {renderContent(activeTab, outfits, likedOutfits)}
           </motion.div>
         </div>
       </main>

@@ -7,7 +7,6 @@ export interface ProfileTabsWithCountsProps {
   onTabChange: ProfileTabsProps["onTabChange"];
   counts: {
     outfits: number;
-    likedProducts: number;
     likedOutfits: number;
   };
 }

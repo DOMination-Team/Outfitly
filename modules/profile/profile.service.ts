@@ -4,7 +4,6 @@ import {
   findUserProfile,
   findUserOutfits,
   findLikedOutfits,
-  findLikedProducts,
   updateUserProfile,
   findUserWardrobeItems,
 } from "./profile.repo";
@@ -31,11 +30,6 @@ export const getLikedOutfitsPaginated = async (userId: string, query: IPaginatio
   return findLikedOutfits(userId, { page, limit });
 };
 
-// Get liked products paginated
-export const getLikedProductsPaginated = async (userId: string, query: IPaginationQuery) => {
-  const { page, limit } = zodValidation(profileListQuerySchema, query);
-  return findLikedProducts(userId, { page, limit });
-};
 
 // Update profile
 export const updateProfile = async (
