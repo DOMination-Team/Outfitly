@@ -44,12 +44,12 @@ export default function Weather() {
           )}
 
           {/* ================= ERROR STATE ================= */}
-          {weatherStatus === "error" && (
+          {weatherStatus === "error" && weatherError && (
             <WeatherErrorFallback error={weatherError} onRetry={() => window.location.reload()} />
           )}
 
           {/* ================= READY STATE ================= */}
-          {weatherStatus === "ready" && (
+          {weatherStatus === "ready" && weather && (
             <>
               {/* Weather Widget */}
               <WeatherWidget weather={weather} loading={false} />
