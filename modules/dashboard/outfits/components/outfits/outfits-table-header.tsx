@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import { Filter, Download } from "lucide-react";
-import { motion } from "framer-motion";
-import { NAVBAR_COLORS } from "@/components/navbar/navbar.constants";
+//import { Filter, Download } from "lucide-react";
+//import { motion } from "framer-motion";
+//import { NAVBAR_COLORS } from "@/components/navbar/navbar.constants";
 import HeaderTable from "@/modules/dashboard/headerTable";
 
 export const OutfitsTableHeader = () => {
