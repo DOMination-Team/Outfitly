@@ -304,16 +304,10 @@ export const getWardrobeItemsFiltered = async (
   userId: string,
 ): Promise<FilteredItemsDTO[]> => {
   const { style, weather } = filters;
+  
   const items = await prisma.wardrobeItem.findMany({
     where: {
       userId,
-      season: weather,
-      category: {
-        name: {
-          contains: style,
-          mode: "insensitive",
-        },
-      },
     },
     include: {
       category: true,
