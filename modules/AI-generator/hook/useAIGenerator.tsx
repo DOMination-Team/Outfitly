@@ -34,7 +34,7 @@ export function useAIGenerator() {
     requirements: "",
   });
   const isDark = theme === "dark";
-  
+
   const [customOccasion, setCustomOccasion] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [showResults, setShowResults] = useState(false);
@@ -50,7 +50,7 @@ export function useAIGenerator() {
       (formData.occasion !== "Other" || customOccasion.trim()),
     );
   }, [formData.occasion, formData.weather, formData.style, customOccasion]);
-  console.log(filteredFromDB)
+  console.log(filteredFromDB);
   const open = Boolean(viewingOutfit);
 
   const handleGenerate = async () => {
@@ -63,7 +63,7 @@ export function useAIGenerator() {
       getItemsForGeneratorAction({ style: formData.style, weather: formData.weather }, user.id),
       getOccasionsForAIAction(),
     ]);
-    console.log(itemsRes)
+    console.log(itemsRes);
     if (!itemsRes.success || !occasionsRes.success) {
       setIsGenerating(false);
       return;
@@ -89,7 +89,7 @@ export function useAIGenerator() {
 
     setGeneratedOutfits(outfits);
     setShowResults(true);
-  }
+  };
 
   const onSelectOutfit = (name: string) => {
     const outfit = generatedOutfits.find((o) => o.name === name);
@@ -120,7 +120,7 @@ export function useAIGenerator() {
       toast.error("Failed to save the outfit, please try again!");
       return;
     }
-    
+
     toast.success(`${createdOutfit.data.name} Outfit created successfully!`);
     setViewingOutfit(null);
   };

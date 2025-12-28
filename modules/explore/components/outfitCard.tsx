@@ -14,7 +14,7 @@ interface OutfitCardProps {
 
 export const OutfitCard = ({ outfit, index, dispatch }: OutfitCardProps) => {
   const { theme, onToggleLike } = useOutfit(outfit, dispatch);
-  
+
   return (
     <motion.div
       key={outfit.id}
@@ -39,16 +39,17 @@ export const OutfitCard = ({ outfit, index, dispatch }: OutfitCardProps) => {
         ) : (
           // Placeholder when no image
           <div className="w-full h-full flex flex-col items-center justify-center">
-            <Shirt 
+            <Shirt
               className="w-20 h-20 mb-4 opacity-30"
-              style={{ 
-                color: theme === "dark" ? "var(--outfitly-text-light)" : "var(--outfitly-primary)" 
+              style={{
+                color: theme === "dark" ? "var(--outfitly-text-light)" : "var(--outfitly-primary)",
               }}
             />
-            <span 
+            <span
               className="text-sm opacity-50"
-              style={{ 
-                color: theme === "dark" ? "var(--outfitly-text-light)" : "var(--outfitly-text-primary)" 
+              style={{
+                color:
+                  theme === "dark" ? "var(--outfitly-text-light)" : "var(--outfitly-text-primary)",
               }}
             >
               No Image Available

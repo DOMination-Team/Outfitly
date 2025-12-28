@@ -59,7 +59,7 @@ export function ProfilePage() {
   } = useProfile();
 
   if (outfitsLoading || profileLoading) {
-    return <Loading />
+    return <Loading />;
   }
 
   if (!user) {

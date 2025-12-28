@@ -38,9 +38,9 @@ export function Navbar() {
   // Fix hydration mismatch using React 18's useSyncExternalStore
   // This is the recommended way to check if component is mounted
   const mounted = useSyncExternalStore(
-    () => () => {}, 
-    () => true,      
-    () => false      
+    () => () => {},
+    () => true,
+    () => false,
   );
 
   const isAuthLoading = authStatus === "loading";
