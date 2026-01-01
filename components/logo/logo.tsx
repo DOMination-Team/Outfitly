@@ -16,12 +16,12 @@ interface IProps {
 
 export function Logo({ size = "md", animated = true, linkTo = "/", className = "" }: IProps) {
   const { theme } = useTheme();
-  
+
   // Fix hydration mismatch - only apply theme filter after client mount
   const mounted = useSyncExternalStore(
     () => () => {},
     () => true,
-    () => false
+    () => false,
   );
 
   const logo = (
