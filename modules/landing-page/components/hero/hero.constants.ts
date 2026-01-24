@@ -52,8 +52,7 @@ export const PARALLAX_LAYERS: ParallaxLayer[] = [
   { speed: 0.6, zIndex: 3, opacity: 0.3 },
 ];
 
-export const HERO_BACKGROUND_IMAGE =
-  "/hero-image.jpg";
+export const HERO_BACKGROUND_IMAGE = "/hero-image.jpg";
 
 export const PARALLAX_IMAGES = {
   layer1: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
